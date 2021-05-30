@@ -4,3 +4,5 @@ github.com/fastrodev/router v0.1.11 h1:oGilZY9wD1oIzoXkYNsIigTIZ+YH5I0PlYryld6tG
 github.com/fastrodev/router v0.1.11/go.mod h1:uy+WPJ38d2or2H+yq23b7jQk4D8BdtJtqQ0QH0MUaxk=
 github.com/fastrodev/router v0.1.13 h1:RXClICnFaS0MAYm80byo/0ClMDWulJywub+zOL1RXmI=
 github.com/fastrodev/router v0.1.13/go.mod h1:uy+WPJ38d2or2H+yq23b7jQk4D8BdtJtqQ0QH0MUaxk=
+github.com/fastrodev/router v0.1.17 h1:1XrmobGEFEQrMF2oT4978be+MSrbaYXqrz5U7w9xMQw=
+github.com/fastrodev/router v0.1.17/go.mod h1:uy+WPJ38d2or2H+yq23b7jQk4D8BdtJtqQ0QH0MUaxk=
