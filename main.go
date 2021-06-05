@@ -1,20 +1,21 @@
 package function
 
 import (
-	std "net/http"
+	"net/http"
 
-	"github.com/fastrodev/router"
-	"github.com/fastrodev/router/http"
+	"github.com/fastrodev/rider"
 )
 
-func createRouter() router.Router {
-	app := router.New()
-	app.Get("/", func(req http.Request, res http.Response) {
-		res.Send("Hello")
-	})
+func handler(req rider.Request, res rider.Response) {
+	res.Send("Hello, cloud!")
+}
+
+func createRouter() rider.Router {
+	app := rider.New()
+	app.Get("/", handler)
 	return app
 }
 
-func HelloHTTP(w std.ResponseWriter, r *std.Request) {
+func HelloHTTP(w http.ResponseWriter, r *http.Request) {
 	createRouter().ServeHTTP(w, r)
 }
