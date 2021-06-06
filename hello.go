@@ -1,4 +1,4 @@
-package function
+package serverless
 
 import (
 	"net/http"
@@ -6,21 +6,26 @@ import (
 	"github.com/fastrodev/rider"
 )
 
-func handler(req rider.Request, res rider.Response) {
+func htmlHandler(req rider.Request, res rider.Response) {
 	data := map[string]interface{}{
-		"title": "Learning Golang Web",
+		"title": "Cloud function app",
 		"name":  "Agus",
 	}
 	res.Render(data)
 }
 
-func createRouter() rider.Router {
+func apiHandler(req rider.Request, res rider.Response) {
+	res.Json(`{"message":"ok"}`)
+}
+
+func createApp() rider.Router {
 	app := rider.New()
 	app.Template("index.html")
-	app.Get("/", handler)
+	app.Get("/", htmlHandler)
+	app.Get("/api", apiHandler)
 	return app
 }
 
 func HelloHTTP(w http.ResponseWriter, r *http.Request) {
-	createRouter().ServeHTTP(w, r)
+	createApp().ServeHTTP(w, r)
 }
