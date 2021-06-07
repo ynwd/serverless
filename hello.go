@@ -20,8 +20,13 @@ func apiHandler(req rider.Request, res rider.Response) {
 
 func createApp() rider.Router {
 	app := rider.New()
+	// setup static files
+	app.Static("static")
+	// setup html template
 	app.Template("index.html")
-	app.Get("/", htmlHandler)
+	// setup route for /html
+	app.Get("/html", htmlHandler)
+	// setup route for /api
 	app.Get("/api", apiHandler)
 	return app
 }

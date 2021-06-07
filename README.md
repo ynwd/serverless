@@ -2,7 +2,7 @@
 
 Get the latest commit hash:
 ```
-go get github.com/fastrodev/rider@c6dfb2d
+go get github.com/fastrodev/rider@3b9e2eb
 ```
 
 *`c6dfb2d` is the latest commit. You can see it in the rider github repository.*
