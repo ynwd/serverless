@@ -5,7 +5,44 @@ Get the latest commit hash:
 go get github.com/fastrodev/rider@3b9e2eb
 ```
 
-*`c6dfb2d` is the latest commit. You can see it in the rider github repository.*
+> Note: *`3b9e2eb` is the latest commit. You can see it in the [rider github repository](https://github.com/fastrodev/rider).*
+
+Entry point:
+```go
+package serverless
+
+import (
+  "net/http"
+
+  "github.com/fastrodev/rider"
+)
+
+func htmlHandler(req rider.Request, res rider.Response) {
+  data := map[string]interface{}{
+    "title": "Cloud function app",
+    "name":  "Agus",
+  }
+  res.Render(data)
+}
+
+func apiHandler(req rider.Request, res rider.Response) {
+  res.Json(`{"message":"ok"}`)
+}
+
+func createApp() rider.Router {
+  app := rider.New()
+  app.Static("static")
+  app.Template("index.html")
+  app.Get("/html", htmlHandler)
+  app.Get("/api", apiHandler)
+  return app
+}
+
+func HelloHTTP(w http.ResponseWriter, r *http.Request) {
+  createApp().ServeHTTP(w, r)
+}
+
+```
 
 Deploy to google cloud function:
 ```
