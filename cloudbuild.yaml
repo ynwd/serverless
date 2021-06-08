@@ -1,0 +1,11 @@
+steps:
+  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
+    args:
+      - gcloud
+      - functions
+      - deploy
+      - HelloHTTP
+      - --source=.
+      - --trigger-http
+  - name: gcr.io/phonic-altar-274306/firebase
+    args: ["deploy", "--project=phonic-altar-274306"]

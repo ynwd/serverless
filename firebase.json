@@ -7,8 +7,9 @@
       }
     ],
     "ignore": [
-      "static/**",
+      "**/static/**",
       ".gitignore",
+      "cloudbuild.yaml",
       "firebase.json",
       "go.mod",
       "go.sum",
