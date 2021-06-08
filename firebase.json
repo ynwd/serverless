@@ -7,9 +7,15 @@
       }
     ],
     "ignore": [
+      "static/**",
+      ".gitignore",
       "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
+      "go.mod",
+      "go.sum",
+      "hello.go",
+      "index.html",
+      "README.md",
+      "**/.*"
     ]
   }
 }
