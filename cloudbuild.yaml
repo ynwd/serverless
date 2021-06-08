@@ -7,5 +7,6 @@ steps:
       - HelloHTTP
       - --source=.
       - --trigger-http
+      - --allow-unauthenticated
   - name: gcr.io/phonic-altar-274306/firebase
     args: ["deploy", "--project=phonic-altar-274306"]
