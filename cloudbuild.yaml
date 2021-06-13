@@ -4,7 +4,7 @@ steps:
       - gcloud
       - functions
       - deploy
-      - HelloHTTP
+      - Entrypoint
       - --source=.
       - --trigger-http
       - --allow-unauthenticated

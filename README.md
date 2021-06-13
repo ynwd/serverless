@@ -2,54 +2,17 @@
 
 Get the latest commit hash:
 ```
-go get github.com/fastrodev/rider@3b9e2eb
+go get github.com/fastrodev/fastrex@68d585f
 ```
 
-> Note: *`3b9e2eb` is the latest commit. You can see it in the [rider github repository](https://github.com/fastrodev/rider).*
-
-Entry point:
-```go
-package serverless
-
-import (
-  "net/http"
-
-  "github.com/fastrodev/rider"
-)
-
-func htmlHandler(req rider.Request, res rider.Response) {
-  data := map[string]interface{}{
-    "title": "Cloud function app",
-    "name":  "Agus",
-  }
-  res.Render(data)
-}
-
-func apiHandler(req rider.Request, res rider.Response) {
-  res.Json(`{"message":"ok"}`)
-}
-
-func createApp() rider.Router {
-  app := rider.New()
-  app.Static("static")
-  app.Template("index.html")
-  app.Get("/html", htmlHandler)
-  app.Get("/api", apiHandler)
-  return app
-}
-
-func HelloHTTP(w http.ResponseWriter, r *http.Request) {
-  createApp().ServeHTTP(w, r)
-}
-
-```
+> Note: *`68d585f` is the latest commit. You can see it in the [rider github repository](https://github.com/fastrodev/fastrex).*
 
 Deploy to google cloud function:
 ```
-gcloud functions deploy HelloHTTP --runtime go113 --trigger-http --allow-unauthenticated
+gcloud functions deploy Entrypoint --runtime go113 --trigger-http --allow-unauthenticated
 ```
 
-Live demo: [https://us-central1-phonic-altar-274306.cloudfunctions.net/HelloHTTP](https://us-central1-phonic-altar-274306.cloudfunctions.net/HelloHTTP)
+Live demo: [https://us-central1-phonic-altar-274306.cloudfunctions.net/Entrypoint](https://us-central1-phonic-altar-274306.cloudfunctions.net/Entrypoint)
 
 ## Firebase
 
@@ -77,7 +40,7 @@ Change firebase config:
     "rewrites": [
       {
         "source": "**",
-        "function": "HelloHTTP"
+        "function": "Entrypoint"
       }
     ],
     "ignore": [

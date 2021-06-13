@@ -3,10 +3,10 @@ package serverless
 import (
 	"net/http"
 
-	"github.com/fastrodev/rider"
+	fastrex "github.com/fastrodev/fastrex"
 )
 
-func htmlHandler(req rider.Request, res rider.Response) {
+func htmlHandler(req fastrex.Request, res fastrex.Response) {
 	data := map[string]interface{}{
 		"title": "Cloud function app",
 		"name":  "Agus",
@@ -14,12 +14,12 @@ func htmlHandler(req rider.Request, res rider.Response) {
 	res.Render(data)
 }
 
-func apiHandler(req rider.Request, res rider.Response) {
+func apiHandler(req fastrex.Request, res fastrex.Response) {
 	res.Json(`{"message":"ok"}`)
 }
 
-func createApp() rider.Router {
-	app := rider.New()
+func createApp() fastrex.App {
+	app := fastrex.New()
 	// setup static files
 	app.Static("static")
 	// setup html template
@@ -31,6 +31,6 @@ func createApp() rider.Router {
 	return app
 }
 
-func HelloHTTP(w http.ResponseWriter, r *http.Request) {
+func Entrypoint(w http.ResponseWriter, r *http.Request) {
 	createApp().ServeHTTP(w, r)
 }
