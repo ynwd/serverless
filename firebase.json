@@ -3,19 +3,21 @@
     "rewrites": [
       {
         "source": "**",
-        "function": "Entrypoint"
+        "function": "Main"
       }
     ],
     "ignore": [
+      "**/cmd/**",
+      "**/internal/**",
       "**/static/**",
+      "**/template/**",
       ".gitignore",
       "cloudbuild.yaml",
       "firebase.json",
       "go.mod",
       "go.sum",
-      "hello.go",
-      "index.html",
       "README.md",
+      "serverless.go",
       "**/.*"
     ]
   }
