@@ -7,5 +7,5 @@ import (
 )
 
 func Main(w http.ResponseWriter, r *http.Request) {
-	internal.CreateApp().ServeHTTP(w, r)
+	internal.CreateApp().Serverless(true).ServeHTTP(w, r)
 }
