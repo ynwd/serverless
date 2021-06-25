@@ -1,4 +1,10 @@
 steps:
+  - name: golang
+    entrypoint: /bin/bash
+    args: 
+      - -c
+      - |
+        go run cmd/static/main.go
   - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
     args:
       - gcloud
