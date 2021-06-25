@@ -5,18 +5,12 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
-	"os"
 
 	"github.com/fastrodev/fastrex"
 )
 
 func readJson(host string) Data {
-	schema := "http://"
-	if os.Getenv("GCP") == "true" {
-		schema = "https://"
-	}
-
-	fullURLFile := schema + host + "/iklan.json"
+	fullURLFile := "https://raw.githubusercontent.com/fastrodev/serverless/main/static/iklan.json"
 
 	client := http.Client{
 		CheckRedirect: func(r *http.Request, via []*http.Request) error {
