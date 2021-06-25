@@ -2,12 +2,17 @@ package internal
 
 import (
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
 
 	"github.com/fastrodev/fastrex"
 )
+
+func init() {
+	fmt.Println("init is executed")
+}
 
 func readJson(host string) Data {
 	fullURLFile := "https://raw.githubusercontent.com/fastrodev/serverless/main/static/iklan.json"
