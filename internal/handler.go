@@ -17,10 +17,10 @@ func (h *Handler) htmlHandler(req fastrex.Request, res fastrex.Response) {
 	res.Render(h.data.Data)
 }
 
-func (h *Handler) readJson() Data {
-	file := "static/iklan.json"
+func (h *Handler) ReadJson() Data {
+	file := "internal/iklan.json"
 	if h.serverless {
-		file = "serverless_function_source_code/static/iklan.json"
+		file = "serverless_function_source_code/internal/iklan.json"
 	}
 	body, errReadFile := ioutil.ReadFile(file)
 	if errReadFile != nil {
