@@ -1,10 +1,86 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>{{.title}}</title>
-    </head>
-    <body>
-        <p>Welcome {{.name}}</p>
-        <a href="api">api</a>
-    </body>
+
+<head>
+    <title>Iklan Baris</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style media="screen">
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            width: 100%;
+            margin: 10px;
+            background: #FFFFFF;
+        }
+        
+        .content {
+            max-width: 1080px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            margin: 0 auto;
+        }
+        
+        .topic {
+            max-width: 270px;
+            background-color: #FFFFFF;
+        }
+        
+        .card {
+            margin: 10px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        
+        .title {
+            font-family: Georgia, Cambria, "Times New Roman", Times, serif;
+            text-align: center;
+            margin: 10px;
+        }
+        
+        .title-iklan {
+            font-size: medium;
+            background-color: black;
+            color: #FFFFFF;
+            padding: 10px 0;
+        }
+        
+        .footer {
+            color: darkgrey;
+            text-align: center;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: small;
+        }
+        
+        .footer a {
+            color: darkgrey;
+            /* text-decoration: none; */
+        }
+    </style>
+</head>
+
+<body>
+    <div class=container>
+        <div class="header">
+            <h1 class=title>IKLAN BARIS</h1>
+        </div>
+        <div class=content>
+            <!-- {{range $index, $elem := .Topics}} -->
+
+            <div class=topic>
+                <div class="title title-iklan">{{.topic}}</div>
+                <div class=card>
+                    <b>{{.title}}</b> {{.content}}
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            Made in Cirebon. Powered by <a href="https://github.com/fastrodev/fastrex">Fastrex</a>
+        </div>
+    </div>
+</body>
+
 </html>
