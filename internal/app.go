@@ -9,10 +9,11 @@ func handler(req fastrex.Request, res fastrex.Response) {
 }
 
 func CreateApp() fastrex.App {
+	root := Handler{data: readJson()}
 	app := fastrex.New()
 	app.Static("static")
 	app.Template("template/index.html")
 	app.Get("/api", handler)
-	app.Get("/", htmlHandler)
+	app.Get("/", root.htmlHandler)
 	return app
 }
