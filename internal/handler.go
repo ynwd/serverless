@@ -14,7 +14,7 @@ func init() {
 }
 
 func readJson() Data {
-	body, errReadFile := ioutil.ReadFile("./static/iklan.json")
+	body, errReadFile := ioutil.ReadFile("static/iklan.json")
 	if errReadFile != nil {
 		log.Fatal(errReadFile)
 	}
