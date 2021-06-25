@@ -8,8 +8,12 @@ func handler(req fastrex.Request, res fastrex.Response) {
 	res.Json(`{"message":"ok"}`)
 }
 
-func CreateApp() fastrex.App {
-	root := Handler{data: readJson()}
+func CreateApp(gcp bool) fastrex.App {
+	// read json file
+	root := Handler{serverless: gcp}
+	root.data = root.readJson()
+
+	// create fastrex instance
 	app := fastrex.New()
 	app.Static("static")
 	app.Template("template/index.html")

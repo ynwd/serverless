@@ -2,19 +2,27 @@ package internal
 
 import (
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
 	"log"
 
 	"github.com/fastrodev/fastrex"
 )
 
-func init() {
-	fmt.Println("init is executed")
+type Handler struct {
+	data       Data
+	serverless bool
 }
 
-func readJson() Data {
-	body, errReadFile := ioutil.ReadFile("serverless_function_source_code/static/iklan.json")
+func (h *Handler) htmlHandler(req fastrex.Request, res fastrex.Response) {
+	res.Render(h.data.Data)
+}
+
+func (h *Handler) readJson() Data {
+	file := "static/iklan.json"
+	if h.serverless {
+		file = "serverless_function_source_code/static/iklan.json"
+	}
+	body, errReadFile := ioutil.ReadFile(file)
 	if errReadFile != nil {
 		log.Fatal(errReadFile)
 	}
@@ -24,12 +32,4 @@ func readJson() Data {
 		log.Fatal(errUnmarshal)
 	}
 	return data
-}
-
-type Handler struct {
-	data Data
-}
-
-func (h *Handler) htmlHandler(req fastrex.Request, res fastrex.Response) {
-	res.Render(h.data.Data)
 }
