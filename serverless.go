@@ -1,4 +1,4 @@
-package main
+package serverless
 
 import (
 	"net/http"
