@@ -2,7 +2,6 @@ package main
 
 import (
 	"bytes"
-	"fmt"
 	"log"
 	"os"
 	"text/template"
@@ -11,25 +10,24 @@ import (
 )
 
 func writeFile(data string) {
-	f, err := os.Create("static/index.html")
-	if err != nil {
-		log.Fatal(err)
+	f, errCreate := os.Create("static/index.html")
+	if errCreate != nil {
+		log.Fatal(errCreate)
 	}
 
-	_, err2 := f.WriteString(data)
-	if err2 != nil {
-		log.Fatal(err2)
+	_, errWrite := f.WriteString(data)
+	if errWrite != nil {
+		log.Fatal(errWrite)
 	}
 
 	defer f.Close()
-	fmt.Println("done")
 }
 
 func main() {
 	h := internal.Handler{}
 	td := h.ReadJson("internal/iklan.json")
 
-	t, err := template.ParseFiles("template/default.gohtml")
+	t, err := template.ParseFiles("template/default.tmpl")
 	if err != nil {
 		panic(err)
 	}
