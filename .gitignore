@@ -1,0 +1,4 @@
+.firebase/
+tmp/
+Makefile
+.air.toml

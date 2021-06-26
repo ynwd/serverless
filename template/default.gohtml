@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Iklan Baris</title>
+    <meta charset=utf-8>
+    <meta name=viewport content="width=device-width,initial-scale=1">
+    <style media=screen>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            width: 100%;
+            margin: 10px;
+            background: #FFFFFF;
+        }
+        
+        .content {
+            max-width: 1080px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            margin: 0 auto;
+        }
+        
+        .topic {
+            max-width: 270px;
+            background-color: #FFFFFF;
+        }
+        
+        .card {
+            margin: 10px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        
+        .title {
+            font-family: Georgia, "Times New Roman", Times, serif;
+            text-align: center;
+            margin: 10px;
+        }
+        
+        .title-ad {
+            font-size: medium;
+            background-color: black;
+            color: #FFFFFF;
+            padding: 10px 0;
+        }
+        
+        .footer {
+            color: darkgrey;
+            text-align: center;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: medium;
+            margin: 25px auto;
+        }
+        
+        .footer a {
+            color: darkgrey;
+        }
+    </style>
+</head>
+
+<body>
+    <div class=container>
+        <div class=header>
+            <h1 class=title>IKLAN BARIS</h1>
+        </div>
+        <div class=content>
+            {{ range $key, $value := . }}
+            <div class=topic>
+                <div class="title title-ad">{{.Topic}}</div>
+                {{ range $key, $value := .Ads }}
+                <div class=card>
+                    <b>{{.Title}}</b> {{.Content}}
+                </div>
+                {{ end }}
+            </div>
+            {{ end }}
+        </div>
+        <div class="footer ">
+            Made in Cirebon. Powered by <a href=https://github.com/fastrodev/fastrex>Fastrex</a>
+        </div>
+    </div>
+</body>
+
+</html>

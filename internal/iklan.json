@@ -1,0 +1,105 @@
+{
+    "data": [{
+            "topic": "MOTOR",
+            "ads": [{
+                "title": "Lorem ipsum dolor sit amet",
+                "content": "consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+            }, {
+                "title": "Lorem ipsum dolor sit amet",
+                "content": "consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+            }, {
+                "title": "Lorem ipsum dolor sit amet",
+                "content": "consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+            }]
+        }, {
+            "topic": "MOBIL",
+            "ads": [{
+                "title": "Lorem ipsum dolor sit amet",
+                "content": "consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+            }, {
+                "title": "Lorem ipsum dolor sit amet",
+                "content": "consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+            }, {
+                "title": "Lorem ipsum dolor sit amet",
+                "content": "consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+            }]
+        }, {
+            "topic": "RUMAH",
+            "ads": [{
+                "title": "Lorem ipsum dolor sit amet",
+                "content": "consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+            }, {
+                "title": "Lorem ipsum dolor sit amet",
+                "content": "consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+            }, {
+                "title": "Lorem ipsum dolor sit amet",
+                "content": "consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+            }]
+        },
+        {
+            "topic": "TANAH",
+            "ads": [{
+                "title": "Lorem ipsum dolor sit amet",
+                "content": "consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+            }, {
+                "title": "Lorem ipsum dolor sit amet",
+                "content": "consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+            }, {
+                "title": "Lorem ipsum dolor sit amet",
+                "content": "consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+            }]
+        },
+        {
+            "topic": "RUKO",
+            "ads": [{
+                "title": "Lorem ipsum dolor sit amet",
+                "content": "consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+            }, {
+                "title": "Lorem ipsum dolor sit amet",
+                "content": "consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+            }, {
+                "title": "Lorem ipsum dolor sit amet",
+                "content": "consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+            }]
+        },
+        {
+            "topic": "APARTEMEN",
+            "ads": [{
+                "title": "Lorem ipsum dolor sit amet",
+                "content": "consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+            }, {
+                "title": "Lorem ipsum dolor sit amet",
+                "content": "consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+            }, {
+                "title": "Lorem ipsum dolor sit amet",
+                "content": "consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+            }]
+        },
+        {
+            "topic": "KONTRAKAN",
+            "ads": [{
+                "title": "Lorem ipsum dolor sit amet",
+                "content": "consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+            }, {
+                "title": "Lorem ipsum dolor sit amet",
+                "content": "consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+            }, {
+                "title": "Lorem ipsum dolor sit amet",
+                "content": "consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+            }]
+        },
+        {
+            "topic": "KOS-KOSAN",
+            "ads": [{
+                "title": "Lorem ipsum dolor sit amet",
+                "content": "consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+            }, {
+                "title": "Lorem ipsum dolor sit amet",
+                "content": "consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+            }, {
+                "title": "Lorem ipsum dolor sit amet",
+                "content": "consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+            }]
+        }
+    ]
+}

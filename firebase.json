@@ -1,0 +1,24 @@
+{
+  "hosting": {
+    "rewrites": [
+      {
+        "source": "**",
+        "function": "Main"
+      }
+    ],
+    "ignore": [
+      "**/cmd/**",
+      "**/internal/**",
+      "**/static/**",
+      "**/template/**",
+      ".gitignore",
+      "cloudbuild.yaml",
+      "firebase.json",
+      "go.mod",
+      "go.sum",
+      "README.md",
+      "serverless.go",
+      "**/.*"
+    ]
+  }
+}

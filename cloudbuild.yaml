@@ -1,0 +1,17 @@
+steps:
+  - name: golang
+    entrypoint: /bin/bash
+    args: 
+      - -c
+      - |
+        mkdir static
+        go run cmd/static/main.go
+  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
+    args:
+      - gcloud
+      - functions
+      - deploy
+      - Main
+      - --source=.
+      - --trigger-http
+      - --allow-unauthenticated
