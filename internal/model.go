@@ -1,15 +1,20 @@
 package internal
 
-type Ad struct {
-	Title   string `json:"title"`
-	Content string `json:"content"`
-}
+import "time"
 
-type Ads struct {
-	Topic string `json:"topic"`
-	Ads   []Ad   `json:"ads"`
+type Post struct {
+	ID      string    `json:"id"`
+	User    string    `json:"user"`
+	Topic   string    `json:"topic"`
+	Type    string    `json:"type"`
+	Title   string    `json:"title"`
+	Content string    `json:"content"`
+	Created time.Time `json:"created,omitempty"`
+	Updated time.Time `json:"updated,omitempty"`
+	Expired time.Time `json:"expired,omitempty"`
 }
 
 type Data struct {
-	Data []Ads `json:"data"`
+	Topic string `json:"topic"`
+	Posts []Post `json:"posts"`
 }

@@ -1,5 +1,3 @@
 .firebase/
 tmp/
-Makefile
-.air.toml
 static/

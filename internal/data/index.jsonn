@@ -1,0 +1,13 @@
+[{
+    "topic": "motor",
+    "posts": [{
+        "title": "Lorem ipsum dolor sit amet",
+        "content": "consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    }, {
+        "title": "Lorem ipsum dolor sit amet",
+        "content": "consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    }, {
+        "title": "Lorem ipsum dolor sit amet",
+        "content": "consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    }]
+}]

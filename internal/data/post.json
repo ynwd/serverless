@@ -1,0 +1,49 @@
+[{
+        "id": "fd8a9fb",
+        "user": "user",
+        "created": "2021-02-18T21:54:42.123Z",
+        "topic": "mobil",
+        "type": "ads",
+        "title": "suzuki",
+        "content": "consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    },
+    {
+        "id": "fd8a9fa",
+        "user": "user",
+        "created": "2021-02-18T21:54:42.123Z",
+        "expired": "2021-02-18T21:54:42.123Z",
+        "topic": "mobil",
+        "type": "ads",
+        "title": "honda",
+        "content": "consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    },
+    {
+        "id": "fd8a9fc",
+        "user": "user",
+        "created": "2021-02-18T21:54:42.123Z",
+        "updated": "2021-02-18T21:54:42.123Z",
+        "expired": "2021-02-18T21:54:42.123Z",
+        "topic": "mobil",
+        "type": "ads",
+        "title": "toyota",
+        "content": "consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    },
+    {
+        "id": "fd8a9fd",
+        "user": "user",
+        "created": "2021-02-18T21:54:42.123Z",
+        "topic": "motor",
+        "type": "ads",
+        "title": "kawasaki",
+        "content": "consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    },
+    {
+        "id": "fd8a9fe",
+        "user": "user",
+        "created": "2021-02-18T21:54:42.123Z",
+        "topic": "motor",
+        "type": "ads",
+        "title": "kawasaki",
+        "content": "consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    }
+]

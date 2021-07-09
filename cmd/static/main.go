@@ -2,41 +2,37 @@ package main
 
 import (
 	"bytes"
-	"log"
-	"os"
 	"text/template"
+	"time"
 
 	"github.com/fastrodev/serverless/internal"
 )
 
-func writeFile(data string) {
-	f, errCreate := os.Create("static/index.html")
-	if errCreate != nil {
-		log.Fatal(errCreate)
-	}
-
-	_, errWrite := f.WriteString(data)
-	if errWrite != nil {
-		log.Fatal(errWrite)
-	}
-
-	defer f.Close()
-}
-
 func main() {
-	h := internal.Handler{}
-	td := h.ReadJson("internal/iklan.json")
+	td := internal.ReadJson("internal/data/index.json")
 
-	t, err := template.ParseFiles("template/default.tmpl")
+	t, err := template.ParseFiles("template/default.html")
 	if err != nil {
 		panic(err)
+	}
+
+	type FrontData struct {
+		Title string
+		Date  string
+		Data  []internal.Data
+	}
+
+	frontData := FrontData{
+		Title: "phonic-altar",
+		Date:  time.Now().Local().Format("Jan-02-06"),
+		Data:  td,
 	}
 
 	var tpl bytes.Buffer
-	err = t.Execute(&tpl, td.Data)
+	err = t.Execute(&tpl, frontData)
 	if err != nil {
 		panic(err)
 	}
 
-	writeFile(tpl.String())
+	internal.WriteFile(tpl.String(), "static/index.html")
 }
