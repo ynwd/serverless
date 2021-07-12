@@ -10,8 +10,7 @@ multiple routes, handle static files, and render html templates -- then
 associate them with an entry point in the cloud function. The entry point is
 then redirected to firebase hosting according to the domain and url you want.
 
-Live demo:
-[https://phonic-altar-274306.web.app](https://phonic-altar-274306.web.app)
+Live demo: [https://fastro-319406.web.app](https://fastro-319406.web.app/)
 
 ## Getting start
 
@@ -123,7 +122,7 @@ gcloud functions deploy Main --runtime go113 --trigger-http --allow-unauthentica
 ```
 
 Live demo:
-[https://us-central1-phonic-altar-274306.cloudfunctions.net/Main](https://us-central1-phonic-altar-274306.cloudfunctions.net/Entrypoint)
+[https://us-central1-fastro-319406.cloudfunctions.net/Main](https://us-central1-fastro-319406.cloudfunctions.net/Main)
 
 ## Firebase domain setup
 
@@ -183,5 +182,4 @@ Deploy to firebase:
 firebase deploy
 ```
 
-Live demo:
-[https://phonic-altar-274306.web.app](https://phonic-altar-274306.web.app)
+Live demo: [https://fastro-319406.web.app](https://fastro-319406.web.app)

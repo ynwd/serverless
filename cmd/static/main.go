@@ -23,7 +23,7 @@ func main() {
 	}
 
 	frontData := FrontData{
-		Title: "phonic-altar",
+		Title: "iklan baris",
 		Date:  time.Now().Local().Format("Jan-02-06"),
 		Data:  td,
 	}
