@@ -6,8 +6,13 @@ steps:
     - | 
       gcloud secrets versions access latest  --secret=firestore-secret > firestore.json
       export GOOGLE_APPLICATION_CREDENTIALS=firestore.json
-      mkdir public
-      go run cmd/static/main.go
+  - name: golang
+    entrypoint: /bin/bash
+      args:
+      - '-c'
+      - | 
+        mkdir public
+        go run cmd/static/main.go
   - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
     args:
       - gcloud
