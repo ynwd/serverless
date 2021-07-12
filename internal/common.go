@@ -1,10 +1,12 @@
 package internal
 
 import (
+	"context"
 	"encoding/json"
 	"io/ioutil"
 	"log"
 	"os"
+	"time"
 )
 
 func WriteFile(data string, output string) {
@@ -31,6 +33,26 @@ func ReadJson(file string) []Data {
 	if errUnmarshal != nil {
 		log.Fatal("ReadJson" + errUnmarshal.Error())
 	}
+	return data
+}
+
+func ReadPost() []Post {
+	data := []Post{}
+	ctx := context.Background()
+	db := createDatabase(ctx)
+
+	for _, v := range db.getPost(ctx) {
+		var p map[string]interface{} = v.(map[string]interface{})
+		post := Post{}
+		post.ID = p["id"].(string)
+		post.Title = p["title"].(string)
+		post.Topic = p["topic"].(string)
+		post.Type = p["type"].(string)
+		post.Created = p["created"].(time.Time)
+		post.Content = p["content"].(string)
+		data = append(data, post)
+	}
+
 	return data
 }
 

@@ -1,29 +1,60 @@
 package internal
 
-import "github.com/fastrodev/fastrex"
+import (
+	"context"
 
-func handler(req fastrex.Request, res fastrex.Response) {
-	res.Json(`{"message":"ok"}`)
-}
+	"github.com/fastrodev/fastrex"
+)
 
 func CreateApp() fastrex.App {
 	app := fastrex.New()
-	app.Get("/api", handler)
-	// add static folder
-	app.Static("static")
-	// add html templates
-	app.Template("template/search.html")
-	app.Template("template/signin.html")
-	app.Template("template/signup.html")
-	app.Template("template/membership.html")
-	app.Template("template/home.html")
-	app.Template("template/detail.html")
-	// add routes
-	app.Get("/search", searchHandler)
-	app.Get("/signin", signinHandler)
-	app.Get("/signup", signupHandler)
-	app.Get("/membership", membershipHandler)
-	app.Get("/home", homeHandler)
-	app.Get("/detail/:post", detailHandler)
+	ctx := context.Background()
+	app = createPageRoute(ctx, app)
+	app = createApiRoute(ctx, app)
+	app.Ctx(ctx).Static("public")
+	app = createTemplate(app)
 	return app
+}
+
+func createTemplate(app fastrex.App) fastrex.App {
+	app.Template("template/search.html").
+		Template("template/signin.html").
+		Template("template/signup.html").
+		Template("template/membership.html").
+		Template("template/home.html").
+		Template("template/detail.html")
+	return app
+}
+
+func createPageRoute(ctx context.Context, app fastrex.App) fastrex.App {
+	s := createPageService(ctx)
+	app.Get("/search", s.searchPage).
+		Get("/signin", s.signinPage).
+		Get("/signup", s.signupPage).
+		Get("/membership", s.membershipPage).
+		Get("/home", s.homePage).
+		Get("/post", s.createPostPage).
+		Get("/detail/:post", s.detailPage)
+	return app
+}
+
+func createApiRoute(ctx context.Context, app fastrex.App) fastrex.App {
+	api := createApiService(ctx)
+	app.Get("/api", api.getPost).
+		Post("/api", api.createPost)
+	return app
+}
+
+func createDatabase(ctx context.Context) *database {
+	return &database{client: createClient(ctx)}
+}
+
+func createApiService(ctx context.Context) *apiService {
+	db := createDatabase(ctx)
+	return &apiService{db: *db}
+}
+
+func createPageService(ctx context.Context) *pageService {
+	db := createDatabase(ctx)
+	return &pageService{db: *db}
 }

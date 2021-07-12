@@ -1,3 +1,4 @@
 .firebase/
 tmp/
-static/
+public/
+fastro*.json

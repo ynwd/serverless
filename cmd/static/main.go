@@ -2,15 +2,16 @@ package main
 
 import (
 	"bytes"
-	"text/template"
+	"encoding/json"
+	"html/template"
+	"log"
 	"time"
 
 	"github.com/fastrodev/serverless/internal"
 )
 
 func main() {
-	td := internal.ReadJson("internal/data/index.json")
-
+	td := createData()
 	t, err := template.ParseFiles("template/default.html")
 	if err != nil {
 		panic(err)
@@ -23,8 +24,8 @@ func main() {
 	}
 
 	frontData := FrontData{
-		Title: "iklan baris",
-		Date:  time.Now().Local().Format("Jan-02-06"),
+		Title: "Iklan Baris",
+		Date:  time.Now().Local().Format("2 Jan 2006 15:04:05"),
 		Data:  td,
 	}
 
@@ -34,5 +35,55 @@ func main() {
 		panic(err)
 	}
 
-	internal.WriteFile(tpl.String(), "static/index.html")
+	internal.WriteFile(tpl.String(), "public/index.html")
+}
+
+func Filter(vs []internal.Post, f func(internal.Post) bool) []internal.Post {
+	filtered := []internal.Post{}
+	for _, v := range vs {
+		if f(v) {
+			filtered = append(filtered, v)
+		}
+	}
+	return filtered
+}
+
+func groupByTopic(d []internal.Post) []internal.Data {
+	posts := map[string][]internal.Post{}
+	for _, v := range d {
+		filtered := Filter(d, func(p internal.Post) bool {
+			return p.Topic == v.Topic
+		})
+		posts[v.Topic] = filtered
+	}
+
+	items := []internal.Data{}
+	for key, element := range posts {
+		data := internal.Data{
+			Topic: key,
+			Posts: element,
+		}
+		items = append(items, data)
+	}
+	return items
+}
+
+func createData() []internal.Data {
+	body := createJsonPost()
+	data := []internal.Data{}
+	errUnmarshal := json.Unmarshal(body, &data)
+	if errUnmarshal != nil {
+		log.Fatal("ReadJson" + errUnmarshal.Error())
+	}
+	return data
+}
+
+func createJsonPost() []byte {
+	d := internal.ReadPost()
+	output, errMarshal := json.Marshal(groupByTopic(d))
+	if errMarshal != nil {
+		panic(errMarshal)
+	}
+
+	return output
 }

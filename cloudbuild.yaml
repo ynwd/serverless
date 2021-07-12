@@ -1,11 +1,13 @@
 steps:
-  - name: golang
-    entrypoint: /bin/bash
-    args: 
-      - -c
-      - |
-        mkdir static
-        go run cmd/static/main.go
+  - name: 'gcr.io/cloud-builders/gcloud'
+    entrypoint: 'bash'
+    args:
+    - '-c'
+    - | 
+      gcloud secrets versions access latest  --secret=firestore-secret > firestore.json
+      export GOOGLE_APPLICATION_CREDENTIALS=firestore.json
+      mkdir public
+      go run cmd/static/main.go
   - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
     args:
       - gcloud

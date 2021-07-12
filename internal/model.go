@@ -10,8 +10,6 @@ type Post struct {
 	Title   string    `json:"title"`
 	Content string    `json:"content"`
 	Created time.Time `json:"created,omitempty"`
-	Updated time.Time `json:"updated,omitempty"`
-	Expired time.Time `json:"expired,omitempty"`
 }
 
 type Data struct {

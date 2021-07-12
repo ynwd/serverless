@@ -7,7 +7,7 @@
         "ignore": [
             "**/cmd/**",
             "**/internal/**",
-            "**/static/**",
+            "**/public/**",
             "**/template/**",
             ".gitignore",
             "cloudbuild.yaml",
