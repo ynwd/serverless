@@ -16,6 +16,8 @@
             font-style: italic;
             font-weight: bold;
             text-transform: uppercase;
+            text-align: center;
+            margin-bottom: 1rem;
         }
         
         form {
@@ -42,13 +44,16 @@
             padding: 0.5em 1.5em 0.5em 0;
         }
         
+        textarea,
         input,
-        select {
+        select,
+        button {
             width: 100%;
             padding: 0.7em;
             margin-bottom: 0.5rem;
         }
         
+        textarea,
         select {
             margin-bottom: 1rem;
         }
@@ -61,6 +66,7 @@
                 float: left;
                 width: 100px;
             }
+            textarea,
             input,
             select,
             h2 {
@@ -91,7 +97,7 @@
 <body>
     <form method="post" action="/api">
         <label></label>
-        <h2 class="main">PASANG IKLAN</h2>
+        <div class="main">PASANG IKLAN</div>
         <label for="topic">Topik</label>
         <select id="topic" name="topic">
       <option value="">-- Pilih topik iklanmu --</option>
@@ -110,7 +116,7 @@
         <input id="title" name="title" type="text">
 
         <label for="content">Isi Iklan</label>
-        <input id="content" name="content" type="text">
+        <textarea id="content" name="content"></textarea>
 
         <button>Submit</button>
     </form>
