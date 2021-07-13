@@ -3,103 +3,109 @@
 <html>
 
 <head>
-    <title>{{.Title}}</title>
-    <meta charset=utf-8>
-    <meta name=viewport content="width=device-width,initial-scale=1">
-    <style media=screen>
-        * {
-            box-sizing: border-box;
-        }
-        
-        .main {
-            font-size: xx-large;
-            font-style: italic;
-            font-weight: bold;
-            text-transform: uppercase;
-            text-align: center;
-            margin-bottom: 1rem;
-        }
-        
-        form {
-            padding: 1em;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            padding: 1em;
-        }
-        
-        form input {
-            margin-bottom: 1rem;
-            background: #fff;
-            border: 1px solid #9c9c9c;
-        }
-        
-        form button {
-            padding: 0.7em;
-        }
-        
-        label {
-            text-align: right;
-            display: block;
-            padding: 0.5em 1.5em 0.5em 0;
-        }
-        
-        textarea,
-        input,
-        select,
-        button {
-            width: 100%;
-            padding: 0.7em;
-            margin-bottom: 0.5rem;
-        }
-        
-        textarea,
-        select {
-            margin-bottom: 1rem;
-        }
-        
-        @media (min-width: 400px) {
-            form {
-                overflow: hidden;
-            }
-            label {
-                float: left;
-                width: 100px;
-            }
-            textarea,
-            input,
-            select,
-            h2 {
-                float: left;
-                width: calc(100% - 100px);
-            }
-            button {
-                float: right;
-                width: calc(100% - 100px);
-            }
-            h2 {
-                text-align: center;
-            }
-        }
-        
-        @media all and (min-device-width: 320px) and (max-device-width: 480px),
-        (max-width: 700px) {
-            label {
-                text-align: left;
-            }
-            h2 {
-                text-align: center;
-            }
-        }
-    </style>
+  <title>{{.Title}}</title>
+  <meta charset=utf-8>
+  <meta name=viewport content="width=device-width,initial-scale=1">
+  <style media=screen>
+    * {
+      box-sizing: border-box;
+    }
+
+    .main {
+      font-size: xx-large;
+      font-style: italic;
+      font-weight: bold;
+      text-transform: uppercase;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    form {
+      padding: 1em;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 1em;
+    }
+
+    form input,
+    form textarea {
+      margin-bottom: 1rem;
+      background: #fff;
+      border: 1px solid #9c9c9c;
+    }
+
+    form button {
+      padding: 0.7em;
+    }
+
+    label {
+      text-align: right;
+      display: block;
+      padding: 0.5em 1.5em 0.5em 0;
+    }
+
+    textarea,
+    input,
+    select,
+    button {
+      width: 100%;
+      padding: 0.7em;
+      margin-bottom: 0.5rem;
+    }
+
+    textarea,
+    select {
+      margin-bottom: 1rem;
+    }
+
+    @media (min-width: 400px) {
+      form {
+        overflow: hidden;
+      }
+
+      label {
+        float: left;
+        width: 100px;
+      }
+
+      textarea,
+      input,
+      select,
+      h2 {
+        float: left;
+        width: calc(100% - 100px);
+      }
+
+      button {
+        float: right;
+        width: calc(100% - 100px);
+      }
+
+      h2 {
+        text-align: center;
+      }
+    }
+
+    @media all and (min-device-width: 320px) and (max-device-width: 480px),
+    (max-width: 700px) {
+      label {
+        text-align: left;
+      }
+
+      h2 {
+        text-align: center;
+      }
+    }
+  </style>
 </head>
 
 <body>
-    <form method="post" action="/api">
-        <label></label>
-        <div class="main">PASANG IKLAN</div>
-        <label for="topic">Topik</label>
-        <select id="topic" name="topic">
+  <form method="post" action="/api">
+    <label></label>
+    <div class="main">PASANG IKLAN</div>
+    <label for="topic">Topik</label>
+    <select id="topic" name="topic">
       <option value="">-- Pilih topik iklanmu --</option>
       <option value="catering">Catering</option>
       <option value="motor">Motor</option>
@@ -112,14 +118,14 @@
       <option value="lowongan">Lowongan</option>
     </select>
 
-        <label for="title">Judul</label>
-        <input id="title" name="title" type="text">
+    <label for="title">Judul</label>
+    <input id="title" name="title" type="text">
 
-        <label for="content">Isi Iklan</label>
-        <textarea id="content" name="content"></textarea>
+    <label for="content">Isi Iklan</label>
+    <textarea id="content" name="content"></textarea>
 
-        <button>Submit</button>
-    </form>
+    <button>Submit</button>
+  </form>
 
 </body>
 
