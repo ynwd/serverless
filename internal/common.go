@@ -55,16 +55,3 @@ func ReadPost() []Post {
 
 	return data
 }
-
-func ReadData(file string) []Post {
-	body, errReadFile := ioutil.ReadFile(file)
-	if errReadFile != nil {
-		log.Fatal("ReadData" + errReadFile.Error())
-	}
-	data := []Post{}
-	errUnmarshal := json.Unmarshal(body, &data)
-	if errUnmarshal != nil {
-		log.Fatal("ReadData" + errUnmarshal.Error())
-	}
-	return data
-}

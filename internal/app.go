@@ -17,18 +17,19 @@ func CreateApp() fastrex.App {
 }
 
 func createTemplate(app fastrex.App) fastrex.App {
-	app.Template("template/search.html").
+	app.Template("template/arsip.html").
 		Template("template/signin.html").
 		Template("template/signup.html").
 		Template("template/membership.html").
 		Template("template/home.html").
-		Template("template/detail.html")
+		Template("template/detail.html").
+		Template("template/create.html")
 	return app
 }
 
 func createPageRoute(ctx context.Context, app fastrex.App) fastrex.App {
 	s := createPageService(ctx)
-	app.Get("/search", s.searchPage).
+	app.Get("/arsip", s.arsipPage).
 		Get("/signin", s.signinPage).
 		Get("/signup", s.signupPage).
 		Get("/membership", s.membershipPage).

@@ -25,7 +25,7 @@ func main() {
 
 	frontData := FrontData{
 		Title: "Iklan Baris",
-		Date:  time.Now().Local().Format("2 Jan 2006 15:04:05"),
+		Date:  time.Now().Local().Format("2 January 2006"),
 		Data:  td,
 	}
 

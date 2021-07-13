@@ -1,0 +1,112 @@
+{{define "create"}}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>{{.Title}}</title>
+    <meta charset=utf-8>
+    <meta name=viewport content="width=device-width,initial-scale=1">
+    <style media=screen>
+        * {
+            box-sizing: border-box;
+        }
+        
+        .main {
+            font-size: xx-large;
+            font-style: italic;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        
+        form {
+            padding: 1em;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 1em;
+        }
+        
+        form input {
+            margin-bottom: 1rem;
+            background: #fff;
+            border: 1px solid #9c9c9c;
+        }
+        
+        form button {
+            padding: 0.7em;
+        }
+        
+        label {
+            text-align: right;
+            display: block;
+            padding: 0.5em 1.5em 0.5em 0;
+        }
+        
+        input,
+        select {
+            width: 100%;
+            padding: 0.7em;
+            margin-bottom: 0.5rem;
+        }
+        
+        select {
+            margin-bottom: 1rem;
+        }
+        
+        @media (min-width: 400px) {
+            form {
+                overflow: hidden;
+            }
+            label {
+                float: left;
+                width: 100px;
+            }
+            input,
+            select,
+            h2 {
+                float: left;
+                width: calc(100% - 100px);
+            }
+            button {
+                float: right;
+                width: calc(100% - 100px);
+            }
+            h2 {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <form method="post" action="/api">
+        <label></label>
+        <h2 class="main">PASANG IKLAN</h2>
+        <label for="topic">Topik</label>
+        <select id="topic" name="topic">
+      <option value="">-- Pilih topik iklanmu --</option>
+      <option value="catering">Catering</option>
+      <option value="motor">Motor</option>
+      <option value="mobil">Mobil</option>
+      <option value="rumah">Rumah</option>
+      <option value="ruko">Ruko</option>
+      <option value="tanah">Tanah</option>
+      <option value="toko">Toko</option>
+      <option value="pekerjaan">Pekerjaan</option>
+      <option value="sepeda">Sepeda</option>
+    </select>
+
+        <label for="title">Judul</label>
+        <input id="title" name="title" type="text">
+
+        <label for="content">Isi Iklan</label>
+        <input id="content" name="content" type="text">
+
+        <button>Submit</button>
+    </form>
+
+</body>
+
+
+</html>
+{{end}}

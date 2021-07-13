@@ -6,8 +6,8 @@ type pageService struct {
 	db database
 }
 
-func (p *pageService) searchPage(req fastrex.Request, res fastrex.Response) {
-	res.Render("search", nil)
+func (p *pageService) arsipPage(req fastrex.Request, res fastrex.Response) {
+	res.Render("arsip", nil)
 }
 
 func (p *pageService) signinPage(req fastrex.Request, res fastrex.Response) {
@@ -31,5 +31,5 @@ func (p *pageService) detailPage(req fastrex.Request, res fastrex.Response) {
 }
 
 func (p *pageService) createPostPage(req fastrex.Request, res fastrex.Response) {
-	res.Render("detail", nil)
+	res.Render("create", nil)
 }
