@@ -1,6 +1,8 @@
 package internal
 
 import (
+	"fmt"
+
 	"github.com/fastrodev/fastrex"
 )
 
@@ -9,10 +11,14 @@ type pageService struct {
 }
 
 func (p *pageService) homePage(req fastrex.Request, res fastrex.Response) {
-	c, _ := req.Cookie("user")
+	c, err := req.Cookie("user")
+	if err != nil {
+		fmt.Println("homePage>>", err.Error())
+	}
+	email := c.GetValue()
 	data := struct {
 		Email string
-	}{c.GetValue()}
+	}{email}
 	res.Render(data)
 }
 
