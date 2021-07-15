@@ -18,12 +18,14 @@ func main() {
 	}
 
 	type FrontData struct {
+		Email string
 		Title string
 		Date  string
 		Data  []internal.Data
 	}
 
 	frontData := FrontData{
+		Email: "oke@gmail.com",
 		Title: "Iklan Baris",
 		Date:  time.Now().Local().Format("2 January 2006"),
 		Data:  td,

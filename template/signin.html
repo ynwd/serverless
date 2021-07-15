@@ -1,7 +1,128 @@
 {{define "signin"}}
 <!DOCTYPE html>
 <html>
-signin
+
+<head>
+    <title>{{.Title}}</title>
+    <meta charset=utf-8>
+    <meta name=viewport content="width=device-width,initial-scale=1">
+    <style media=screen>
+        * {
+            box-sizing: border-box;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        
+        .arial {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        
+        .main {
+            font-size: xx-large;
+            font-style: italic;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-align: center;
+        }
+        
+        form {
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        form input,
+        form textarea {
+            margin-bottom: 1rem;
+            background: #fff;
+            border: 1px solid #9c9c9c;
+        }
+        
+        form button {
+            padding: 0.7em;
+        }
+        
+        label {
+            text-align: right;
+            display: block;
+            padding-left: 0.5em;
+            padding-right: 0.5em;
+            padding-top: 0.5em;
+            padding-bottom: 0.5em;
+        }
+        
+        input,
+        button {
+            width: 100%;
+            padding: 0.7em;
+            margin-bottom: 0.5rem;
+        }
+        
+        @media (min-width: 400px) {
+            form {
+                overflow: hidden;
+            }
+            label {
+                float: left;
+                width: 100px;
+            }
+            input,
+            h2 {
+                float: left;
+                width: calc(100% - 100px);
+            }
+            button {
+                float: right;
+                width: calc(100% - 100px);
+            }
+            h2 {
+                text-align: center;
+            }
+        }
+        
+        @media all and (min-device-width: 320px) and (max-device-width: 480px),
+        (max-width: 700px) {
+            label {
+                text-align: left;
+                padding-left: 0;
+            }
+            h2 {
+                text-align: center;
+            }
+            form {
+                padding-left: 0.5em;
+                padding-right: 0.5em;
+            }
+            button {
+                margin-top: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <form method="post" action="/api/signin">
+        <label></label>
+        <div class="header">
+            <div class="title main">
+                MASUK
+            </div>
+        </div>
+
+        <label for="email" class="arial">Email</label>
+        <input id="email" name="email" type="text">
+
+        <label for="content" class="arial">Password</label>
+        <input id="password" name="password" type="password"></input>
+
+        <button>Submit</button>
+    </form>
+
+</body>
+
 
 </html>
 {{end}}

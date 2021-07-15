@@ -3,109 +3,129 @@
 <html>
 
 <head>
-  <title>{{.Title}}</title>
-  <meta charset=utf-8>
-  <meta name=viewport content="width=device-width,initial-scale=1">
-  <style media=screen>
-    * {
-      box-sizing: border-box;
-    }
-
-    .main {
-      font-size: xx-large;
-      font-style: italic;
-      font-weight: bold;
-      text-transform: uppercase;
-      text-align: center;
-      margin-bottom: 1rem;
-    }
-
-    form {
-      padding: 1em;
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
-      padding: 1em;
-    }
-
-    form input,
-    form textarea {
-      margin-bottom: 1rem;
-      background: #fff;
-      border: 1px solid #9c9c9c;
-    }
-
-    form button {
-      padding: 0.7em;
-    }
-
-    label {
-      text-align: right;
-      display: block;
-      padding: 0.5em 1.5em 0.5em 0;
-    }
-
-    textarea,
-    input,
-    select,
-    button {
-      width: 100%;
-      padding: 0.7em;
-      margin-bottom: 0.5rem;
-    }
-
-    textarea,
-    select {
-      margin-bottom: 1rem;
-    }
-
-    @media (min-width: 400px) {
-      form {
-        overflow: hidden;
-      }
-
-      label {
-        float: left;
-        width: 100px;
-      }
-
-      textarea,
-      input,
-      select,
-      h2 {
-        float: left;
-        width: calc(100% - 100px);
-      }
-
-      button {
-        float: right;
-        width: calc(100% - 100px);
-      }
-
-      h2 {
-        text-align: center;
-      }
-    }
-
-    @media all and (min-device-width: 320px) and (max-device-width: 480px),
-    (max-width: 700px) {
-      label {
-        text-align: left;
-      }
-
-      h2 {
-        text-align: center;
-      }
-    }
-  </style>
+    <title>{{.Title}}</title>
+    <meta charset=utf-8>
+    <meta name=viewport content="width=device-width,initial-scale=1">
+    <style media=screen>
+        * {
+            box-sizing: border-box;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        
+        .main {
+            font-size: xx-large;
+            font-style: italic;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-align: center;
+        }
+        
+        form {
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        form input,
+        form textarea {
+            margin-bottom: 1rem;
+            background: #fff;
+            border: 1px solid #9c9c9c;
+        }
+        
+        form button {
+            padding: 0.7em;
+        }
+        
+        label {
+            text-align: right;
+            display: block;
+            padding-left: 0.5em;
+            padding-right: 0.5em;
+            padding-top: 0.5em;
+            padding-bottom: 0.5em;
+        }
+        
+        textarea,
+        input,
+        select,
+        button {
+            width: 100%;
+            padding: 0.7em;
+            margin-bottom: 0.5rem;
+        }
+        
+        textarea,
+        select {
+            margin-bottom: 1rem;
+        }
+        
+        textarea {
+            height: 6rem;
+        }
+        
+        .arial {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        
+        @media (min-width: 400px) {
+            form {
+                overflow: hidden;
+            }
+            label {
+                float: left;
+                width: 100px;
+            }
+            textarea,
+            input,
+            select,
+            h2 {
+                float: left;
+                width: calc(100% - 100px);
+            }
+            button {
+                float: right;
+                width: calc(100% - 100px);
+            }
+            h2 {
+                text-align: center;
+            }
+        }
+        
+        @media all and (min-device-width: 320px) and (max-device-width: 480px),
+        (max-width: 700px) {
+            label {
+                text-align: left;
+                padding-left: 0;
+            }
+            h2 {
+                text-align: center;
+            }
+            form {
+                padding-left: 0.5em;
+                padding-right: 0.5em;
+            }
+            button {
+                margin-top: 2rem;
+            }
+        }
+    </style>
 </head>
 
 <body>
-  <form method="post" action="/api">
-    <label></label>
-    <div class="main">PASANG IKLAN</div>
-    <label for="topic">Topik</label>
-    <select id="topic" name="topic">
+    <form method="post" action="/api">
+        <label></label>
+        <div class="header">
+            <div class="title main">
+                PASANG IKLAN
+            </div>
+        </div>
+        <label for="topic" class="arial">Topik</label>
+        <select id="topic" name="topic">
       <option value="">-- Pilih topik iklanmu --</option>
       <option value="catering">Catering</option>
       <option value="sembako">Sembako</option>
@@ -119,14 +139,23 @@
       <option value="lowongan">Lowongan</option>
     </select>
 
-    <label for="title">Judul</label>
-    <input id="title" name="title" type="text">
+        <label for="title" class="arial">Judul</label>
+        <input id="title" name="title" type="text">
 
-    <label for="content">Isi Iklan</label>
-    <textarea id="content" name="content"></textarea>
+        <label for="content" class="arial">Isi Iklan</label>
+        <textarea id="content" name="content"></textarea>
 
-    <button>Submit</button>
-  </form>
+        <label for="address" class="arial">Kota</label>
+        <input id="address" name="address" type="text">
+
+        <label for="phone" class="arial">Phone</label>
+        <input id="phone" name="phone" type="text">
+
+        <label for="email" class="arial">Email</label>
+        <input id="email" name="email" type="email">
+
+        <button>Submit</button>
+    </form>
 
 </body>
 

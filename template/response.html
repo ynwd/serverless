@@ -1,3 +1,4 @@
+{{define "response"}}
 <!DOCTYPE html>
 <html>
 
@@ -25,44 +26,25 @@
         .header {
             display: flex;
             flex-wrap: wrap;
-            justify-content: space-between;
+            justify-content: center;
         }
         
         .content {
-            display: flex;
-            flex-wrap: wrap;
-            align-content: baseline;
-            flex-direction: column;
-            max-height: 50rem;
-        }
-        
-        .wrapper {
-            max-width: 1080px;
-            overflow-x: scroll;
-        }
-        
-        .topic {
-            max-width: 260px;
-            background-color: #FFFFFF;
-            margin-right: 10px;
-        }
-        
-        .card {
-            margin: 5px auto;
-        }
-        
-        .card a span {
-            font-weight: bold;
-        }
-        
-        .card a,
-        .card a:hover {
-            text-decoration: none;
-            color: inherit;
+            max-width: 600px;
         }
         
         .arial {
             font-family: Arial, Helvetica, sans-serif;
+        }
+        
+        .title,
+        .date,
+        .register {
+            text-transform: capitalize;
+        }
+        
+        .bold {
+            font-weight: bold;
         }
         
         .left {
@@ -77,23 +59,15 @@
             text-align: center;
         }
         
+        .margin-bottom {
+            margin-bottom: 1rem;
+        }
+        
         .main {
             font-size: xx-large;
             font-style: italic;
             font-weight: bold;
             text-transform: uppercase;
-        }
-        
-        .register {
-            text-align: right;
-        }
-        
-        .title-ad {
-            text-transform: uppercase;
-            font-size: small;
-            background-color: black;
-            color: #FFFFFF;
-            padding: 10px 0;
         }
         
         .footer {
@@ -140,41 +114,18 @@
 <body>
     <div class=container>
         <div class="content-container header">
-            <div class="date arial left">{{.Date}}</div>
             <div class="title main">
-                {{.Title}}
+                IKLAN BARIS
             </div>
-            {{`{{if .Email}}`}}
-            <div class="register arial right">
-                <a href="post">Pasang</a>
-                <span>{{`{{.Email}}`}}</span>
-            </div>
-            {{`{{else}}`}}
-            <div class="register arial right">
-                <a href="post">Pasang</a>
-                <a href="signup">Daftar</a>
-                <a href="signin">Masuk</a>
-            </div>
-            {{`{{end}}`}}
-
         </div>
-        <div class="content-container wrapper content">
-            {{ range $key, $value := .Data }}
-            <div class=topic>
-                <div class="title title-ad center">{{.Topic}}</div>
-                {{ range $key, $value := .Posts }}
-                <div class="card arial">
-                    <a href=/post/{{.ID}}><span>{{.Title}}</span> {{.Content}}</a>
-                </div>
-                {{ end }}
-            </div>
-            {{ end }}
+        <div class="content-container content">
+            <div class="margin-bottom center title">{{.Response}}</div>
         </div>
-    </div>
-    <div class="footer arial">
-        Powered by <a href=https://github.com/fastrodev/fastrex>Fastrex Framework</a>
-    </div>
+        <div class="footer arial">
+            Powered by <a href=https://github.com/fastrodev/fastrex>Fastrex Framework</a>
+        </div>
     </div>
 </body>
 
 </html>
+{{end}}

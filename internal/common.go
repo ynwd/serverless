@@ -7,6 +7,8 @@ import (
 	"log"
 	"os"
 	"time"
+
+	"github.com/fastrodev/fastrex"
 )
 
 func WriteFile(data string, output string) {
@@ -54,4 +56,13 @@ func ReadPost() []Post {
 	}
 
 	return data
+}
+
+func createResponsePage(msg string, res fastrex.Response) {
+	resp := struct {
+		Date     string
+		Response string
+		Title    string
+	}{time.Now().Format("2 January 2006"), msg, msg}
+	res.Render("response", resp)
 }
