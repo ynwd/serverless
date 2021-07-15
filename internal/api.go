@@ -117,6 +117,7 @@ func (s *apiService) getUserByEmailAndPassword(req fastrex.Request, res fastrex.
 		createResponsePage("user tidak ditemukan. periksa email dan password anda", res)
 	}
 	c := fastrex.Cookie{}
-	c.Name("user").Value(user.Email).Path("/")
+	// expiration := time.Now().Add(365 * 24 * time.Hour)
+	c.Name("__session").Value(user.Email).Path("/")
 	res.Cookie(c).Redirect("/", 302)
 }

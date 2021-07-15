@@ -11,9 +11,9 @@ type pageService struct {
 }
 
 func (p *pageService) homePage(req fastrex.Request, res fastrex.Response) {
-	c, err := req.Cookie("user")
+	c, err := req.Cookie("__session")
 	if err != nil {
-		fmt.Println("homePage>>", err.Error())
+		fmt.Println("homePage::", err.Error())
 	}
 	email := c.GetValue()
 	data := struct {
@@ -40,7 +40,7 @@ func (p *pageService) membershipPage(req fastrex.Request, res fastrex.Response) 
 
 func (p *pageService) detailPage(req fastrex.Request, res fastrex.Response) {
 	id := req.Params("id")
-	c, _ := req.Cookie("user")
+	c, _ := req.Cookie("__session")
 	// cookie := struct {
 	// 	Email string
 	// }{c.GetValue()}
