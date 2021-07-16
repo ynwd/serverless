@@ -1,7 +1,6 @@
 package internal
 
 import (
-	"fmt"
 	"time"
 
 	"github.com/fastrodev/fastrex"
@@ -55,7 +54,6 @@ func (p *pageService) signupPage(req fastrex.Request, res fastrex.Response) {
 
 func (p *pageService) signOut(req fastrex.Request, res fastrex.Response) {
 	cookie, err := req.Cookie("__session")
-	fmt.Println(err)
 	if err == nil {
 		res.ClearCookie(cookie)
 		res.Redirect("/", 302)
