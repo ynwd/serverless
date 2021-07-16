@@ -12,6 +12,7 @@ steps:
     - '-c'
     - | 
       mkdir public
+      mv template/iklan.png public
       go run cmd/static/main.go
   - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
     args:
