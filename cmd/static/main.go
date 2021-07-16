@@ -18,19 +18,21 @@ func main() {
 	}
 
 	type FrontData struct {
-		Email       string
-		Title       string
-		Description string
-		Date        string
-		Data        []FlatPost
+		Email         string
+		Title         string
+		Description   string
+		Date          string
+		PublishedDate string
+		Data          []FlatPost
 	}
 
 	frontData := FrontData{
-		Email:       "oke@gmail.com",
-		Title:       "Iklan Baris",
-		Description: "Webapp untuk membuat iklan secara gratis. Simple dan nyaman dibaca.",
-		Date:        time.Now().Local().Format("2 January 2006"),
-		Data:        td,
+		Email:         "oke@gmail.com",
+		Title:         "Iklan Baris",
+		Description:   "Aplikasi web untuk membuat iklan baris online secara gratis. Simple dan nyaman dibaca.",
+		Date:          time.Now().Local().Format("2 January 2006"),
+		PublishedDate: time.Now().Local().Format("2006-01-0215:04:05"),
+		Data:          td,
 	}
 
 	var bfr bytes.Buffer
