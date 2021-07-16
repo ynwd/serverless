@@ -85,7 +85,7 @@ func (p *pageService) detailPage(req fastrex.Request, res fastrex.Response) {
 	user := post.User
 
 	if user == "user" {
-		user = "anonim"
+		user = "guest"
 	}
 
 	data := struct {
