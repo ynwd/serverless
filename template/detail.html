@@ -24,9 +24,7 @@
         }
         
         .header {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
+            display: block;
         }
         
         .content {
@@ -61,7 +59,8 @@
             font-style: italic;
         }
         
-        .topic {
+        .topic,
+        .date {
             font-size: medium;
             font-weight: normal;
             text-align: center;
@@ -114,22 +113,11 @@
 <body>
     <div class=container>
         <div class="content-container header">
-            <div class="date arial left">{{.Date}}</div>
             <div class="title-detail">
-                <div class="italic topic arial">{{.Topic}}</div>
+                <div class="italic date arial">{{.Date}}</div>
                 {{.Title}}
+                <div class="italic topic arial">oleh {{.User}} pada topik {{.Topic}}</div>
             </div>
-            {{if .UserEmail}}
-            <div class="register arial right">
-                <span><a href="/home">{{.UserEmail}}</a></span>
-            </div>
-            {{else}}
-            <div class="register arial right">
-                <a href="/post">Pasang</a>
-                <a href="/signup">Daftar</a>
-                <a href="/signin">Masuk</a>
-            </div>
-            {{end}}
         </div>
         <div class="content-container content">
             <div class="margin-bottom arial">{{.Content}}</div>

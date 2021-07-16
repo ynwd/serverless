@@ -82,6 +82,11 @@ func (p *pageService) detailPage(req fastrex.Request, res fastrex.Response) {
 	email := post.Email
 	phone := post.Phone
 	address := post.Address
+	user := post.User
+
+	if user == "user" {
+		user = "anonim"
+	}
 
 	data := struct {
 		Title     string
@@ -93,7 +98,8 @@ func (p *pageService) detailPage(req fastrex.Request, res fastrex.Response) {
 		Address   string
 		UserEmail string
 		ID        string
-	}{title, topic, date, content, email, phone, address, c.GetValue(), id[0]}
+		User      string
+	}{title, topic, date, content, email, phone, address, c.GetValue(), id[0], user}
 	res.Render("detail", data)
 }
 
