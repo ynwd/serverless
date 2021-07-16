@@ -6,6 +6,20 @@
     <title>Iklan | {{.Title}}</title>
     <meta charset=utf-8>
     <meta name=viewport content="width=device-width,initial-scale=1">
+    <meta name="description" content="{{.Content}}">
+    <meta name="twitter:image:src" content="iklan.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="{{.Title}}" />
+    <meta name="twitter:description" content="{{.Content}}" />
+    <meta property="og:image" content="iklan.png" />
+    <meta property="og:image:alt" content="Iklan Baris" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="600" />
+    <meta property="og:site_name" content="Fastro.app" />
+    <meta property="og:type" content="object" />
+    <meta property="og:title" content="{{.Title}}" />
+    <meta property="og:url" content="https://fastro.app/post/{{.ID}}" />
+    <meta property="og:description" content="{{.Content}}" />
     <style media=screen>
         body {
             margin: 0;
