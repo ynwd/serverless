@@ -21,7 +21,7 @@ func main() {
 		Email string
 		Title string
 		Date  string
-		Data  []internal.Data
+		Data  []FlatPost
 	}
 
 	frontData := FrontData{
@@ -31,13 +31,13 @@ func main() {
 		Data:  td,
 	}
 
-	var tpl bytes.Buffer
-	err = t.Execute(&tpl, frontData)
+	var bfr bytes.Buffer
+	err = t.Execute(&bfr, frontData)
 	if err != nil {
 		panic(err)
 	}
 
-	internal.WriteFile(tpl.String(), "public/index.html")
+	internal.WriteFile(bfr.String(), "public/index.html")
 }
 
 func Filter(vs []internal.Post, f func(internal.Post) bool) []internal.Post {
@@ -70,9 +70,43 @@ func groupByTopic(d []internal.Post) []internal.Data {
 	return items
 }
 
-func createData() []internal.Data {
+type FlatPost struct {
+	Header string
+	internal.Post
+}
+
+func flatByTopic(d []internal.Post) []FlatPost {
+	posts := map[string][]internal.Post{}
+	for _, v := range d {
+		filtered := Filter(d, func(p internal.Post) bool {
+			return p.Topic == v.Topic
+		})
+		posts[v.Topic] = filtered
+	}
+
+	fp := []FlatPost{}
+	for topic, postMap := range posts {
+		for idx, element := range postMap {
+			header := ""
+			post := element
+			if idx == 0 {
+				header = topic
+				post = internal.Post{}
+			}
+			data := FlatPost{
+				Header: header,
+				Post:   post,
+			}
+			fp = append(fp, data)
+		}
+	}
+
+	return fp
+}
+
+func createData() []FlatPost {
 	body := createJsonPost()
-	data := []internal.Data{}
+	data := []FlatPost{}
 	errUnmarshal := json.Unmarshal(body, &data)
 	if errUnmarshal != nil {
 		log.Fatal("ReadJson" + errUnmarshal.Error())
@@ -82,7 +116,8 @@ func createData() []internal.Data {
 
 func createJsonPost() []byte {
 	d := internal.ReadPost()
-	output, errMarshal := json.Marshal(groupByTopic(d))
+	// output, errMarshal := json.Marshal(groupByTopic(d))
+	output, errMarshal := json.Marshal(flatByTopic(d))
 	if errMarshal != nil {
 		panic(errMarshal)
 	}
