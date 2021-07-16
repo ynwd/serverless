@@ -117,6 +117,9 @@
 
         <label for="content" class="arial">Password</label>
         <input id="password" name="password" type="password"></input>
+        {{if .Post}}
+        <input type="hidden" name="post" value="{{.Post}}"></input>
+        {{end}}
 
         <button>Submit</button>
     </form>

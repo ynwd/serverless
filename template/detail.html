@@ -57,11 +57,22 @@
             margin-bottom: 1rem;
         }
         
-        .main {
-            font-size: xx-large;
+        .italic {
             font-style: italic;
+        }
+        
+        .topic {
+            font-size: medium;
+            font-weight: normal;
+            text-align: center;
+            text-transform: lowercase;
+        }
+        
+        .title-detail {
+            font-size: x-large;
             font-weight: bold;
-            text-transform: uppercase;
+            text-transform: capitalize;
+            text-align: center;
         }
         
         .footer {
@@ -86,11 +97,6 @@
                 margin: 0 auto;
                 max-height: none;
             }
-            .topic {
-                max-width: 100%;
-                background-color: #fefefe;
-                margin: 0 auto;
-            }
             .header {
                 padding: 10px 10px;
                 display: flex;
@@ -109,13 +115,13 @@
     <div class=container>
         <div class="content-container header">
             <div class="date arial left">{{.Date}}</div>
-            <div class="title main">
-                {{.Topic}}
+            <div class="title-detail">
+                <div class="italic topic arial">{{.Topic}}</div>
+                {{.Title}}
             </div>
             {{if .UserEmail}}
             <div class="register arial right">
-                <a href="/post">Pasang</a>
-                <span>{{.UserEmail}}</span>
+                <span><a href="/home">{{.UserEmail}}</a></span>
             </div>
             {{else}}
             <div class="register arial right">
@@ -126,13 +132,17 @@
             {{end}}
         </div>
         <div class="content-container content">
-            <div class="margin-bottom center title">{{.Title}}</div>
-            <div class="margin-bottom">{{.Content}}</div>
-            <div>
+            <div class="margin-bottom arial">{{.Content}}</div>
+            {{if .UserEmail}}
+            <div class="arial">
                 <span>{{.Email}}</span>
                 <span>{{.Phone}}</span>
                 <span>{{.Address}}</span>
             </div>
+            {{else}}
+            <div class="arial italic">Silahkan <a href="/signin?post={{.ID}}">masuk</a> untuk melihat kontak pembuat iklan.
+            </div>
+            {{end}}
         </div>
         <div class="footer arial">
             Powered by <a href=https://github.com/fastrodev/fastrex>Fastrex Framework</a>

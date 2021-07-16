@@ -72,6 +72,11 @@
             font-family: Arial, Helvetica, sans-serif;
         }
         
+        .guest {
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+        
         @media (min-width: 400px) {
             form {
                 overflow: hidden;
@@ -87,12 +92,16 @@
                 float: left;
                 width: calc(100% - 100px);
             }
-            button {
+            button,
+            .guest {
                 float: right;
                 width: calc(100% - 100px);
             }
             h2 {
                 text-align: center;
+            }
+            .guest {
+                margin-bottom: 1rem;
             }
         }
         
@@ -138,21 +147,27 @@
       <option value="toko">Toko</option>
       <option value="lowongan">Lowongan</option>
     </select>
-
         <label for="title" class="arial">Judul</label>
-        <input id="title" name="title" type="text">
+        <input id="title" name="title" type="text"></input>
 
         <label for="content" class="arial">Isi Iklan</label>
-        <textarea id="content" name="content"></textarea>
-
+        <textarea id="content" name="content"></textarea> {{if .User}} {{else}}
+        <label></label>
+        <div class="arial guest">
+            Anda akan membuat iklan secara anonim. Silahkan <a href="/signin">masuk</a> agar dapat menambahkan data email, phone, kota, dan mengakses lagi iklan yang telah Anda buat.
+        </div>
+        {{end}} {{if .User}}
         <label for="address" class="arial">Kota</label>
-        <input id="address" name="address" type="text">
+        <input id="address" name="address" type="text"></input>
 
         <label for="phone" class="arial">Phone</label>
-        <input id="phone" name="phone" type="text">
+        <input id="phone" name="phone" type="text"></input>
 
         <label for="email" class="arial">Email</label>
-        <input id="email" name="email" type="email">
+        <input id="email" name="email" type="email" value="{{.User}}"> </input>
+        {{end}} {{if .User}}
+        <input type="hidden" name="user" value="{{.User}}"></input>
+        {{end}}
 
         <button>Submit</button>
     </form>
