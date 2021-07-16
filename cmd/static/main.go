@@ -50,32 +50,12 @@ func Filter(vs []internal.Post, f func(internal.Post) bool) []internal.Post {
 	return filtered
 }
 
-func groupByTopic(d []internal.Post) []internal.Data {
-	posts := map[string][]internal.Post{}
-	for _, v := range d {
-		filtered := Filter(d, func(p internal.Post) bool {
-			return p.Topic == v.Topic
-		})
-		posts[v.Topic] = filtered
-	}
-
-	items := []internal.Data{}
-	for key, element := range posts {
-		data := internal.Data{
-			Topic: key,
-			Posts: element,
-		}
-		items = append(items, data)
-	}
-	return items
-}
-
 type FlatPost struct {
 	Header string
 	internal.Post
 }
 
-func flatByTopic(d []internal.Post) []FlatPost {
+func groupByTopic(d []internal.Post) []FlatPost {
 	posts := map[string][]internal.Post{}
 	for _, v := range d {
 		filtered := Filter(d, func(p internal.Post) bool {
@@ -116,8 +96,7 @@ func createData() []FlatPost {
 
 func createJsonPost() []byte {
 	d := internal.ReadPost()
-	// output, errMarshal := json.Marshal(groupByTopic(d))
-	output, errMarshal := json.Marshal(flatByTopic(d))
+	output, errMarshal := json.Marshal(groupByTopic(d))
 	if errMarshal != nil {
 		panic(errMarshal)
 	}
