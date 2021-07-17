@@ -81,8 +81,8 @@ func groupByTopic(d []internal.Post) []FlatPost {
 				post.Content = post.Content[0:95]
 			}
 			// cut larger title
-			if len(post.Title) > 30 {
-				post.Title = post.Title[0:30]
+			if len(post.Title) > 29 {
+				post.Title = post.Title[0:29]
 			}
 			data := FlatPost{
 				Header: header,
