@@ -66,6 +66,7 @@
         
         textarea {
             height: 6rem;
+            font-family: Arial, Helvetica, sans-serif;
         }
         
         .arial {
@@ -75,6 +76,11 @@
         .guest {
             font-style: italic;
             margin-bottom: 0.5em;
+            font-size: small;
+        }
+        
+         ::placeholder {
+            font-family: Arial, Helvetica, sans-serif;
         }
         
         @media (min-width: 400px) {
@@ -126,7 +132,7 @@
 </head>
 
 <body>
-    <form method="post" action="/api">
+    <form method="post" action="/api" enctype="multipart/form-data">
         <label></label>
         <div class="header">
             <div class="title main">
@@ -136,35 +142,53 @@
         <label for="topic" class="arial">Topik</label>
         <select id="topic" name="topic">
       <option value="">-- Pilih topik iklanmu --</option>
-      <option value="catering">Catering</option>
+      <option value="rumah">Rumah</option>
+      <option value="dapur">Dapur</option>
+      <option value="apartemen">Apartemen</option>
+      <option value="ruko">Ruko</option>
+      <option value="toko">Toko</option>
+      <option value="tanah">Tanah</option>
+      <option value="indekos">Indekos</option>
       <option value="sembako">Sembako</option>
+      <option value="catering">Catering</option>
+      <option value="makanan">Makanan</option>
+      <option value="minuman">Minuman</option>
+      <option value="kendaraan">Kendaraan</option>
       <option value="motor">Motor</option>
       <option value="mobil">Mobil</option>
       <option value="sepeda">Sepeda</option>
-      <option value="rumah">Rumah</option>
-      <option value="ruko">Ruko</option>
-      <option value="tanah">Tanah</option>
-      <option value="toko">Toko</option>
       <option value="lowongan">Lowongan</option>
+      <option value="tukang">Tukang</option>
+      <option value="jasa">Jasa</option>
     </select>
         <label for="title" class="arial">Judul</label>
-        <input id="title" name="title" type="text"></input>
+        <input id="title" name="title" type="text" placeholder="judul iklan, singkat - jangan terlalu panjang, contoh: Honda Beat tahun 2021"></input>
 
-        <label for="content" class="arial">Isi Iklan</label>
-        <textarea id="content" name="content"></textarea> {{if .User}} {{else}}
+        <label for="content" class="arial">Konten</label>
+        <textarea id="content" name="content" placeholder="isi iklan, contoh: honda beat tahun 2021, mulus, jarang dipakai, kunci original, harga 10jt, bisa dinego."></textarea>
+        <label for="harga" class="arial">Harga</label>
+        <input type="number" id="harga" name="harga" placeholder="harga, contoh: 1000000"> {{if .User}} {{else}}
         <label></label>
         <div class="arial guest">
-            Anda akan membuat iklan secara anonim. Silahkan <a href="/signin">masuk</a> agar dapat menambahkan data email, phone, kota, dan mengakses lagi iklan yang telah Anda buat.
+            Anda akan membuat iklan secara anonim. Jika anda sudah punya akun di website ini, silahkan <a href="/signin">masuk</a> agar dapat menambahkan gambar, video, email, phone, dan kota - serta mengakses lagi iklan yang telah Anda buat. Jika Anda
+            belum punya akun, silahkan <a href="/signup">daftar</a> terlebih dahulu.
         </div>
         {{end}} {{if .User}}
+        <label for="file" class="arial">Foto</label>
+        <input type="file" id="file" name="file">
+
+        <label for="video" class="arial">Youtube</label>
+        <input type="text" id="video" name="video" placeholder="url video youtube, contoh: https://www.youtube.com/watch?v=jNQXAC9IVRw">
+
         <label for="address" class="arial">Kota</label>
-        <input id="address" name="address" type="text"></input>
+        <input id="address" name="address" type="text" placeholder="kota atau kabupaten, contoh: cirebon"></input>
 
         <label for="phone" class="arial">Phone</label>
-        <input id="phone" name="phone" type="text"></input>
+        <input id="phone" name="phone" type="text" placeholder="nomor handphone, contoh: 081212345678"></input>
 
         <label for="email" class="arial">Email</label>
-        <input id="email" name="email" type="email" value="{{.User}}"> </input>
+        <input id="email" name="email" type="email" value="{{.User}}" placeholder="alamat email, contoh: oke@gmail.com">
+        </input>
         {{end}} {{if .User}}
         <input type="hidden" name="user" value="{{.User}}"></input>
         {{end}}

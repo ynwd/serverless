@@ -4,7 +4,7 @@ import "time"
 
 type Post struct {
 	ID      string    `json:"id"`
-	User    string    `json:"user"`
+	User    string    `json:"user_id"`
 	Topic   string    `json:"topic"`
 	Type    string    `json:"type"`
 	Title   string    `json:"title"`
@@ -16,8 +16,9 @@ type Post struct {
 }
 
 type User struct {
+	ID       string `json:"id"`
 	Email    string `json:"email"`
-	Phone    string `json:"phone"`
+	Name     string `json:"name"`
 	Password string `json:"password"`
 }
 

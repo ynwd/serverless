@@ -12,7 +12,10 @@ type pageService struct {
 
 func (p *pageService) rootPage(req fastrex.Request, res fastrex.Response) {
 	c, _ := req.Cookie("__session")
-	email := c.GetValue()
+	userID := c.GetValue()
+	user, _ := p.db.getUserDetailByID(req.Context(), userID)
+	email := user.Email
+
 	data := struct {
 		Email string
 	}{email}
@@ -26,7 +29,10 @@ func (p *pageService) homePage(req fastrex.Request, res fastrex.Response) {
 		return
 	}
 
-	email := c.GetValue()
+	userID := c.GetValue()
+	user, _ := p.db.getUserDetailByID(req.Context(), userID)
+	email := user.Email
+
 	data := struct {
 		Title string
 		Email string
@@ -66,14 +72,15 @@ func (p *pageService) membershipPage(req fastrex.Request, res fastrex.Response) 
 
 func (p *pageService) detailPage(req fastrex.Request, res fastrex.Response) {
 	id := req.Params("id")
-	c, _ := req.Cookie("__session")
 
 	post, err := p.db.getPostDetail(req.Context(), id[0])
 	if err != nil {
 		msg := err.Error()
-		createResponsePage(msg, res)
+		createResponsePage(msg, "/", res)
 		return
 	}
+
+	userDetail, _ := p.db.getUserDetailByID(req.Context(), post.User)
 
 	title := post.Title
 	date := post.Created.Format("2 January 2006")
@@ -82,7 +89,7 @@ func (p *pageService) detailPage(req fastrex.Request, res fastrex.Response) {
 	email := post.Email
 	phone := post.Phone
 	address := post.Address
-	user := post.User
+	user := userDetail.Name
 
 	if user == "user" {
 		user = "guest"
@@ -99,7 +106,7 @@ func (p *pageService) detailPage(req fastrex.Request, res fastrex.Response) {
 		UserEmail string
 		ID        string
 		User      string
-	}{title, topic, date, content, email, phone, address, c.GetValue(), id[0], user}
+	}{title, topic, date, content, email, phone, address, userDetail.Email, id[0], user}
 	res.Render("detail", data)
 }
 

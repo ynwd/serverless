@@ -37,12 +37,6 @@
             font-family: Arial, Helvetica, sans-serif;
         }
         
-        .title,
-        .date,
-        .register {
-            text-transform: capitalize;
-        }
-        
         .bold {
             font-weight: bold;
         }
@@ -82,6 +76,10 @@
             text-decoration: none;
         }
         
+        .back {
+            width: 100%;
+        }
+        
         @media all and (min-device-width: 320px) and (max-device-width: 480px),
         (max-width: 700px) {
             .content {
@@ -118,11 +116,12 @@
                 IKLAN BARIS
             </div>
         </div>
-        <div class="content-container content">
+        <div class="content-container content center">
             <div class="margin-bottom center title">{{.Response}}</div>
+            <div class="back"><a class="center" href="{{.URL}}">kembali</a></div>
         </div>
         <div class="footer arial">
-            Powered by <a href=https://github.com/fastrodev/fastrex>Fastrex Framework</a>
+            Powered by <a href=https://github.com/fastrodev/fastrex>Fastrex</a>
         </div>
     </div>
 </body>

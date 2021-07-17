@@ -75,7 +75,14 @@ func groupByTopic(d []internal.Post) []FlatPost {
 			post := element
 			if idx == 0 {
 				header = topic
-				post = internal.Post{}
+			}
+			// cut larger content
+			if len(post.Content) > 95 {
+				post.Content = post.Content[0:95]
+			}
+			// cut larger title
+			if len(post.Title) > 30 {
+				post.Title = post.Title[0:30]
 			}
 			data := FlatPost{
 				Header: header,

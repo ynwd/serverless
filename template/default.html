@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>{{.Title}}</title>
+    <title>{{.Title}} | Fastro.app</title>
     <meta charset=utf-8>
     <meta name=viewport content="width=device-width,initial-scale=1">
     <meta name="description" content="{{.Description}}">
@@ -44,6 +44,10 @@
             justify-content: space-between;
         }
         
+        .ads-header {
+            max-width: 260px;
+        }
+        
         .content {
             display: flex;
             flex-wrap: wrap;
@@ -59,6 +63,7 @@
             border-top-style: solid;
             border-width: 1px;
             border-bottom-style: solid;
+            border-color: rgb(214 214 214);
         }
         
         .topic {
@@ -73,12 +78,15 @@
             margin-right: 15px;
         }
         
-        .card a span {
+        .card a span,
+        .ads-header a span {
             font-weight: bold;
         }
         
         .card a,
-        .card a:hover {
+        .card a:hover,
+        .ads-header a,
+        .ads-header a:hover {
             text-decoration: none;
             color: inherit;
         }
@@ -141,7 +149,8 @@
                 margin: 0 auto;
                 max-height: none;
             }
-            .topic {
+            .topic,
+            .ads-header {
                 max-width: 100%;
                 background-color: #fefefe;
                 margin: 0 auto;
@@ -195,16 +204,19 @@
         </div>
         <div class="content-container wrapper content">
             {{ range $key, $value := .Data }} {{if .Header}}
-            <div class="title title-ad card center">{{.Header}}</div>
+            <div class="ads-header">
+                <div class="title title-ad card center">{{.Header}}</div>
+                <a class="arial" href=/post/{{.ID}}><span>{{.Title}}</span> · {{.Content}}</a>
+            </div>
             {{else}}
             <div class="card arial">
-                <a href=/post/{{.ID}}><span>{{.Title}}</span> {{.Content}}</a>
+                <a href=/post/{{.ID}}><span>{{.Title}}</span> · {{.Content}}</a>
             </div>
-            {{end}} {{ end }}
+            {{end}} {{end}}
         </div>
     </div>
     <div class="footer arial">
-        Powered by <a href=https://github.com/fastrodev/fastrex>Fastrex Framework</a>
+        Powered by <a href=https://github.com/fastrodev/fastrex>Fastrex</a>
     </div>
     </div>
 </body>

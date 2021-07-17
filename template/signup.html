@@ -58,7 +58,6 @@
         button {
             width: 100%;
             padding: 0.7em;
-            margin-bottom: 0.5rem;
         }
         
         @media (min-width: 400px) {
@@ -97,7 +96,11 @@
                 padding-right: 0.5em;
             }
             button {
-                margin-top: 0.5em;
+                margin-top: 1em;
+            }
+            form input,
+            form textarea {
+                margin-bottom: unset;
             }
         }
     </style>
@@ -112,11 +115,11 @@
             </div>
         </div>
 
+        <label for="name" class="arial">Nama</label>
+        <input id="name" name="name" type="text">
+
         <label for="email" class="arial">Email</label>
         <input id="email" name="email" type="text">
-
-        <label for="phone" class="arial">Phone</label>
-        <input id="phone" name="phone" type="text">
 
         <label for="content" class="arial">Password</label>
         <input id="password" name="password" type="password"></input>
