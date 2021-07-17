@@ -1,7 +1,6 @@
 package internal
 
 import (
-	"fmt"
 	"time"
 
 	"github.com/fastrodev/fastrex"
@@ -77,7 +76,6 @@ func (p *pageService) detailPage(req fastrex.Request, res fastrex.Response) {
 
 	post, err := p.db.getPostDetail(req.Context(), id[0])
 	if err != nil {
-		fmt.Println("post====>", post)
 		msg := err.Error()
 		createResponsePage(msg, "/", res)
 		return
@@ -125,8 +123,9 @@ func (p *pageService) createPostPage(req fastrex.Request, res fastrex.Response) 
 	if err == nil {
 		data := struct {
 			User  string
+			Email string
 			Title string
-		}{userDetail.Email, "Pasang Iklan"}
+		}{userDetail.ID, userDetail.Email, "Pasang Iklan | Fastro.app"}
 		res.Render("create", data)
 		return
 	}
