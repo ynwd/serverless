@@ -162,12 +162,12 @@
       <option value="jasa">Jasa</option>
     </select>
         <label for="title" class="arial">Judul</label>
-        <input id="title" name="title" type="text" placeholder="judul iklan, singkat - jangan terlalu panjang, contoh: Honda Beat tahun 2021"></input>
+        <input id="title" name="title" type="text" placeholder="contoh: Honda Beat tahun 2021"></input>
 
         <label for="content" class="arial">Konten</label>
-        <textarea id="content" name="content" placeholder="isi iklan, contoh: honda beat tahun 2021, mulus, jarang dipakai, kunci original, harga 10jt, bisa dinego."></textarea>
-        <label for="harga" class="arial">Harga</label>
-        <input type="number" id="harga" name="harga" placeholder="harga, contoh: 1000000"> {{if .User}} {{else}}
+        <textarea id="content" name="content" placeholder="contoh: honda beat tahun 2021, mulus, jarang dipakai, kunci original, harga 10jt, bisa dinego."></textarea>
+        <label for="price" class="arial">Harga</label>
+        <input type="number" id="price" name="price" placeholder="harga, contoh: 1000000"> {{if .User}} {{else}}
         <label></label>
         <div class="arial guest">
             Anda akan membuat iklan secara anonim. Jika anda sudah punya akun di website ini, silahkan <a href="/signin">masuk</a> agar dapat menambahkan gambar, email, phone, dan kota - serta mengakses lagi iklan yang telah Anda buat. Jika Anda belum
@@ -177,14 +177,14 @@
         <label for="file" class="arial">Foto</label>
         <input type="file" id="file" name="file">
 
-        <!-- <label for="video" class="arial">Youtube</label>
-        <input type="text" id="video" name="video" placeholder="url video youtube, contoh: https://www.youtube.com/watch?v=jNQXAC9IVRw"> -->
+        <label for="video" class="arial">Youtube</label>
+        <input type="text" id="video" name="video" placeholder="contoh: https://www.youtube.com/watch?v=jNQXAC9IVRw">
 
         <label for="address" class="arial">Kota</label>
-        <input id="address" name="address" type="text" placeholder="kota atau kabupaten, contoh: cirebon"></input>
+        <input id="address" name="address" type="text" placeholder="contoh: cirebon"></input>
 
         <label for="phone" class="arial">Phone</label>
-        <input id="phone" name="phone" type="text" placeholder="nomor handphone, contoh: 081212345678"></input>
+        <input id="phone" name="phone" type="text" placeholder="contoh: 081212345678"></input>
 
         <label for="email" class="arial">Email</label>
         <input id="email" name="email" type="email" value="{{.Email}}" placeholder="alamat email, contoh: oke@gmail.com">

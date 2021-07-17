@@ -56,11 +56,12 @@ func (d *database) getPostDetail(ctx context.Context, id string) (Post, error) {
 	}
 
 	post := Post{}
-	var phone, email, address, file string
+	var phone, email, address, file, video string
 	pn := item["phone"]
 	em := item["email"]
 	ad := item["address"]
 	fl := item["file"]
+	vd := item["video"]
 	if pn == nil {
 		phone = ""
 	} else {
@@ -81,6 +82,11 @@ func (d *database) getPostDetail(ctx context.Context, id string) (Post, error) {
 	} else {
 		file = fl.(string)
 	}
+	if vd == nil {
+		video = ""
+	} else {
+		video = vd.(string)
+	}
 
 	post.Phone = phone
 	post.Email = email
@@ -88,11 +94,13 @@ func (d *database) getPostDetail(ctx context.Context, id string) (Post, error) {
 	post.ID = item["id"].(string)
 	post.Topic = item["topic"].(string)
 	post.File = file
+	post.Video = video
 	post.Title = item["title"].(string)
 	post.Content = item["content"].(string)
 	post.Type = item["type"].(string)
 	post.User = item["user"].(string)
 	post.Created = item["created"].(time.Time)
+	post.Price = item["price"].(int64)
 	return post, nil
 }
 

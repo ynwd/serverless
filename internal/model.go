@@ -13,6 +13,8 @@ type Post struct {
 	Phone   string    `json:"phone"`
 	Email   string    `json:"email"`
 	Address string    `json:"address"`
+	Price   int64     `json:"price"`
+	Video   string    `json:"video"`
 	Created time.Time `json:"created,omitempty"`
 }
 

@@ -24,7 +24,6 @@ func saveToGCS(ctx context.Context, r io.Reader, bucketName, name string) (*stor
 	defer client.Close()
 
 	bucket := client.Bucket(bucketName)
-	// Next check if the bucket exists
 	if _, err = bucket.Attrs(ctx); err != nil {
 		return nil, nil, err
 	}
@@ -54,6 +53,7 @@ func (s *apiService) createPost(req fastrex.Request, res fastrex.Response) {
 	topic := req.FormValue("topic")
 	title := req.FormValue("title")
 	content := req.FormValue("content")
+	price := req.FormValue("price")
 	address := req.FormValue("address")
 	email := req.FormValue("email")
 	phone := req.FormValue("phone")
@@ -106,6 +106,12 @@ func (s *apiService) createPost(req fastrex.Request, res fastrex.Response) {
 		return
 	}
 
+	if price == "" {
+		msg = "Harga tidak boleh kosong. lengkapi dg benar."
+		createResponsePage(msg, url, res)
+		return
+	}
+
 	if utf8.RuneCountInString(content) > 280 {
 		msg = "Isi iklan terlalu panjang. maksimal 280 karakter."
 		createResponsePage(msg, url, res)
@@ -137,6 +143,7 @@ func (s *apiService) createPost(req fastrex.Request, res fastrex.Response) {
 	post["topic"] = topic
 	post["title"] = title
 	post["content"] = content
+	post["price"] = price
 	post["email"] = email
 	post["phone"] = phone
 	post["address"] = address

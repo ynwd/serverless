@@ -1,9 +1,11 @@
 package internal
 
 import (
+	"strings"
 	"time"
 
 	"github.com/fastrodev/fastrex"
+	"github.com/leekchan/accounting"
 )
 
 type pageService struct {
@@ -71,19 +73,29 @@ func (p *pageService) membershipPage(req fastrex.Request, res fastrex.Response) 
 }
 
 func (p *pageService) detailPage(req fastrex.Request, res fastrex.Response) {
-	id := req.Params("id")
+	id := ""
+	params := req.Params("id")
+	if len(params) > 0 {
+		id = params[0]
+	}
 	c, _ := req.Cookie("__session")
 
-	post, err := p.db.getPostDetail(req.Context(), id[0])
+	post, err := p.db.getPostDetail(req.Context(), id)
 	if err != nil {
 		msg := err.Error()
 		createResponsePage(msg, "/", res)
 		return
 	}
 
-	userDetail, _ := p.db.getUserDetailByID(req.Context(), post.User)
+	userDetail, err := p.db.getUserDetailByID(req.Context(), post.User)
+	if err != nil {
+		msg := err.Error()
+		createResponsePage(msg, "/", res)
+		return
+	}
 
 	file := ""
+	video := ""
 	title := post.Title
 	date := post.Created.Format("2 January 2006")
 	topic := post.Topic
@@ -92,6 +104,10 @@ func (p *pageService) detailPage(req fastrex.Request, res fastrex.Response) {
 	phone := post.Phone
 	address := post.Address
 	user := userDetail.Name
+	if post.Video != "" {
+		s := strings.Split(post.Video, "=")
+		video = "https://www.youtube.com/embed/" + s[1] + "?autoplay=1&mute=1"
+	}
 
 	if user == "user" {
 		user = "guest"
@@ -100,6 +116,7 @@ func (p *pageService) detailPage(req fastrex.Request, res fastrex.Response) {
 		file = post.File
 	}
 
+	ac := accounting.Accounting{Symbol: "Rp", Precision: 2}
 	data := struct {
 		Title     string
 		Topic     string
@@ -112,7 +129,9 @@ func (p *pageService) detailPage(req fastrex.Request, res fastrex.Response) {
 		UserEmail string
 		ID        string
 		User      string
-	}{title, topic, file, date, content, email, phone, address, c.GetValue(), id[0], user}
+		Price     string
+		Video     string
+	}{title, topic, file, date, content, email, phone, address, c.GetValue(), id, user, ac.FormatMoney(post.Price), video}
 	res.Render("detail", data)
 }
 
