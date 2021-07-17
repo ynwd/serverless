@@ -1,6 +1,7 @@
 package internal
 
 import (
+	"fmt"
 	"time"
 
 	"github.com/fastrodev/fastrex"
@@ -72,9 +73,11 @@ func (p *pageService) membershipPage(req fastrex.Request, res fastrex.Response) 
 
 func (p *pageService) detailPage(req fastrex.Request, res fastrex.Response) {
 	id := req.Params("id")
+	c, _ := req.Cookie("__session")
 
 	post, err := p.db.getPostDetail(req.Context(), id[0])
 	if err != nil {
+		fmt.Println("post====>", post)
 		msg := err.Error()
 		createResponsePage(msg, "/", res)
 		return
@@ -82,6 +85,7 @@ func (p *pageService) detailPage(req fastrex.Request, res fastrex.Response) {
 
 	userDetail, _ := p.db.getUserDetailByID(req.Context(), post.User)
 
+	file := ""
 	title := post.Title
 	date := post.Created.Format("2 January 2006")
 	topic := post.Topic
@@ -94,10 +98,14 @@ func (p *pageService) detailPage(req fastrex.Request, res fastrex.Response) {
 	if user == "user" {
 		user = "guest"
 	}
+	if post.File != "" {
+		file = post.File
+	}
 
 	data := struct {
 		Title     string
 		Topic     string
+		File      string
 		Date      string
 		Content   string
 		Email     string
@@ -106,17 +114,19 @@ func (p *pageService) detailPage(req fastrex.Request, res fastrex.Response) {
 		UserEmail string
 		ID        string
 		User      string
-	}{title, topic, date, content, email, phone, address, userDetail.Email, id[0], user}
+	}{title, topic, file, date, content, email, phone, address, c.GetValue(), id[0], user}
 	res.Render("detail", data)
 }
 
 func (p *pageService) createPostPage(req fastrex.Request, res fastrex.Response) {
 	c, err := req.Cookie("__session")
+	userDetail, _ := p.db.getUserDetailByID(req.Context(), c.GetValue())
+
 	if err == nil {
 		data := struct {
 			User  string
 			Title string
-		}{c.GetValue(), "Pasang Iklan"}
+		}{userDetail.Email, "Pasang Iklan"}
 		res.Render("create", data)
 		return
 	}

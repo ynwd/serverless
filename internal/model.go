@@ -8,6 +8,7 @@ type Post struct {
 	Topic   string    `json:"topic"`
 	Type    string    `json:"type"`
 	Title   string    `json:"title"`
+	File    string    `json:"file"`
 	Content string    `json:"content"`
 	Phone   string    `json:"phone"`
 	Email   string    `json:"email"`
