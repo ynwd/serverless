@@ -110,9 +110,8 @@
         
         .main {
             font-size: xx-large;
-            font-style: italic;
             font-weight: bold;
-            text-transform: uppercase;
+            text-transform: capitalize;
         }
         
         .register {
@@ -196,7 +195,7 @@
             </div>
             {{`{{if .Email}}`}}
             <div class="register arial right">
-                <span><a href="home">{{`{{.Email}}`}}</a></span>
+                <span><a href="/home">{{`{{.Email}}`}}</a></span>
             </div>
             {{`{{else}}`}}
             <div class="register arial right">

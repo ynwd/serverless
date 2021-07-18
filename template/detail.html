@@ -137,6 +137,7 @@
         
         .key {
             width: 5em;
+            color: rgba(117, 117, 117, 1);
         }
         
         .topic a,
@@ -203,23 +204,23 @@
             </iframe> {{end}}
             <div class="arial contact">
                 <div class="contact-container">
-                    <div class="key">harga: </div>
+                    <div class="key">Harga: </div>
                     <div>{{.Price}}</div>
                 </div>
                 <div class="contact-container">
-                    <div class="key">kontak: </div>
+                    <div class="key">Kontak: </div>
                     <div class="value"><a href="/{{.Username}}">{{.User}}</a></div>
                 </div>
                 <div class="contact-container">
-                    <div class="key">email: </div>
+                    <div class="key">Email: </div>
                     <div class="value"><a href="mailto: {{.Email}}">{{.Email}}</a> </div>
                 </div>
                 <div class="contact-container">
-                    <div class="key">whatsapp: </div>
+                    <div class="key">Whatsapp: </div>
                     <div class="value"><a href="https://wa.me/{{.Phone}}">{{.Phone}}</a></div>
                 </div>
                 <div class="contact-container">
-                    <div class="key">kota: </div>
+                    <div class="key">Kota: </div>
                     <div class="city value"><a href="https://www.google.com/maps/search/?api=1&query={{.Address}}+field">{{.Address}}</a></div>
 
                 </div>
@@ -227,7 +228,7 @@
             {{else}}
             <div class="arial contact">
                 <div class="contact-container">
-                    <div class="key">harga: </div>
+                    <div class="key">Harga: </div>
                     <div>{{.Price}}</div>
                 </div>
             </div>

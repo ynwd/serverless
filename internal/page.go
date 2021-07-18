@@ -116,7 +116,6 @@ func (p *pageService) detailPage(req fastrex.Request, res fastrex.Response) {
 	}
 
 	userDetail, _ := p.db.getUserDetailByID(req.Context(), post.User)
-	fmt.Println("userDetail", userDetail)
 
 	file := ""
 	video := ""
