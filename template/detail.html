@@ -124,11 +124,19 @@
             margin: 0 auto;
             display: block;
             border-style: none;
+            margin-bottom: 1em;
         }
         
         .contact {
-            margin-top: 1em;
             width: 100%;
+        }
+        
+        .contact-container {
+            display: flex;
+        }
+        
+        .key {
+            width: 4em;
         }
         
         @media all and (min-device-width: 320px) and (max-device-width: 480px),
@@ -175,17 +183,37 @@
             {{if .UserEmail}} {{if .Email}} {{if .Video}}
             <iframe class="video" width="100%" height="315" src="{{.Video}}">
             </iframe> {{end}}
-            <div class="contact arial ">
-                <div>Harga: {{.Price}}</div>
-                <div>Kontak: {{.User}}</div>
-                <div>Email: {{.Email}}</div>
-                <div>Phone: {{.Phone}}</div>
-                <div>Kota: {{.Address}}</div>
+            <div class="arial contact">
+                <div class="contact-container">
+                    <div class="key">harga: </div>
+                    <div>{{.Price}}</div>
+                </div>
+                <div class="contact-container">
+                    <div class="key">kontak: </div>
+                    <div>{{.User}}</div>
+                </div>
+                <div class="contact-container">
+                    <div class="key">email: </div>
+                    <div>{{.Email}}</div>
+                </div>
+                <div class="contact-container">
+                    <div class="key">phone: </div>
+                    <div>{{.Phone}}</div>
+                </div>
+                <div class="contact-container">
+                    <div class="key">kota: </div>
+                    <div>{{.Address}}</div>
+                </div>
+            </div>
+            {{else}}
+            <div class="arial contact">
+                <div class="contact-container">
+                    <div class="key">harga: </div>
+                    <div>{{.Price}}</div>
+                </div>
             </div>
             {{end}} {{else}}
-            <div class="arial italic darkgrey">Silahkan <a href="/signin?post={{.ID}} ">masuk</a> untuk melihat: harga{{if .Video}}, video{{end}} {{if .Email}}dan kontak pembuat iklan{{end}}
-
-            </div>
+            <div class="arial italic darkgrey contact">Silahkan <a href="/signin?post={{.ID}} ">masuk</a> untuk melihat harga{{if .Video}}, video,{{end}} {{if .Email}}dan kontak pembuat iklan{{end}}.</div>
             {{end}}
         </div>
         <div class="footer arial darkgrey ">
