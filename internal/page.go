@@ -24,6 +24,18 @@ func (p *pageService) rootPage(req fastrex.Request, res fastrex.Response) {
 	res.Render(data)
 }
 
+func (p *pageService) topicPage(req fastrex.Request, res fastrex.Response) {
+	c, _ := req.Cookie("__session")
+	userID := c.GetValue()
+	user, _ := p.db.getUserDetailByID(req.Context(), userID)
+	email := user.Email
+
+	data := struct {
+		Email string
+	}{email}
+	res.Render(data)
+}
+
 func (p *pageService) homePage(req fastrex.Request, res fastrex.Response) {
 	c, err := req.Cookie("__session")
 	if err != nil {
@@ -87,12 +99,7 @@ func (p *pageService) detailPage(req fastrex.Request, res fastrex.Response) {
 		return
 	}
 
-	userDetail, err := p.db.getUserDetailByID(req.Context(), post.User)
-	if err != nil {
-		msg := err.Error()
-		createResponsePage(msg, "/", res)
-		return
-	}
+	userDetail, _ := p.db.getUserDetailByID(req.Context(), post.User)
 
 	file := ""
 	video := ""
@@ -109,7 +116,7 @@ func (p *pageService) detailPage(req fastrex.Request, res fastrex.Response) {
 		video = "https://www.youtube.com/embed/" + s[1] + "?autoplay=1&mute=1"
 	}
 
-	if user == "user" {
+	if user == "" {
 		user = "guest"
 	}
 	if post.File != "" {

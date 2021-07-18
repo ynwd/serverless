@@ -179,3 +179,22 @@ func (d *database) getPost(ctx context.Context) []interface{} {
 	}
 	return data
 }
+
+func (d *database) getPostByTopic(ctx context.Context, topic string) []interface{} {
+	iter := d.client.Collection("post").
+		Where("topic", "==", topic).
+		Documents(ctx)
+	defer d.client.Close()
+	var data []interface{}
+	for {
+		doc, err := iter.Next()
+		if err == iterator.Done {
+			break
+		}
+		if err != nil {
+			log.Fatalf("Failed to iterate: %v", err)
+		}
+		data = append(data, doc.Data())
+	}
+	return data
+}
