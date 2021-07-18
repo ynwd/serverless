@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"io"
+	"strconv"
 	"time"
 	"unicode/utf8"
 
@@ -53,7 +54,7 @@ func (s *apiService) createPost(req fastrex.Request, res fastrex.Response) {
 	topic := req.FormValue("topic")
 	title := req.FormValue("title")
 	content := req.FormValue("content")
-	price := req.FormValue("price")
+	priceStr := req.FormValue("price")
 	address := req.FormValue("address")
 	email := req.FormValue("email")
 	phone := req.FormValue("phone")
@@ -106,9 +107,14 @@ func (s *apiService) createPost(req fastrex.Request, res fastrex.Response) {
 		return
 	}
 
-	if price == "" {
+	if priceStr == "" {
 		msg = "Harga tidak boleh kosong. lengkapi dg benar."
 		createResponsePage(msg, url, res)
+		return
+	}
+	price, err := strconv.Atoi(priceStr)
+	if err != nil {
+		createResponsePage(err.Error(), url, res)
 		return
 	}
 
