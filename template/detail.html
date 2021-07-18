@@ -136,7 +136,25 @@
         }
         
         .key {
-            width: 4em;
+            width: 5em;
+        }
+        
+        .topic a,
+        .user a,
+        .key a,
+        .value a,
+        .value {
+            text-decoration: none;
+            color: rgba(117, 117, 117, 1);
+        }
+        
+        .value a,
+        .value {
+            color: unset;
+        }
+        
+        .city a {
+            text-transform: capitalize;
         }
         
         @media all and (min-device-width: 320px) and (max-device-width: 480px),
@@ -172,9 +190,9 @@
     <div class=container>
         <div class="content-container header">
             <div class="title-detail">
-                <div class="topic arial darkgrey">{{.Topic}}</div>
+                <div class="topic arial darkgrey"><a href="/post/topic/{{.Topic}}">{{.Topic}}</a></div>
                 {{.Title}}
-                <div class="sub cap date arial darkgrey ">{{.User}} · {{.Date}}</div>
+                <div class="sub cap date arial darkgrey user"><a href="/{{.Username}}">{{.User}}</a> · {{.Date}}</div>
             </div>
         </div>
         <div class="content-container content ">
@@ -190,19 +208,20 @@
                 </div>
                 <div class="contact-container">
                     <div class="key">kontak: </div>
-                    <div>{{.User}}</div>
+                    <div class="value"><a href="/{{.Username}}">{{.User}}</a></div>
                 </div>
                 <div class="contact-container">
                     <div class="key">email: </div>
-                    <div>{{.Email}}</div>
+                    <div class="value"><a href="mailto: {{.Email}}">{{.Email}}</a> </div>
                 </div>
                 <div class="contact-container">
-                    <div class="key">phone: </div>
-                    <div>{{.Phone}}</div>
+                    <div class="key">whatsapp: </div>
+                    <div class="value"><a href="https://wa.me/{{.Phone}}">{{.Phone}}</a></div>
                 </div>
                 <div class="contact-container">
                     <div class="key">kota: </div>
-                    <div>{{.Address}}</div>
+                    <div class="city value"><a href="https://www.google.com/maps/search/?api=1&query={{.Address}}+field">{{.Address}}</a></div>
+
                 </div>
             </div>
             {{else}}

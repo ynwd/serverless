@@ -1,6 +1,7 @@
 package internal
 
 import (
+	"fmt"
 	"strings"
 	"time"
 
@@ -13,6 +14,21 @@ type pageService struct {
 }
 
 func (p *pageService) rootPage(req fastrex.Request, res fastrex.Response) {
+	c, _ := req.Cookie("__session")
+	userID := c.GetValue()
+	user, _ := p.db.getUserDetailByID(req.Context(), userID)
+	email := user.Email
+
+	data := struct {
+		Email string
+	}{email}
+	res.Render(data)
+}
+
+func (p *pageService) userPage(req fastrex.Request, res fastrex.Response) {
+	params := req.Params("id")
+	fmt.Println(params[0])
+
 	c, _ := req.Cookie("__session")
 	userID := c.GetValue()
 	user, _ := p.db.getUserDetailByID(req.Context(), userID)
@@ -100,6 +116,7 @@ func (p *pageService) detailPage(req fastrex.Request, res fastrex.Response) {
 	}
 
 	userDetail, _ := p.db.getUserDetailByID(req.Context(), post.User)
+	fmt.Println("userDetail", userDetail)
 
 	file := ""
 	video := ""
@@ -143,7 +160,8 @@ func (p *pageService) detailPage(req fastrex.Request, res fastrex.Response) {
 		User        string
 		Price       string
 		Video       string
-	}{d, title, topic, file, date, content, email, phone, address, c.GetValue(), id, user, ac.FormatMoney(post.Price), video}
+		Username    string
+	}{d, title, topic, file, date, content, email, phone, address, c.GetValue(), id, user, ac.FormatMoney(post.Price), video, userDetail.Username}
 	res.Render("detail", data)
 }
 

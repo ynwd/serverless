@@ -76,6 +76,10 @@ func groupByTopic(d []internal.Post) []FlatPost {
 			if idx == 0 {
 				header = topic
 			}
+
+			if idx == 7 {
+				break
+			}
 			// cut larger content
 			if len(post.Content) > 95 {
 				post.Content = post.Content[0:95]

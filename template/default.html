@@ -46,6 +46,7 @@
         
         .ads-header {
             max-width: 260px;
+            margin-right: 1em;
         }
         
         .content {
@@ -139,6 +140,10 @@
             text-decoration: none;
         }
         
+        .bold {
+            font-weight: bold;
+        }
+        
         @media all and (min-device-width: 320px) and (max-device-width: 480px),
         (max-width: 700px) {
             .content {
@@ -205,7 +210,11 @@
         <div class="content-container wrapper content">
             {{ range $key, $value := .Data }} {{if .Header}}
             <div class="ads-header">
-                <div class="title title-ad card center">{{.Header}}</div>
+                <a href="/post/topic/{{.Topic}}">
+                    <div class="title title-ad card center arial bold">
+                        {{.Header}}
+                    </div>
+                </a>
                 <a class="arial" href=/post/{{.ID}}><span>{{.Title}}</span> · {{.Content}}</a>
             </div>
             {{else}}

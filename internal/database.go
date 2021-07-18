@@ -3,6 +3,7 @@ package internal
 import (
 	"context"
 	"errors"
+	"fmt"
 	"log"
 	"time"
 
@@ -159,6 +160,9 @@ func (d *database) getUserDetailByID(ctx context.Context, id string) (User, erro
 	user.ID = item["id"].(string)
 	user.Email = item["email"].(string)
 	user.Name = item["name"].(string)
+	user.Username = item["username"].(string)
+
+	fmt.Println("user", user)
 
 	return user, nil
 }
