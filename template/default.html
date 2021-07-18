@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>{{.Title}} | Fastro.app</title>
+    <title>{{`{{.Title}}`}} | {{`{{.Domain}}`}}</title>
     <meta charset=utf-8>
     <meta name=viewport content="width=device-width,initial-scale=1">
     <meta name="description" content="{{.Description}}">
@@ -191,7 +191,7 @@
         <div class="content-container header">
             <div class="date arial left">{{.Date}}</div>
             <div class="title main">
-                {{.Title}}
+                {{`{{.Title}}`}}
             </div>
             {{`{{if .Email}}`}}
             <div class="register arial right">

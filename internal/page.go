@@ -20,8 +20,10 @@ func (p *pageService) rootPage(req fastrex.Request, res fastrex.Response) {
 	email := user.Email
 
 	data := struct {
-		Email string
-	}{email}
+		Email  string
+		Title  string
+		Domain string
+	}{email, "Iklan Baris", "Fastro.app"}
 	res.Render(data)
 }
 
@@ -64,10 +66,11 @@ func (p *pageService) homePage(req fastrex.Request, res fastrex.Response) {
 	email := user.Email
 
 	data := struct {
-		Title string
-		Email string
-		Date  string
-	}{"home", email, time.Now().Local().Format("2 January 2006")}
+		Title  string
+		Email  string
+		Date   string
+		Domain string
+	}{"Home", email, time.Now().Local().Format("2 January 2006"), "Fastro.app"}
 	res.Render("home", data)
 }
 
@@ -78,14 +81,19 @@ func (p *pageService) arsipPage(req fastrex.Request, res fastrex.Response) {
 func (p *pageService) signinPage(req fastrex.Request, res fastrex.Response) {
 	post := req.URL.Query().Get("post")
 	data := struct {
-		Post  string
-		Title string
-	}{post, "Masuk"}
+		Post   string
+		Title  string
+		Domain string
+	}{post, "Masuk", "Fastro.app"}
 	res.Render("signin", data)
 }
 
 func (p *pageService) signupPage(req fastrex.Request, res fastrex.Response) {
-	res.Render("signup", nil)
+	data := struct {
+		Title  string
+		Domain string
+	}{"Daftar", "Fastro.app"}
+	res.Render("signup", data)
 }
 
 func (p *pageService) signOut(req fastrex.Request, res fastrex.Response) {
