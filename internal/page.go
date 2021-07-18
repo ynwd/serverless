@@ -122,23 +122,28 @@ func (p *pageService) detailPage(req fastrex.Request, res fastrex.Response) {
 	if post.File != "" {
 		file = post.File
 	}
+	d := "[" + strings.Title(topic) + "] "
+	d = d + strings.Title(title) + ". "
+	d = d + content
+	d = d + " | Fastro.app"
 
 	ac := accounting.Accounting{Symbol: "Rp", Precision: 2}
 	data := struct {
-		Title     string
-		Topic     string
-		File      string
-		Date      string
-		Content   string
-		Email     string
-		Phone     string
-		Address   string
-		UserEmail string
-		ID        string
-		User      string
-		Price     string
-		Video     string
-	}{title, topic, file, date, content, email, phone, address, c.GetValue(), id, user, ac.FormatMoney(post.Price), video}
+		Description string
+		Title       string
+		Topic       string
+		File        string
+		Date        string
+		Content     string
+		Email       string
+		Phone       string
+		Address     string
+		UserEmail   string
+		ID          string
+		User        string
+		Price       string
+		Video       string
+	}{d, title, topic, file, date, content, email, phone, address, c.GetValue(), id, user, ac.FormatMoney(post.Price), video}
 	res.Render("detail", data)
 }
 

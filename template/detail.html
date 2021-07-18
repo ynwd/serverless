@@ -3,15 +3,15 @@
 <html>
 
 <head>
-    <title>Iklan | {{.Title}} - Fastro.app</title>
+    <title>{{.Title}} | Fastro.app</title>
     <meta charset=utf-8>
     <meta name=viewport content="width=device-width,initial-scale=1">
-    <meta name="description" content="{{.Topic}}: {{.Title}}, {{.Content}}"> {{if .File}}
+    <meta name="description" content="{{.Description}}"> {{if .File}}
     <meta name="twitter:image:src" content="{{.File}}" /> {{else}}
-    <meta name="twitter:image:src" content="iklan.png" /> {{end}}
+    <meta name="twitter:image:src" content="/iklan.png" /> {{end}}
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="{{.Title}}" />
-    <meta name="twitter:description" content="{{.Topic}}: {{.Title}}, {{.Content}}" /> {{if .File}}
+    <meta name="twitter:description" content="{{.Description}}" /> {{if .File}}
     <meta property="og:image" content="{{.File}}" /> {{else}}
     <meta property="og:image" content="/iklan.png" /> {{end}}
     <meta property="og:image:alt" content="Iklan Baris" />
@@ -21,7 +21,7 @@
     <meta property="og:type" content="object" />
     <meta property="og:title" content="{{.Title}}" />
     <meta property="og:url" content="https://fastro.app/post/{{.ID}}" />
-    <meta property="og:description" content="{{.Topic}}: {{.Title}}, {{.Content}}" />
+    <meta property="og:description" content="{{.Description}}" />
     <style media=screen>
         body {
             margin: 0;
