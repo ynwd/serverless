@@ -22,7 +22,7 @@ func (p *pageService) rootPage(req fastrex.Request, res fastrex.Response) {
 		Email  string
 		Title  string
 		Domain string
-	}{email, "Iklan Baris", "Fastro.app"}
+	}{email, "Iklan Baris", DOMAIN}
 	res.Render(data)
 }
 
@@ -38,7 +38,7 @@ func (p *pageService) userPage(req fastrex.Request, res fastrex.Response) {
 		Email  string
 		Title  string
 		Domain string
-	}{email, params[0], "Fastro.app"}
+	}{email, params[0], DOMAIN}
 	res.Render(data)
 }
 
@@ -53,7 +53,7 @@ func (p *pageService) topicPage(req fastrex.Request, res fastrex.Response) {
 		Email  string
 		Title  string
 		Domain string
-	}{email, params[0], "Fastro.app"}
+	}{email, params[0], DOMAIN}
 	res.Render(data)
 }
 
@@ -73,7 +73,7 @@ func (p *pageService) homePage(req fastrex.Request, res fastrex.Response) {
 		Email  string
 		Date   string
 		Domain string
-	}{"Home", email, time.Now().Local().Format("2 January 2006"), "Fastro.app"}
+	}{"Home", email, time.Now().Local().Format("2 January 2006"), DOMAIN}
 	res.Render("home", data)
 }
 
@@ -87,7 +87,7 @@ func (p *pageService) signinPage(req fastrex.Request, res fastrex.Response) {
 		Post   string
 		Title  string
 		Domain string
-	}{post, "Masuk", "Fastro.app"}
+	}{post, "Masuk", DOMAIN}
 	res.Render("signin", data)
 }
 
@@ -95,7 +95,7 @@ func (p *pageService) signupPage(req fastrex.Request, res fastrex.Response) {
 	data := struct {
 		Title  string
 		Domain string
-	}{"Daftar", "Fastro.app"}
+	}{"Daftar", DOMAIN}
 	res.Render("signup", data)
 }
 
@@ -155,7 +155,7 @@ func (p *pageService) detailPage(req fastrex.Request, res fastrex.Response) {
 	d := "[" + strings.Title(topic) + "] "
 	d = d + strings.Title(title) + ". "
 	d = d + content
-	d = d + " | Fastro.app"
+	d = d + " | " + DOMAIN
 
 	ac := accounting.Accounting{Symbol: "Rp", Precision: 2}
 	data := struct {
@@ -184,12 +184,19 @@ func (p *pageService) createPostPage(req fastrex.Request, res fastrex.Response) 
 
 	if err == nil {
 		data := struct {
-			User  string
-			Email string
-			Title string
-		}{userDetail.ID, userDetail.Email, "Pasang Iklan | Fastro.app"}
+			User   string
+			Email  string
+			Title  string
+			Domain string
+		}{userDetail.ID, userDetail.Email, "Pasang Iklan", DOMAIN}
 		res.Render("create", data)
 		return
 	}
-	res.Render("create", nil)
+	guest := struct {
+		User   string
+		Email  string
+		Title  string
+		Domain string
+	}{"", "", "Pasang Iklan", DOMAIN}
+	res.Render("create", guest)
 }
