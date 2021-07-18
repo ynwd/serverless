@@ -127,6 +127,7 @@ func (p *pageService) detailPage(req fastrex.Request, res fastrex.Response) {
 	phone := post.Phone
 	address := post.Address
 	user := userDetail.Name
+	username := userDetail.Username
 	if post.Video != "" {
 		s := strings.Split(post.Video, "=")
 		video = "https://www.youtube.com/embed/" + s[1] + "?autoplay=1&mute=1"
@@ -134,7 +135,9 @@ func (p *pageService) detailPage(req fastrex.Request, res fastrex.Response) {
 
 	if user == "" {
 		user = "guest"
+		username = "guest"
 	}
+
 	if post.File != "" {
 		file = post.File
 	}
@@ -160,7 +163,7 @@ func (p *pageService) detailPage(req fastrex.Request, res fastrex.Response) {
 		Price       string
 		Video       string
 		Username    string
-	}{d, title, topic, file, date, content, email, phone, address, c.GetValue(), id, user, ac.FormatMoney(post.Price), video, userDetail.Username}
+	}{d, title, topic, file, date, content, email, phone, address, c.GetValue(), id, user, ac.FormatMoney(post.Price), video, username}
 	res.Render("detail", data)
 }
 
