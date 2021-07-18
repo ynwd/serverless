@@ -185,13 +185,13 @@ func (s *apiService) createUser(req fastrex.Request, res fastrex.Response) {
 		return
 	}
 
-	if password == "" {
-		createResponsePage("Password tidak boleh kosong", "", res)
+	if email == "" {
+		createResponsePage("Email tidak boleh kosong", "", res)
 		return
 	}
 
-	if email == "" {
-		createResponsePage("Email tidak boleh kosong", "", res)
+	if password == "" {
+		createResponsePage("Password tidak boleh kosong", "", res)
 		return
 	}
 
