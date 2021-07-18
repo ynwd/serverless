@@ -132,10 +132,10 @@
         <div class="arial italic note darkgrey">Jika kamu belum punya akun, silahkan <a href="/signup">daftar</a> terlebih dahulu.</div>
 
         <label for="email" class="arial">Email</label>
-        <input id="email" name="email" type="text">
+        <input id="email" name="email" type="text" placeholder="demo_email=oke@gmail.com">
 
         <label for="content" class="arial">Password</label>
-        <input id="password" name="password" type="password"></input>
+        <input id="password" name="password" type="password" placeholder="demo_email=123"></input>
         {{if .Post}}
         <input type="hidden" name="post" value="{{.Post}}"></input>
         {{end}}

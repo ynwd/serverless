@@ -1,5 +1,3 @@
 package internal
 
-func createPostByTopic() {
-
-}
+func createPostByTopic() {}
