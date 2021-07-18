@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"io"
+	"regexp"
 	"strconv"
 	"time"
 	"unicode/utf8"
@@ -65,17 +66,13 @@ func (s *apiService) createPost(req fastrex.Request, res fastrex.Response) {
 	id := uuid.New().String()
 	url := "/"
 	req.ParseMultipartForm(32 << 20)
-	uploadedFile, _, err := req.FormFile("file")
+	uploadedFile, _, _ := req.FormFile("file")
 	if uploadedFile != nil {
-		if err != nil {
-			createResponsePage(err.Error(), "/", res)
-			return
-		}
 		defer uploadedFile.Close()
 
 		_, _, err := saveToGCS(req.Context(), uploadedFile, "fastro-images", id)
 		if err != nil {
-			createResponsePage(err.Error(), "/", res)
+			createResponsePage(err.Error(), "", res)
 			fmt.Printf("GCS is not setup %v\n", err)
 			return
 		}
@@ -85,31 +82,31 @@ func (s *apiService) createPost(req fastrex.Request, res fastrex.Response) {
 
 	if topic == "" {
 		msg = "Topic tidak boleh kosong. pilih salah satu."
-		createResponsePage(msg, url, res)
+		createResponsePage(msg, "", res)
 		return
 	}
 
 	if title == "" {
 		msg = "Judul tidak boleh kosong. lengkapi dg benar."
-		createResponsePage(msg, url, res)
+		createResponsePage(msg, "", res)
 		return
 	}
 
 	if utf8.RuneCountInString(title) > 100 {
 		msg = "Judul iklan terlalu panjang. maksimal 100 karakter."
-		createResponsePage(msg, url, res)
+		createResponsePage(msg, "", res)
 		return
 	}
 
 	if content == "" {
 		msg = "Isi iklan tidak boleh kosong. lengkapi dg benar."
-		createResponsePage(msg, url, res)
+		createResponsePage(msg, "", res)
 		return
 	}
 
 	if priceStr == "" {
 		msg = "Harga tidak boleh kosong. lengkapi dg benar."
-		createResponsePage(msg, url, res)
+		createResponsePage(msg, "", res)
 		return
 	}
 	price, err := strconv.Atoi(priceStr)
@@ -120,7 +117,7 @@ func (s *apiService) createPost(req fastrex.Request, res fastrex.Response) {
 
 	if utf8.RuneCountInString(content) > 280 {
 		msg = "Isi iklan terlalu panjang. maksimal 280 karakter."
-		createResponsePage(msg, url, res)
+		createResponsePage(msg, "", res)
 		return
 	}
 
@@ -130,17 +127,17 @@ func (s *apiService) createPost(req fastrex.Request, res fastrex.Response) {
 
 	if address == "" && user != "user" {
 		msg = "Kota tidak boleh kosong."
-		createResponsePage(msg, url, res)
+		createResponsePage(msg, "", res)
 		return
 	}
 	if phone == "" && user != "user" {
 		msg = "Phone tidak boleh kosong."
-		createResponsePage(msg, url, res)
+		createResponsePage(msg, "", res)
 		return
 	}
 	if email == "" && user != "user" {
 		msg = "Email tidak boleh kosong."
-		createResponsePage(msg, url, res)
+		createResponsePage(msg, "", res)
 		return
 	}
 
@@ -177,14 +174,36 @@ func (s *apiService) createUser(req fastrex.Request, res fastrex.Response) {
 	email := req.FormValue("email")
 	password := req.FormValue("password")
 
-	user["username"] = username
+	if username == "" {
+		createResponsePage("Username tidak boleh kosong", "", res)
+		return
+	}
+
+	re := regexp.MustCompile("^[a-zA-Z0-9-_]+$")
+	if !re.MatchString(username) {
+		createResponsePage("Username harus berupa angka dan huruf. Tidak boleh mengandung spasi.", "", res)
+		return
+	}
+
+	if password == "" {
+		createResponsePage("Password tidak boleh kosong", "", res)
+		return
+	}
+
+	if email == "" {
+		createResponsePage("Email tidak boleh kosong", "", res)
+		return
+	}
+
 	user["email"] = email
 	user["password"] = password
 	user["id"] = uuid.New().String()
+	user["username"] = username
+	user["name"] = username
 
 	_, _, err := s.db.addUser(req.Context(), user)
 	if err != nil {
-		createResponsePage(err.Error(), "/signup", res)
+		createResponsePage(err.Error(), "", res)
 		return
 	}
 
