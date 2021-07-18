@@ -3,6 +3,7 @@ package internal
 import (
 	"context"
 	"errors"
+	"fmt"
 	"log"
 	"time"
 
@@ -33,8 +34,34 @@ func (d *database) addPost(ctx context.Context, data interface{}) {
 	d.addData(ctx, "post", data)
 }
 
-func (d *database) addUser(ctx context.Context, data interface{}) {
-	d.addData(ctx, "user", data)
+func (d *database) addUser(ctx context.Context, data interface{}) (
+	*firestore.DocumentRef, *firestore.WriteResult, error) {
+	msg := ""
+	user := data.(map[string]interface{})
+	username := user["username"]
+	email := user["email"]
+
+	u := d.client.Collection("user").Where("username", "==", username).Documents(ctx)
+	resU, err := u.GetAll()
+	if err != nil {
+		fmt.Println(err.Error())
+	}
+	if len(resU) > 0 {
+		msg = fmt.Sprintf("Username '%v' telah terdaftar. Gunakan yang lain", username)
+		return nil, nil, errors.New(msg)
+	}
+
+	e := d.client.Collection("user").Where("email", "==", email).Documents(ctx)
+	resE, err := e.GetAll()
+	if err != nil {
+		fmt.Println(err.Error())
+	}
+	if len(resE) > 0 {
+		msg = fmt.Sprintf("Email '%v' telah terdaftar. Gunakan yang lain", email)
+		return nil, nil, errors.New(msg)
+	}
+
+	return d.addData(ctx, "user", data)
 }
 
 func (d *database) getPostDetail(ctx context.Context, id string) (Post, error) {

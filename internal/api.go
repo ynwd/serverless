@@ -173,16 +173,21 @@ func (s *apiService) createUser(req fastrex.Request, res fastrex.Response) {
 	user := make(map[string]interface{})
 	var msg string
 
-	name := req.FormValue("name")
+	username := req.FormValue("username")
 	email := req.FormValue("email")
 	password := req.FormValue("password")
 
-	user["name"] = name
+	user["username"] = username
 	user["email"] = email
 	user["password"] = password
 	user["id"] = uuid.New().String()
 
-	s.db.addUser(req.Context(), user)
+	_, _, err := s.db.addUser(req.Context(), user)
+	if err != nil {
+		createResponsePage(err.Error(), "/signup", res)
+		return
+	}
+
 	msg = "data Anda telah tersimpan."
 	url := "/signin"
 	createResponsePage(msg, url, res)
