@@ -1,7 +1,6 @@
 package internal
 
 import (
-	"fmt"
 	"strings"
 	"time"
 
@@ -29,7 +28,6 @@ func (p *pageService) rootPage(req fastrex.Request, res fastrex.Response) {
 
 func (p *pageService) userPage(req fastrex.Request, res fastrex.Response) {
 	params := req.Params("id")
-	fmt.Println("params", params[0])
 
 	c, _ := req.Cookie("__session")
 	userID := c.GetValue()
@@ -37,8 +35,10 @@ func (p *pageService) userPage(req fastrex.Request, res fastrex.Response) {
 	email := user.Email
 
 	data := struct {
-		Email string
-	}{email}
+		Email  string
+		Title  string
+		Domain string
+	}{email, params[0], "Fastro.app"}
 	res.Render(data)
 }
 
