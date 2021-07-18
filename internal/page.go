@@ -27,7 +27,7 @@ func (p *pageService) rootPage(req fastrex.Request, res fastrex.Response) {
 
 func (p *pageService) userPage(req fastrex.Request, res fastrex.Response) {
 	params := req.Params("id")
-	fmt.Println(params[0])
+	fmt.Println("params", params[0])
 
 	c, _ := req.Cookie("__session")
 	userID := c.GetValue()
