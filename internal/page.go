@@ -43,14 +43,17 @@ func (p *pageService) userPage(req fastrex.Request, res fastrex.Response) {
 }
 
 func (p *pageService) topicPage(req fastrex.Request, res fastrex.Response) {
+	params := req.Params("topic")
 	c, _ := req.Cookie("__session")
 	userID := c.GetValue()
 	user, _ := p.db.getUserDetailByID(req.Context(), userID)
 	email := user.Email
 
 	data := struct {
-		Email string
-	}{email}
+		Email  string
+		Title  string
+		Domain string
+	}{email, params[0], "Fastro.app"}
 	res.Render(data)
 }
 
