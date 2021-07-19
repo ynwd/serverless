@@ -185,16 +185,16 @@
         <input type="text" id="video" name="video" placeholder="contoh: https://www.youtube.com/watch?v=jNQXAC9IVRw">
 
         <label for="address" class="arial">Kota</label>
-        <input id="address" name="address" type="text" placeholder="contoh: cirebon"></input>
+        <input id="address" name="address" type="text" placeholder="contoh: cirebon">
 
         <label for="phone" class="arial">Whatsapp</label>
-        <input id="phone" name="phone" type="text" placeholder="contoh: 081212345678"></input>
+        <input id="phone" name="phone" type="text" placeholder="contoh: 081212345678">
 
         <label for="email" class="arial">Email</label>
         <input id="email" name="email" type="email" value="{{.Email}}" placeholder="alamat email, contoh: oke@gmail.com">
-        </input>
+
         {{end}} {{if .User}}
-        <input type="hidden" name="user" value="{{.User}}"></input>
+        <input type="hidden" name="user" value="{{.User}}">
         {{end}}
 
         <button>Submit</button>

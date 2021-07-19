@@ -1,4 +1,4 @@
-{{define "signup"}}
+{{define "signin"}}
 <!DOCTYPE html>
 <html>
 
@@ -57,6 +57,23 @@
         button {
             width: 100%;
             padding: 0.7em;
+            margin-bottom: 0.5rem;
+        }
+        
+        .guest {
+            margin-bottom: 0.5em;
+        }
+        
+        .italic {
+            font-style: italic;
+        }
+        
+        .note {
+            margin-bottom: 0.5em;
+        }
+        
+        .darkgrey {
+            color: rgba(117, 117, 117, 1);
         }
         
         @media (min-width: 400px) {
@@ -95,34 +112,36 @@
                 padding-right: 0.5em;
             }
             button {
-                margin-top: 1em;
-            }
-            form input,
-            form textarea {
-                margin-bottom: unset;
+                margin-top: 0.5em;
             }
         }
     </style>
 </head>
 
 <body>
-    <form method="post" action="/api/signup">
+    <form method="post" action="/api/signin">
         <label></label>
         <div class="header">
             <div class="title main">
                 {{.Title}}
             </div>
         </div>
-        <label for="username" class="arial">Username</label>
-        <input id="username" name="username" type="text" placeholder="contoh: agus">
+
+        <label></label>
+        <div class="arial italic note darkgrey">Jika kamu belum punya akun, silahkan <a href="/signup">daftar</a> terlebih dahulu.</div>
 
         <label for="email" class="arial">Email</label>
-        <input id="email" name="email" type="text" placeholder="contoh: agus@gmail.com">
+        <input id="email" name="email" type="text" placeholder="demo_email=oke@gmail.com">
 
         <label for="content" class="arial">Password</label>
-        <input id="password" name="password" type="password" placeholder="contoh: rahasia"></input>
+        <input id="password" name="password" type="password" placeholder="demo_password=123">
+        {{if .Post}}
+        <input type="hidden" name="post" value="{{.Post}}">
+        {{end}}
 
         <button>Submit</button>
+
+        <label></label>
     </form>
 
 </body>

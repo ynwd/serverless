@@ -18,14 +18,14 @@ func CreateApp() fastrex.App {
 
 func createTemplate(app fastrex.App) fastrex.App {
 	app.Template("public/index.html").
-		Template("template/arsip.html").
-		Template("template/signin.html").
-		Template("template/signup.html").
-		Template("template/membership.html").
-		Template("template/home.html").
-		Template("template/detail.html").
-		Template("template/create.html").
-		Template("template/response.html")
+		Template("template/arsip.gohtml").
+		Template("template/signin.gohtml").
+		Template("template/signup.gohtml").
+		Template("template/membership.gohtml").
+		Template("template/home.gohtml").
+		Template("template/detail.gohtml").
+		Template("template/create.gohtml").
+		Template("template/response.gohtml")
 
 	return app
 }
