@@ -208,38 +208,38 @@
             <iframe class="video" width="100%" height="315" src="{{.Video}}"></iframe> {{end}} {{if .UserEmail}} {{else}}
             <div class="arial contact">
                 <div class="contact-container">
-                    <div class="key">Harga: </div>
-                    <div>{{.Price}}</div>
+                    <div class="key">Harga </div>
+                    <div><button>{{.Price}}</button></div>
                 </div>
             </div>
             {{end}} {{if .UserEmail}} {{if .Email}}
             <div class="arial contact">
                 <div class="contact-container">
-                    <div class="key">Harga: </div>
-                    <div>{{.Price}}</div>
+                    <div class="key">Harga </div>
+                    <div><button>{{.Price}}</button></div>
                 </div>
                 <div class="contact-container">
-                    <div class="key">Kontak: </div>
+                    <div class="key">Kontak </div>
                     <div class="value"><a href="/u/{{.Username}}"><button>{{.User}}</button></a></div>
                 </div>
                 <div class="contact-container">
-                    <div class="key">Kota: </div>
+                    <div class="key">Kota </div>
                     <div class="city value"><a href="https://www.google.com/maps/search/?api=1&query={{.Address}}+field"><button>{{.Address}}</button></a></div>
                 </div>
                 <div class="contact-container">
-                    <div class="key">Email: </div>
+                    <div class="key">Email </div>
                     <div class="value"><a href="mailto: {{.Email}}"><button>{{.Email}}</button></a> </div>
                 </div>
                 <div class="contact-container">
-                    <div class="key">Whatsapp: </div>
+                    <div class="key">Whatsapp </div>
                     <div class="value"><a href="https://wa.me/{{.Phone}}"><button>{{.Phone}}</button></a></div>
                 </div>
             </div>
             {{else}}
             <div class="arial contact">
                 <div class="contact-container">
-                    <div class="key">Harga: </div>
-                    <div>{{.Price}}</div>
+                    <div class="key">Harga </div>
+                    <div><button>{{.Price}}</button></div>
                 </div>
             </div>
             {{end}} {{else}}
