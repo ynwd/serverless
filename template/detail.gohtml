@@ -63,6 +63,10 @@
             text-align: right;
         }
         
+        iframe {
+            border-style: none;
+        }
+        
         .center {
             text-align: center;
         }
@@ -114,17 +118,11 @@
             font-size: small;
         }
         
-        .img {
+        .img,
+        .video {
             max-width: 600px;
             margin-bottom: 1em;
             width: 100%;
-        }
-        
-        .video {
-            margin: 0 auto;
-            display: block;
-            border-style: none;
-            margin-bottom: 1em;
         }
         
         .contact {
@@ -169,10 +167,18 @@
         }
         
         .media-container {
-            display: flex;
             max-width: 600px;
             overflow-x: overlay;
             margin-bottom: 0.5em;
+            display: -webkit-box;
+            /* OLD - iOS 6-, Safari 3.1-6 */
+            display: -moz-box;
+            /* OLD - Firefox 19- (buggy but mostly works) */
+            display: -ms-flexbox;
+            /* TWEENER - IE 10 */
+            display: -webkit-flex;
+            /* NEW - Chrome */
+            display: flex;
         }
         
         @media all and (min-device-width: 320px) and (max-device-width: 480px),
@@ -198,7 +204,7 @@
             .img {
                 max-width: 100%;
                 height: auto;
-                width: auto\9;
+                width: auto;
             }
         }
     </style>
@@ -216,7 +222,8 @@
         <div class="content-container content ">
             <div class="media-container">
                 <img src="{{.File}}" class="img"> {{if .Video}}
-                <iframe class="video" width="100%" src="{{.Video}}"></iframe> {{end}}
+                <div class="video"> <iframe height="100%" src="{{.Video}}"></iframe></div>
+                {{end}}
             </div>
             <div class="margin-bottom arial ">{{.Content}}</div>
             {{if .UserEmail}} {{else}}
