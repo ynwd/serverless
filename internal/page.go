@@ -158,6 +158,15 @@ func (p *pageService) detailPage(req fastrex.Request, res fastrex.Response) {
 	d = d + content
 	d = d + " | " + DOMAIN
 
+	addr := ""
+	for idx, v := range strings.Split(address, " ") {
+		if idx == 0 {
+			addr = addr + v
+		} else {
+			addr = addr + "+" + v
+		}
+	}
+
 	ac := accounting.Accounting{Symbol: "Rp", Precision: 2}
 	data := struct {
 		Description string
@@ -169,13 +178,14 @@ func (p *pageService) detailPage(req fastrex.Request, res fastrex.Response) {
 		Email       string
 		Phone       string
 		Address     string
+		Map         string
 		UserEmail   string
 		ID          string
 		User        string
 		Price       string
 		Video       string
 		Username    string
-	}{d, title, topic, file, date, content, email, phone, address, c.GetValue(), id, user, ac.FormatMoney(post.Price), video, username}
+	}{d, title, topic, file, date, content, email, phone, address, addr, c.GetValue(), id, user, ac.FormatMoney(post.Price), video, username}
 	res.Render("detail", data)
 }
 
