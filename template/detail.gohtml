@@ -172,6 +172,7 @@
             display: flex;
             max-width: 600px;
             overflow-x: overlay;
+            margin-bottom: 0.5em;
         }
         
         @media all and (min-device-width: 320px) and (max-device-width: 480px),
@@ -215,7 +216,7 @@
         <div class="content-container content ">
             <div class="media-container">
                 <img src="{{.File}}" class="img"> {{if .Video}}
-                <iframe class="video" width="600px" src="{{.Video}}"></iframe> {{end}}
+                <iframe class="video" width="100%" src="{{.Video}}"></iframe> {{end}}
             </div>
             <div class="margin-bottom arial ">{{.Content}}</div>
             {{if .UserEmail}} {{else}}
