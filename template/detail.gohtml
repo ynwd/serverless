@@ -163,9 +163,15 @@
         .value a button {
             color: black;
         }
-
+        
         .value button {
             color: black;
+        }
+        
+        .media-container {
+            display: flex;
+            max-width: 600px;
+            overflow-x: overlay;
         }
         
         @media all and (min-device-width: 320px) and (max-device-width: 480px),
@@ -207,13 +213,12 @@
             </div>
         </div>
         <div class="content-container content ">
-            <img src="{{.File}}" class="img">
+            <div class="media-container">
+                <img src="{{.File}}" class="img"> {{if .Video}}
+                <iframe class="video" width="600px" src="{{.Video}}"></iframe> {{end}}
+            </div>
             <div class="margin-bottom arial ">{{.Content}}</div>
-            {{if .Video}}
-              <iframe class="video" width="100%" height="315" src="{{.Video}}"></iframe> 
-            {{end}} 
-            {{if .UserEmail}} 
-            {{else}}
+            {{if .UserEmail}} {{else}}
             <div class="arial contact">
                 <div class="contact-container">
                     <div class="key">Harga </div>
@@ -226,9 +231,7 @@
                 </div>
                 {{end}}
             </div>
-            {{end}} 
-            {{if .UserEmail}} 
-            {{if .Email}}
+            {{end}} {{if .UserEmail}} {{if .Email}}
             <div class="arial contact">
                 <div class="contact-container">
                     <div class="key">Harga </div>
@@ -264,15 +267,9 @@
                 </div>
                 {{end}}
             </div>
-            {{end}} 
-            {{else}}
-
-            {{if .Address}}
+            {{end}} {{else}} {{if .Address}}
             <div class="arial italic darkgrey contact">Silahkan <a href="/signin?post={{.ID}} ">masuk</a> untuk melihat detail{{if .Email}} kontak pembuat iklan{{end}}.</div>
-            {{else}}
-            {{end}}
-
-            {{end}}
+            {{else}} {{end}} {{end}}
         </div>
         <div class="footer arial darkgrey ">
             Powered by <a href=https://github.com/fastrodev/fastrex>Fastrex</a>
