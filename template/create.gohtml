@@ -174,8 +174,8 @@
         <input type="number" id="price" name="price" placeholder="harga, contoh: 1000000"> {{if .User}} {{else}}
         <label></label>
         <div class="arial guest">
-            Anda akan membuat iklan secara anonim. Jika anda sudah punya akun di website ini, silahkan <a href="/signin">masuk</a> agar dapat menambahkan gambar, video, email, whatsapp, dan kota - serta mengakses lagi iklan yang telah Anda buat. Jika
-            Anda belum punya akun, silahkan <a href="/signup">daftar</a> terlebih dahulu.
+            Kamu akan membuat iklan secara anonim. Jika sudah punya akun di website ini, silahkan <a href="/signin">masuk</a> agar dapat menambahkan gambar, video, email, whatsapp, dan kota - serta membarui iklan yang telah dibuat. Jika belum punya akun,
+            silahkan <a href="/signup">daftar</a> terlebih dahulu.
         </div>
         {{end}} {{if .User}}
         <label for="file" class="arial">Foto</label>
@@ -191,11 +191,8 @@
         <input id="phone" name="phone" type="text" placeholder="contoh: 081212345678">
 
         <label for="email" class="arial">Email</label>
-        <input id="email" name="email" type="email" value="{{.Email}}" placeholder="alamat email, contoh: oke@gmail.com">
-
-        {{end}} {{if .User}}
-        <input type="hidden" name="user" value="{{.User}}">
-        {{end}}
+        <input id="email" name="email" type="email" value="{{.Email}}" placeholder="alamat email, contoh: oke@gmail.com"> {{end}} {{if .User}}
+        <input type="hidden" name="user" value="{{.User}}"> {{end}}
 
         <button>Submit</button>
     </form>

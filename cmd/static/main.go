@@ -26,12 +26,16 @@ func main() {
 		Data          []FlatPost
 	}
 
+	now := time.Now()
+	loc, _ := time.LoadLocation("Asia/Jakarta")
+	date := now.In(loc)
+
 	frontData := FrontData{
 		Email:         "oke@gmail.com",
 		Title:         "Iklan Baris",
 		Description:   "Aplikasi web untuk membuat iklan baris online secara gratis. Simple dan nyaman dibaca.",
-		Date:          time.Now().Local().Format("2 January 2006"),
-		PublishedDate: time.Now().Local().Format("2006-01-0215:04:05"),
+		Date:          date.Format("2 January 2006"),
+		PublishedDate: date.Format("2006-01-0215:04:05"),
 		Data:          td,
 	}
 

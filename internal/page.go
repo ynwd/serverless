@@ -12,7 +12,7 @@ type pageService struct {
 	db database
 }
 
-func (p *pageService) rootPage(req fastrex.Request, res fastrex.Response) {
+func (p *pageService) idxPage(req fastrex.Request, res fastrex.Response) {
 	c, _ := req.Cookie("__session")
 	userID := c.GetValue()
 	user, _ := p.db.getUserDetailByID(req.Context(), userID)
@@ -28,6 +28,30 @@ func (p *pageService) rootPage(req fastrex.Request, res fastrex.Response) {
 
 func (p *pageService) userPage(req fastrex.Request, res fastrex.Response) {
 	params := req.Params("id")
+	if params[0] == "home" {
+		p.homePage(req, res)
+		return
+	}
+
+	if params[0] == "signout" {
+		p.signOut(req, res)
+		return
+	}
+
+	if params[0] == "signin" {
+		p.signinPage(req, res)
+		return
+	}
+
+	if params[0] == "signup" {
+		p.signupPage(req, res)
+		return
+	}
+
+	if params[0] == "post" {
+		p.createPostPage(req, res)
+		return
+	}
 
 	c, _ := req.Cookie("__session")
 	userID := c.GetValue()
@@ -78,10 +102,6 @@ func (p *pageService) homePage(req fastrex.Request, res fastrex.Response) {
 	res.Render("home", data)
 }
 
-func (p *pageService) arsipPage(req fastrex.Request, res fastrex.Response) {
-	res.Render("arsip", nil)
-}
-
 func (p *pageService) signinPage(req fastrex.Request, res fastrex.Response) {
 	post := req.URL.Query().Get("post")
 	data := struct {
@@ -108,10 +128,6 @@ func (p *pageService) signOut(req fastrex.Request, res fastrex.Response) {
 	}
 }
 
-func (p *pageService) membershipPage(req fastrex.Request, res fastrex.Response) {
-	res.Render("membership", nil)
-}
-
 func (p *pageService) detailPage(req fastrex.Request, res fastrex.Response) {
 	id := ""
 	params := req.Params("id")
@@ -123,7 +139,7 @@ func (p *pageService) detailPage(req fastrex.Request, res fastrex.Response) {
 	post, err := p.db.getPostDetail(req.Context(), id)
 	if err != nil {
 		msg := err.Error()
-		createResponsePage(msg, "/", res)
+		createResponsePage("Response", msg, "", res)
 		return
 	}
 

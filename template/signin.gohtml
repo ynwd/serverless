@@ -127,17 +127,12 @@
             </div>
         </div>
 
-        <label></label>
-        <div class="arial italic note darkgrey">Jika kamu belum punya akun, silahkan <a href="/signup">daftar</a> terlebih dahulu.</div>
-
         <label for="email" class="arial">Email</label>
-        <input id="email" name="email" type="text" placeholder="demo_email=oke@gmail.com">
+        <input id="email" name="email" type="text" placeholder="guest@fastro.app">
 
         <label for="content" class="arial">Password</label>
-        <input id="password" name="password" type="password" placeholder="demo_password=123">
-        {{if .Post}}
-        <input type="hidden" name="post" value="{{.Post}}">
-        {{end}}
+        <input id="password" name="password" type="password" placeholder="guest"> {{if .Post}}
+        <input type="hidden" name="post" value="{{.Post}}"> {{end}}
 
         <button>Submit</button>
 

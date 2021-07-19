@@ -58,12 +58,12 @@ func ReadPost() []Post {
 	return data
 }
 
-func createResponsePage(msg string, url string, res fastrex.Response) {
+func createResponsePage(title string, msg string, url string, res fastrex.Response) {
 	resp := struct {
 		Date     string
 		Response string
 		Title    string
 		URL      string
-	}{time.Now().Format("2 January 2006"), msg, msg, url}
+	}{time.Now().Format("2 January 2006"), msg, title, url}
 	res.Render("response", resp)
 }

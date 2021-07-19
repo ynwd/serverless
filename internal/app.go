@@ -32,15 +32,8 @@ func createTemplate(app fastrex.App) fastrex.App {
 
 func createPageRoute(ctx context.Context, app fastrex.App) fastrex.App {
 	s := createPageService(ctx)
-	app.Get("/", s.rootPage).
-		Get("/u/:id", s.userPage).
-		Get("/home", s.homePage).
-		Get("/arsip", s.arsipPage).
-		Get("/signin", s.signinPage).
-		Get("/signup", s.signupPage).
-		Get("/signout", s.signOut).
-		Get("/membership", s.membershipPage).
-		Get("/post", s.createPostPage).
+	app.Get("/", s.idxPage).
+		Get("/:id", s.userPage).
 		Get("/post/:id", s.detailPage).
 		Get("/post/topic/:topic", s.topicPage)
 	return app
