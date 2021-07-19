@@ -48,12 +48,12 @@ func (p *pageService) topicPage(req fastrex.Request, res fastrex.Response) {
 	userID := c.GetValue()
 	user, _ := p.db.getUserDetailByID(req.Context(), userID)
 	email := user.Email
-
+	topic := strings.Title(params[0])
 	data := struct {
 		Email  string
 		Title  string
 		Domain string
-	}{email, params[0], DOMAIN}
+	}{email, topic, DOMAIN}
 	res.Render(data)
 }
 
