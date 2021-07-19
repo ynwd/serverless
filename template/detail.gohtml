@@ -220,19 +220,19 @@
                 </div>
                 <div class="contact-container">
                     <div class="key">Kontak: </div>
-                    <div class="value"><a href="/u/{{.Username}}">{{.User}}</a></div>
-                </div>
-                <div class="contact-container">
-                    <div class="key">Email: </div>
-                    <div class="value"><a href="mailto: {{.Email}}">{{.Email}}</a> </div>
-                </div>
-                <div class="contact-container">
-                    <div class="key">Whatsapp: </div>
-                    <div class="value"><a href="https://wa.me/{{.Phone}}">{{.Phone}}</a></div>
+                    <div class="value"><a href="/u/{{.Username}}"><button>{{.User}}</button></a></div>
                 </div>
                 <div class="contact-container">
                     <div class="key">Kota: </div>
-                    <div class="city value"><a href="https://www.google.com/maps/search/?api=1&query={{.Address}}+field">{{.Address}}</a></div>
+                    <div class="city value"><a href="https://www.google.com/maps/search/?api=1&query={{.Address}}+field"><button>{{.Address}}</button></a></div>
+                </div>
+                <div class="contact-container">
+                    <div class="key">Email: </div>
+                    <div class="value"><a href="mailto: {{.Email}}"><button>{{.Email}}</button></a> </div>
+                </div>
+                <div class="contact-container">
+                    <div class="key">Whatsapp: </div>
+                    <div class="value"><a href="https://wa.me/{{.Phone}}"><button>{{.Phone}}</button></a></div>
                 </div>
             </div>
             {{else}}
