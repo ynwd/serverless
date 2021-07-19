@@ -153,7 +153,8 @@ func (p *pageService) detailPage(req fastrex.Request, res fastrex.Response) {
 	if post.File != "" {
 		file = post.File
 	}
-	d := "[" + strings.Title(topic) + "] "
+	d := strings.Title(topic)
+	d = d + " di " + strings.Title(address) + ": "
 	d = d + strings.Title(title) + ". "
 	d = d + content
 	d = d + " | " + DOMAIN
