@@ -96,9 +96,10 @@ func (p *pageService) homePage(req fastrex.Request, res fastrex.Response) {
 	data := struct {
 		Title  string
 		Email  string
+		Name   string
 		Date   string
 		Domain string
-	}{"Home", email, time.Now().Local().Format("2 January 2006"), DOMAIN}
+	}{"Home", email, user.Name, time.Now().Local().Format("2 January 2006"), DOMAIN}
 	res.Render("home", data)
 }
 
