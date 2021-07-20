@@ -232,25 +232,20 @@ func (p *pageService) detailPage(req fastrex.Request, res fastrex.Response) {
 }
 
 func (p *pageService) createPostPage(req fastrex.Request, res fastrex.Response) {
-	c, err := req.Cookie("__session")
-	if err != nil {
-		createResponsePage("Response", err.Error(), "", res)
-	}
+	c, _ := req.Cookie("__session")
+	userID := ""
 	userByte, err := base64.StdEncoding.DecodeString(c.GetValue())
-	if err != nil {
-		createResponsePage("Response", err.Error(), "", res)
+	if err == nil {
+		userID = string(userByte)
 	}
-	userID := string(userByte)
-
 	userDetail, _ := p.db.getUserDetailByID(req.Context(), userID)
-
 	if err == nil {
 		data := struct {
 			User   string
 			Email  string
 			Title  string
 			Domain string
-		}{userDetail.ID, userDetail.Email, "Pasang Iklan", DOMAIN}
+		}{userID, userDetail.Email, "Pasang Iklan", DOMAIN}
 		res.Render("create", data)
 		return
 	}
