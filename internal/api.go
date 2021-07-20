@@ -2,6 +2,7 @@ package internal
 
 import (
 	"context"
+	"encoding/base64"
 	"fmt"
 	"io"
 	"net/mail"
@@ -241,7 +242,8 @@ func (s *apiService) getUserByEmailAndPassword(req fastrex.Request, res fastrex.
 		return
 	}
 	c := fastrex.Cookie{}
-	c.Name("__session").Value(user.ID).Path("/")
+	userID := base64.StdEncoding.EncodeToString([]byte(user.ID))
+	c.Name("__session").Value(userID).Path("/")
 
 	if post != "" {
 		url := "/post/" + post

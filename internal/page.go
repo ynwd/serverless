@@ -1,6 +1,7 @@
 package internal
 
 import (
+	"encoding/base64"
 	"strings"
 	"time"
 
@@ -14,7 +15,12 @@ type pageService struct {
 
 func (p *pageService) idxPage(req fastrex.Request, res fastrex.Response) {
 	c, _ := req.Cookie("__session")
-	userID := c.GetValue()
+
+	userByte, err := base64.StdEncoding.DecodeString(c.GetValue())
+	if err != nil {
+		createResponsePage("Response", err.Error(), "", res)
+	}
+	userID := string(userByte)
 	user, _ := p.db.getUserDetailByID(req.Context(), userID)
 	email := user.Email
 
@@ -54,7 +60,11 @@ func (p *pageService) userPage(req fastrex.Request, res fastrex.Response) {
 	}
 
 	c, _ := req.Cookie("__session")
-	userID := c.GetValue()
+	userByte, err := base64.StdEncoding.DecodeString(c.GetValue())
+	if err != nil {
+		createResponsePage("Response", err.Error(), "", res)
+	}
+	userID := string(userByte)
 	user, _ := p.db.getUserDetailByID(req.Context(), userID)
 	email := user.Email
 	title := strings.Title(params[0])
@@ -70,7 +80,11 @@ func (p *pageService) userPage(req fastrex.Request, res fastrex.Response) {
 func (p *pageService) topicPage(req fastrex.Request, res fastrex.Response) {
 	params := req.Params("topic")
 	c, _ := req.Cookie("__session")
-	userID := c.GetValue()
+	userByte, err := base64.StdEncoding.DecodeString(c.GetValue())
+	if err != nil {
+		createResponsePage("Response", err.Error(), "", res)
+	}
+	userID := string(userByte)
 	user, _ := p.db.getUserDetailByID(req.Context(), userID)
 	email := user.Email
 	topic := strings.Title(params[0])
@@ -88,8 +102,11 @@ func (p *pageService) homePage(req fastrex.Request, res fastrex.Response) {
 		res.Redirect("/", 302)
 		return
 	}
-
-	userID := c.GetValue()
+	userByte, err := base64.StdEncoding.DecodeString(c.GetValue())
+	if err != nil {
+		createResponsePage("Response", err.Error(), "", res)
+	}
+	userID := string(userByte)
 	user, _ := p.db.getUserDetailByID(req.Context(), userID)
 	email := user.Email
 
@@ -179,16 +196,16 @@ func (p *pageService) detailPage(req fastrex.Request, res fastrex.Response) {
 	d = d + content
 	d = d + " | " + DOMAIN
 
-	addr := ""
+	mapAddr := ""
 	tmpAddr := address
 	if strings.Contains(address, ",") {
 		tmpAddr = strings.ReplaceAll(address, ",", "")
 	}
 	for idx, v := range strings.Split(tmpAddr, " ") {
 		if idx == 0 {
-			addr = addr + v
+			mapAddr = mapAddr + v
 		} else {
-			addr = addr + "+" + v
+			mapAddr = mapAddr + "+" + v
 		}
 	}
 
@@ -204,19 +221,28 @@ func (p *pageService) detailPage(req fastrex.Request, res fastrex.Response) {
 		Phone       string
 		Address     string
 		Map         string
-		UserEmail   string
+		Cookie      string
 		ID          string
 		User        string
 		Price       string
 		Video       string
 		Username    string
-	}{d, title, topic, file, date, content, email, phone, address, addr, c.GetValue(), id, user, ac.FormatMoney(post.Price), video, username}
+	}{d, title, topic, file, date, content, email, phone, address, mapAddr, c.GetValue(), id, user, ac.FormatMoney(post.Price), video, username}
 	res.Render("detail", data)
 }
 
 func (p *pageService) createPostPage(req fastrex.Request, res fastrex.Response) {
 	c, err := req.Cookie("__session")
-	userDetail, _ := p.db.getUserDetailByID(req.Context(), c.GetValue())
+	if err != nil {
+		createResponsePage("Response", err.Error(), "", res)
+	}
+	userByte, err := base64.StdEncoding.DecodeString(c.GetValue())
+	if err != nil {
+		createResponsePage("Response", err.Error(), "", res)
+	}
+	userID := string(userByte)
+
+	userDetail, _ := p.db.getUserDetailByID(req.Context(), userID)
 
 	if err == nil {
 		data := struct {
