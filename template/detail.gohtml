@@ -226,12 +226,14 @@
         </div>
         <div class="content-container content ">
             <div class="media-container">
-                <img src="{{.File}}" class="img"> {{if .Video}}
+                <img src="{{.File}}" class="img"> 
+                {{if .Video}}
                 <div class="video"> <iframe height="100%" src="{{.Video}}"></iframe></div>
                 {{end}}
             </div>
             <div class="margin-bottom arial ">{{.Content}}</div>
-            {{if .UserEmail}} {{else}}
+            {{if .UserEmail}}
+            {{else}}
             <div class="arial contact">
                 <div class="contact-container">
                     <div class="key">Harga </div>
@@ -242,9 +244,19 @@
                     <div class="key">Alamat </div>
                     <div class="city value"><a href="https://www.google.com/maps/search/?api=1&query={{.Map}}"><button class="cap">{{.Address}}</button></a></div>
                 </div>
+                {{/*  */}}
+                {{if .Address}}
+                <div class="contact-container">
+                    <div class="key arial">Kontak</div>
+                    <div class="value arial"><a href="/signin?post={{.ID}} "><button class="arial">Silahkan masuk</button></a> untuk melihat detail{{if .Email}} kontak pembuat iklan{{end}}.</div>
+                </div>
+                {{end}} 
+                {{/* / */}}
                 {{end}}
             </div>
-            {{end}} {{if .UserEmail}} {{if .Email}}
+            {{end}} 
+            {{if .UserEmail}} 
+              {{if .Email}}
             <div class="arial contact">
                 <div class="contact-container">
                     <div class="key">Harga </div>
@@ -269,7 +281,7 @@
                     <div class="value"><a href="https://wa.me/{{.Phone}}"><button>{{.Phone}}</button></a></div>
                 </div>
             </div>
-            {{else}}
+              {{else}}
             <div class="arial contact">
                 <div class="contact-container">
                     <div class="key">Harga</div>
@@ -282,12 +294,8 @@
                 </div>
                 {{end}}
             </div>
-            {{end}} {{else}} {{if .Address}}
-            <div class="contact-container">
-                <div class="key arial">Kontak</div>
-                <div class="value arial"><a href="/signin?post={{.ID}} "><button class="arial">Silahkan masuk</button></a> untuk melihat detail{{if .Email}} kontak pembuat iklan{{end}}.</div>
-            </div>
-            {{else}} {{end}} {{end}}
+              {{end}}
+            {{end}}
         </div>
         <div class="footer arial darkgrey ">
             Powered by <a href=https://github.com/fastrodev/fastrex>Fastrex</a>
