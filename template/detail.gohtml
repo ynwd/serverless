@@ -230,11 +230,11 @@
             <div class="arial contact">
                 <div class="contact-container">
                     <div class="key">Harga </div>
-                    <div class="value"><button disabled>{{.Price}}</button></div>
+                    <div class="value">{{.Price}}</div>
                 </div>
                 {{if .Address}}
                 <div class="contact-container">
-                    <div class="key">Kota </div>
+                    <div class="key">Alamat </div>
                     <div class="city value"><a href="https://www.google.com/maps/search/?api=1&query={{.Map}}"><button class="cap">{{.Address}}</button></a></div>
                 </div>
                 {{end}}
@@ -243,14 +243,16 @@
             <div class="arial contact">
                 <div class="contact-container">
                     <div class="key">Harga </div>
-                    <div class="value"><button disabled>{{.Price}}</button></div>
+                    <div class="value">
+                        <span class="price">{{.Price}}</span>
+                    </div>
                 </div>
                 <div class="contact-container">
                     <div class="key">Kontak </div>
                     <div class="value"><a href="/{{.Username}}"><button>{{.User}}</button></a></div>
                 </div>
                 <div class="contact-container">
-                    <div class="key">Kota </div>
+                    <div class="key">Alamat </div>
                     <div class="city value"><a href="https://www.google.com/maps/search/?api=1&query={{.Map}}"><button class="cap">{{.Address}}</button></a></div>
                 </div>
                 <div class="contact-container">
@@ -266,11 +268,11 @@
             <div class="arial contact">
                 <div class="contact-container">
                     <div class="key">Harga</div>
-                    <div class="value"><button disabled>{{.Price}}</button></div>
+                    <div class="value">{{.Price}}</div>
                 </div>
                 {{if .Address}}
                 <div class="contact-container">
-                    <div class="key">Kota </div>
+                    <div class="key">Alamat </div>
                     <div class="city value"><a href="https://www.google.com/maps/search/?api=1&query={{.Map}}"><button class="cap">{{.Address}}</button></a></div>
                 </div>
                 {{end}}

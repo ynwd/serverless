@@ -170,13 +170,20 @@ func (p *pageService) detailPage(req fastrex.Request, res fastrex.Response) {
 		file = post.File
 	}
 	d := strings.Title(topic)
-	d = d + " di " + strings.Title(address) + ": "
-	d = d + strings.Title(title) + ". "
+	if address != "" {
+		d = d + " di " + strings.Title(address) + ": "
+	} else {
+		d = d + ": "
+	}
 	d = d + content
 	d = d + " | " + DOMAIN
 
 	addr := ""
-	for idx, v := range strings.Split(address, " ") {
+	tmpAddr := address
+	if strings.Contains(address, ",") {
+		tmpAddr = strings.ReplaceAll(address, ",", "")
+	}
+	for idx, v := range strings.Split(tmpAddr, " ") {
 		if idx == 0 {
 			addr = addr + v
 		} else {

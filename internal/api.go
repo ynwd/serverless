@@ -183,7 +183,7 @@ func (s *apiService) createUser(req fastrex.Request, res fastrex.Response) {
 	}
 	re := regexp.MustCompile("^[a-zA-Z0-9-_]+$")
 	if !re.MatchString(username) {
-		createResponsePage(respTitle, "Username harus berupa angka dan huruf. Tidak boleh mengandung spasi.", "", res)
+		createResponsePage(respTitle, "Username harus berupa angka dan huruf. Tidak boleh ada spasi.", "", res)
 		return
 	}
 
