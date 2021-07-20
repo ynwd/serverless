@@ -81,7 +81,7 @@ func groupByTopic(d []internal.Post) []FlatPost {
 				header = topic
 			}
 
-			if idx == 7 {
+			if idx == 2 {
 				break
 			}
 			// cut larger content
