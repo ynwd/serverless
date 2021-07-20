@@ -2,6 +2,8 @@ package internal
 
 import (
 	"context"
+	"io/ioutil"
+	"log"
 
 	"github.com/fastrodev/fastrex"
 )
@@ -33,10 +35,19 @@ func createTemplate(app fastrex.App) fastrex.App {
 func createPageRoute(ctx context.Context, app fastrex.App) fastrex.App {
 	s := createPageService(ctx)
 	app.Get("/", s.idxPage).
+		Post("/", receiveEvent).
 		Get("/:id", s.userPage).
 		Get("/post/:id", s.detailPage).
 		Get("/post/topic/:topic", s.topicPage)
 	return app
+}
+
+func receiveEvent(req fastrex.Request, res fastrex.Response) {
+	body, err := ioutil.ReadAll(req.Body)
+	if err != nil {
+		log.Printf("error on receive event from pubsub %v", err.Error())
+	}
+	res.Send(string(body))
 }
 
 func createApiRoute(ctx context.Context, app fastrex.App) fastrex.App {
