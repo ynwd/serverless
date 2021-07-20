@@ -248,12 +248,12 @@
                     </div>
                 </div>
                 <div class="contact-container">
-                    <div class="key">Kontak </div>
-                    <div class="value"><a href="/{{.Username}}"><button>{{.User}}</button></a></div>
-                </div>
-                <div class="contact-container">
                     <div class="key">Alamat </div>
                     <div class="city value"><a href="https://www.google.com/maps/search/?api=1&query={{.Map}}"><button class="cap">{{.Address}}</button></a></div>
+                </div>
+                <div class="contact-container">
+                    <div class="key">Kontak </div>
+                    <div class="value"><a href="/{{.Username}}"><button>{{.User}}</button></a></div>
                 </div>
                 <div class="contact-container">
                     <div class="key">Email </div>
@@ -278,7 +278,10 @@
                 {{end}}
             </div>
             {{end}} {{else}} {{if .Address}}
-            <div class="arial italic darkgrey contact">Silahkan <a href="/signin?post={{.ID}} ">masuk</a> untuk melihat detail{{if .Email}} kontak pembuat iklan{{end}}.</div>
+            <div class="contact-container">
+                <div class="key arial">Kontak</div>
+                <div class="value arial"><a href="/signin?post={{.ID}} "><button class="arial">Silahkan masuk</button></a> untuk melihat detail{{if .Email}} kontak pembuat iklan{{end}}.</div>
+            </div>
             {{else}} {{end}} {{end}}
         </div>
         <div class="footer arial darkgrey ">

@@ -143,6 +143,15 @@
             font-weight: bold;
         }
         
+        .txt {
+            text-align: justify;
+            display: block;
+        }
+        
+        .cap {
+            text-transform: capitalize;
+        }
+        
         @media all and (min-device-width: 320px) and (max-device-width: 480px),
         (max-width: 700px) {
             .content {
@@ -214,11 +223,11 @@
                         {{.Header}}
                     </div>
                 </a>
-                <a class="arial" href=/post/{{.ID}}><span>{{.Title}}</span> · {{.Content}}</a>
+                <a class="arial txt" href=/post/{{.ID}}><span class="cap">{{.Title}} </span>{{.Content}}</a>
             </div>
             {{else}}
             <div class="card arial">
-                <a href=/post/{{.ID}}><span>{{.Title}}</span> · {{.Content}}</a>
+                <a href=/post/{{.ID}}><span class="cap">{{.Title}} </span>{{.Content}}</a>
             </div>
             {{end}} {{end}}
         </div>

@@ -81,7 +81,11 @@ func groupByTopic(d []internal.Post) []FlatPost {
 				header = topic
 			}
 
-			if idx == 2 {
+			if idx == 1 && topic != "rumah" {
+				break
+			}
+
+			if idx == 9 && topic != "rumah" {
 				break
 			}
 			// cut larger content
