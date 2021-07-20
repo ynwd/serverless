@@ -47,7 +47,9 @@ func receiveEvent(req fastrex.Request, res fastrex.Response) {
 	if err != nil {
 		log.Printf("error on receive event from pubsub %v", err.Error())
 	}
-	res.Send(string(body))
+	msg := string(body)
+	log.Printf("receiveEvent:%v", msg)
+	res.Send(msg)
 }
 
 func createApiRoute(ctx context.Context, app fastrex.App) fastrex.App {
