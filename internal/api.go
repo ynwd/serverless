@@ -128,12 +128,12 @@ func (s *apiService) createPost(req fastrex.Request, res fastrex.Response) {
 	}
 
 	if address == "" && user != "user" {
-		msg = "Kota tidak boleh kosong."
+		msg = "Alamat tidak boleh kosong."
 		createResponsePage(respTitle, msg, "", res)
 		return
 	}
 	if phone == "" && user != "user" {
-		msg = "Phone tidak boleh kosong."
+		msg = "WhatsApp tidak boleh kosong."
 		createResponsePage(respTitle, msg, "", res)
 		return
 	}
