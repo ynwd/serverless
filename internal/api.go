@@ -66,7 +66,6 @@ func (s *apiService) createPost(req fastrex.Request, res fastrex.Response) {
 
 	file := ""
 	id := uuid.New().String()
-	url := "/"
 	req.ParseMultipartForm(32 << 20)
 	uploadedFile, _, _ := req.FormFile("file")
 	if uploadedFile != nil {
@@ -113,7 +112,7 @@ func (s *apiService) createPost(req fastrex.Request, res fastrex.Response) {
 	}
 	price, err := strconv.Atoi(priceStr)
 	if err != nil {
-		createResponsePage(respTitle, err.Error(), url, res)
+		createResponsePage(respTitle, err.Error(), "", res)
 		return
 	}
 
@@ -143,7 +142,8 @@ func (s *apiService) createPost(req fastrex.Request, res fastrex.Response) {
 		return
 	}
 
-	post["id"] = uuid.New().String()
+	postID := uuid.New().String()
+	post["id"] = postID
 	post["created"] = time.Now()
 	post["topic"] = topic
 	post["title"] = title
@@ -159,7 +159,8 @@ func (s *apiService) createPost(req fastrex.Request, res fastrex.Response) {
 
 	s.db.addPost(req.Context(), post)
 
-	msg = "Iklan anda telah selesai disimpan. akan ditayangkan besok."
+	msg = "Iklan telah selesai disimpan. Klik tombol berikut untuk melihatnya."
+	url := "/post/" + postID
 	createResponsePage(respTitle, msg, url, res)
 }
 

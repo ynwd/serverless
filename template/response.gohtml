@@ -116,7 +116,7 @@
         <div class="content-container content center">
             <div class="margin-bottom center title">{{.Response}}</div>
             {{if .URL}}
-            <a class="center" href="{{.URL}}"><button>Kembali</button></a> {{else}}
+            <a class="center" href="{{.URL}}"><button>{{.Domain}}{{.URL}}</button></a> {{else}}
             <button id="go-back">Kembali</button> {{end}}
         </div>
         <div class="footer arial">

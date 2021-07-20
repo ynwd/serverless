@@ -64,6 +64,7 @@ func createResponsePage(title string, msg string, url string, res fastrex.Respon
 		Response string
 		Title    string
 		URL      string
-	}{time.Now().Format("2 January 2006"), msg, title, url}
+		Domain   string
+	}{time.Now().Format("2 January 2006"), msg, title, url, DOMAIN}
 	res.Render("response", resp)
 }
