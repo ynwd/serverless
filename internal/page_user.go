@@ -33,7 +33,10 @@ func (p *pageService) userPage(req fastrex.Request, res fastrex.Response) {
 		return
 	}
 	user, _ := p.getUserFromSession(req, res)
-	email := user.Email
+	email := ""
+	if user != nil {
+		email = user.Email
+	}
 	title := strings.Title(params[0])
 
 	data := struct {

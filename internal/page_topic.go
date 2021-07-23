@@ -9,7 +9,11 @@ import (
 func (p *pageService) topicPage(req fastrex.Request, res fastrex.Response) {
 	params := req.Params("topic")
 	user, _ := p.getUserFromSession(req, res)
-	email := user.Email
+	email := ""
+	if user != nil {
+		email = user.Email
+	}
+
 	topic := strings.Title(params[0])
 	data := struct {
 		Email  string
