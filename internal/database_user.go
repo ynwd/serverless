@@ -123,5 +123,10 @@ func (d *database) getUserIDWithSession(ctx context.Context, sessionID, userAgen
 		}
 		item = doc.Data()
 	}
-	return item["userID"].(string), nil
+
+	if len(item) > 0 {
+		return item["userID"].(string), nil
+	}
+
+	return "", nil
 }
