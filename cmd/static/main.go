@@ -33,7 +33,7 @@ func main() {
 	frontData := FrontData{
 		Email:         "oke@gmail.com",
 		Title:         "Iklan Baris",
-		Description:   "Aplikasi web untuk membuat iklan baris online secara gratis. Simple dan nyaman dibaca.",
+		Description:   "Aplikasi iklan baris online. Gratis, simple, nyaman dibaca, dan tak ada iklan.",
 		Date:          date.Format("2 January 2006"),
 		PublishedDate: date.Format("2006-01-0215:04:05"),
 		Data:          td,
