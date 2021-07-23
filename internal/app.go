@@ -27,7 +27,8 @@ func createTemplate(app fastrex.App) fastrex.App {
 		Template("template/home.gohtml").
 		Template("template/detail.gohtml").
 		Template("template/create.gohtml").
-		Template("template/response.gohtml")
+		Template("template/response.gohtml").
+		Template("template/result.gohtml")
 
 	return app
 }
@@ -38,7 +39,7 @@ func createPageRoute(ctx context.Context, app fastrex.App) fastrex.App {
 		Post("/", receiveEvent).
 		Get("/:id", s.userPage).
 		Get("/post/:id", s.detailPage).
-		Get("/post/topic/:topic", s.topicPage)
+		Get("/topic/:topic", s.topicPage)
 	return app
 }
 

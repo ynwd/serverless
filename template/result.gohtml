@@ -1,8 +1,9 @@
+{{define "result"}}
 <!DOCTYPE html>
 <html>
 
 <head>
-    <title>{{`{{.Title}}`}} | {{`{{.Domain}}`}}</title>
+    <title>{{.Title}} | {{.Domain}}</title>
     <meta charset=utf-8>
     <meta name=viewport content="width=device-width,initial-scale=1">
     <meta name="description" content="{{.Description}}">
@@ -20,7 +21,6 @@
     <meta property="og:url" content="https://fastro.app" />
     <meta property="og:description" content="{{.Description}}" />
     <meta name="author" content="github.com/ynwd">
-    <meta name="publish_date" property="og:publish_date" content="{{.PublishedDate}}">
     <style media=screen>
         body {
             margin: 0;
@@ -200,19 +200,19 @@
         <div class="content-container header">
             <div class="date arial left">{{.Date}}</div>
             <div class="title main">
-                {{`{{.Title}}`}}
+                {{.Title}}
             </div>
-            {{`{{if .Email}}`}}
+            {{if .Email}}
             <div class="register arial right">
-                <span><a href="/home">{{`{{.Email}}`}}</a></span>
+                <span><a href="/home">{{.Email}}</a></span>
             </div>
-            {{`{{else}}`}}
+            {{else}}
             <div class="register arial right">
                 <a href="/post">Pasang</a>
                 <a href="/signup">Daftar</a>
                 <a href="/signin">Masuk</a>
             </div>
-            {{`{{end}}`}}
+            {{end}}
 
         </div>
         <div class="content-container wrapper content">
@@ -239,3 +239,4 @@
 </body>
 
 </html>
+{{end}}

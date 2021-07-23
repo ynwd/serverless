@@ -46,9 +46,9 @@
         .content {
             max-width: 600px;
         }
-
+        
         .content-txt {
-          white-space: pre-line;
+            white-space: pre-line;
         }
         
         .arial {
@@ -223,21 +223,19 @@
     <div class=container>
         <div class="content-container header">
             <div class="title-detail">
-                <div class="topic arial darkgrey"><a href="/post/topic/{{.Topic}}">{{.Topic}}</a></div>
+                <div class="topic arial darkgrey"><a href="/topic/{{.Topic}}">{{.Topic}}</a></div>
                 {{.Title}}
                 <div class="sub cap date arial darkgrey user"><a href="/{{.Username}}">{{.User}}</a> · {{.Date}}</div>
             </div>
         </div>
         <div class="content-container content ">
             <div class="media-container">
-                <img src="{{.File}}" class="img"> 
-                {{if .Video}}
+                <img src="{{.File}}" class="img"> {{if .Video}}
                 <div class="video"> <iframe height="100%" src="{{.Video}}"></iframe></div>
                 {{end}}
             </div>
             <div class="margin-bottom arial content-txt">{{.Content}}</div>
-            {{if .Cookie}}
-            {{else}}
+            {{if .Cookie}} {{else}}
             <div class="arial contact">
                 <div class="contact-container">
                     <div class="key">Harga </div>
@@ -248,19 +246,14 @@
                     <div class="key">Alamat </div>
                     <div class="city value"><a href="https://www.google.com/maps/search/?api=1&query={{.Map}}"><button class="cap">{{.Address}}</button></a></div>
                 </div>
-                {{/*  */}}
-                {{if .Address}}
+                {{/* */}} {{if .Address}}
                 <div class="contact-container">
                     <div class="key arial">Kontak</div>
                     <div class="value arial"><a href="/signin?post={{.ID}} "><button class="arial">Silahkan masuk</button></a> untuk melihat detail{{if .Email}} kontak pembuat iklan{{end}}.</div>
                 </div>
-                {{end}} 
-                {{/* / */}}
-                {{end}}
+                {{end}} {{/* / */}} {{end}}
             </div>
-            {{end}} 
-            {{if .Cookie}} 
-              {{if .Email}}
+            {{end}} {{if .Cookie}} {{if .Email}}
             <div class="arial contact">
                 <div class="contact-container">
                     <div class="key">Harga </div>
@@ -285,7 +278,7 @@
                     <div class="value"><a href="https://wa.me/{{.Phone}}"><button>{{.Phone}}</button></a></div>
                 </div>
             </div>
-              {{else}}
+            {{else}}
             <div class="arial contact">
                 <div class="contact-container">
                     <div class="key">Harga</div>
@@ -298,8 +291,7 @@
                 </div>
                 {{end}}
             </div>
-              {{end}}
-            {{end}}
+            {{end}} {{end}}
         </div>
         <div class="footer arial darkgrey ">
             Powered by <a href=https://github.com/fastrodev/fastrex>Fastrex</a>

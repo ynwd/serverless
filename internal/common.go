@@ -59,6 +59,26 @@ func ReadPost() []Post {
 	return data
 }
 
+func ReadPostByTopic(topic string) []Post {
+	data := []Post{}
+	ctx := context.Background()
+	db := createDatabase(ctx)
+
+	for _, v := range db.getPostByTopic(ctx, topic) {
+		var p map[string]interface{} = v.(map[string]interface{})
+		post := Post{}
+		post.ID = p["id"].(string)
+		post.Title = p["title"].(string)
+		post.Topic = p["topic"].(string)
+		post.Type = p["type"].(string)
+		post.Created = p["created"].(time.Time)
+		post.Content = p["content"].(string)
+		data = append(data, post)
+	}
+
+	return data
+}
+
 func createResponsePage(res fastrex.Response, title string, msg string, url string) {
 	u := strings.ToLower(url)
 	resp := struct {

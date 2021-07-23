@@ -9,8 +9,7 @@ import (
 )
 
 func createClient(ctx context.Context) *firestore.Client {
-	projectID := "fastro-319406"
-	client, err := firestore.NewClient(ctx, projectID)
+	client, err := firestore.NewClient(ctx, PROJECT_ID)
 	if err != nil {
 		log.Fatalf("Failed to create client: %v", err)
 	}
