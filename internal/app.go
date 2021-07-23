@@ -12,14 +12,14 @@ func CreateApp() fastrex.App {
 	app := fastrex.New()
 	ctx := context.Background()
 	app = createPageRoute(ctx, app)
-	app = createApiRoute(ctx, app)
-	app.Ctx(ctx).Static("public")
+	app = createFormRoute(ctx, app)
 	app = createTemplate(app)
+	app.Ctx(ctx).Static("public", "/public")
 	return app
 }
 
 func createTemplate(app fastrex.App) fastrex.App {
-	app.Template("public/index.html").
+	app.Template("template/index.gohtml").
 		Template("template/arsip.gohtml").
 		Template("template/signin.gohtml").
 		Template("template/signup.gohtml").
@@ -52,12 +52,12 @@ func receiveEvent(req fastrex.Request, res fastrex.Response) {
 	res.Send(msg)
 }
 
-func createApiRoute(ctx context.Context, app fastrex.App) fastrex.App {
+func createFormRoute(ctx context.Context, app fastrex.App) fastrex.App {
 	api := createApiService(ctx)
-	app.Get("/api", api.getPost).
-		Post("/api", api.createPost).
-		Post("/api/signup", api.createUser).
-		Post("/api/signin", api.getUserByEmailAndPassword)
+	app.Get("/form/post", api.getPost).
+		Post("/form/post", api.createPost).
+		Post("/form/signup", api.createUser).
+		Post("/form/signin", api.getUserByEmailAndPassword)
 	return app
 }
 

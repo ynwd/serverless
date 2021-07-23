@@ -35,7 +35,7 @@
         
         form input,
         form textarea {
-            margin-bottom: 0.5em;
+            margin-bottom: 1em;
             background: #fff;
             border: 1px solid #9c9c9c;
         }
@@ -54,7 +54,8 @@
         }
         
         input,
-        button {
+        button,
+        .new {
             width: 100%;
             padding: 0.7em;
             margin-bottom: 0.5rem;
@@ -68,8 +69,13 @@
             font-style: italic;
         }
         
-        .note {
-            margin-bottom: 0.5em;
+        .new {
+            float: right;
+            margin-top: 1em;
+        }
+        
+        .center {
+            text-align: center;
         }
         
         .darkgrey {
@@ -89,7 +95,8 @@
                 float: left;
                 width: calc(100% - 100px);
             }
-            button {
+            button,
+            .new {
                 float: right;
                 width: calc(100% - 100px);
             }
@@ -114,12 +121,19 @@
             button {
                 margin-top: 0.5em;
             }
+            form input,
+            form textarea {
+                margin-bottom: unset;
+            }
+            button {
+                margin-top: 1em;
+            }
         }
     </style>
 </head>
 
 <body>
-    <form method="post" action="/api/signin">
+    <form method="post" action="/form/signin">
         <label></label>
         <div class="header">
             <div class="title main">
@@ -133,10 +147,8 @@
         <label for="content" class="arial">Password</label>
         <input id="password" name="password" type="password" placeholder="guest"> {{if .Post}}
         <input type="hidden" name="post" value="{{.Post}}"> {{end}}
-
-        <button>Submit</button>
-
-        <label></label>
+        <button>Masuk</button>
+        <div class="new arial center">Baru di Fastro.app? <a href="/signup">Gabung sekarang</a></div>
     </form>
 
 </body>

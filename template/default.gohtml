@@ -6,11 +6,11 @@
     <meta charset=utf-8>
     <meta name=viewport content="width=device-width,initial-scale=1">
     <meta name="description" content="{{.Description}}">
-    <meta name="twitter:image:src" content="iklan.png" />
+    <meta name="twitter:image:src" content="/public/iklan.png" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="{{.Title}}" />
     <meta name="twitter:description" content="{{.Description}}" />
-    <meta property="og:image" content="iklan.png" />
+    <meta property="og:image" content="/public/iklan.png" />
     <meta property="og:image:alt" content="Iklan Baris" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="600" />
@@ -227,7 +227,7 @@
             </div>
             {{else}}
             <div class="card arial">
-                <a href=/post/{{.ID}}><span class="cap">{{.Title}} </span>{{.Content}}</a>
+                <a class="arial txt" href=/post/{{.ID}}><span class="cap">{{.Title}} </span>{{.Content}}</a>
             </div>
             {{end}} {{end}}
         </div>

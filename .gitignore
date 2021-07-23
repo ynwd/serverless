@@ -4,3 +4,4 @@ public/
 fastro*.json
 setup.md
 .DS_Store
+template/index.gohtml

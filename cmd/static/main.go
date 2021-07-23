@@ -45,7 +45,7 @@ func main() {
 		panic(err)
 	}
 
-	internal.WriteFile(bfr.String(), "public/index.html")
+	internal.WriteFile(bfr.String(), "template/index.gohtml")
 }
 
 func Filter(vs []internal.Post, f func(internal.Post) bool) []internal.Post {

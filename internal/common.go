@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
+	"strings"
 	"time"
 
 	"github.com/fastrodev/fastrex"
@@ -58,13 +59,14 @@ func ReadPost() []Post {
 	return data
 }
 
-func createResponsePage(title string, msg string, url string, res fastrex.Response) {
+func createResponsePage(res fastrex.Response, title string, msg string, url string) {
+	u := strings.ToLower(url)
 	resp := struct {
 		Date     string
 		Response string
 		Title    string
 		URL      string
 		Domain   string
-	}{time.Now().Format("2 January 2006"), msg, title, url, DOMAIN}
+	}{time.Now().Format("2 January 2006"), msg, title, u, DOMAIN}
 	res.Render("response", resp)
 }

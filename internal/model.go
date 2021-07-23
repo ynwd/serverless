@@ -30,3 +30,10 @@ type Data struct {
 	Topic string `json:"topic"`
 	Posts []Post `json:"posts"`
 }
+
+type Session struct {
+	SessionID string    `json:"sessionID"`
+	UserID    string    `json:"userID"`
+	Created   time.Time `json:"created,omitempty"`
+	Device    string
+}
