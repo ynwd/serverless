@@ -46,7 +46,7 @@ func createData(topic string) []FlatPost {
 	data := []FlatPost{}
 	errUnmarshal := json.Unmarshal(body, &data)
 	if errUnmarshal != nil {
-		log.Fatal("ReadJson" + errUnmarshal.Error())
+		log.Printf("createData %v:", errUnmarshal.Error())
 	}
 	return data
 }

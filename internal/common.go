@@ -2,6 +2,7 @@ package internal
 
 import (
 	"context"
+	"encoding/base64"
 	"encoding/json"
 	"io/ioutil"
 	"log"
@@ -79,6 +80,26 @@ func ReadPostByTopic(topic string) []Post {
 	return data
 }
 
+func ReadPostByUsername(username string) []Post {
+	data := []Post{}
+	ctx := context.Background()
+	db := createDatabase(ctx)
+
+	for _, v := range db.getPostByUsername(ctx, username) {
+		var p map[string]interface{} = v.(map[string]interface{})
+		post := Post{}
+		post.ID = p["id"].(string)
+		post.Title = p["title"].(string)
+		post.Topic = p["topic"].(string)
+		post.Type = p["type"].(string)
+		post.Created = p["created"].(time.Time)
+		post.Content = p["content"].(string)
+		data = append(data, post)
+	}
+
+	return data
+}
+
 func createResponsePage(res fastrex.Response, title string, msg string, url string) {
 	u := strings.ToLower(url)
 	resp := struct {
@@ -135,4 +156,26 @@ func Filter(vs []Post, f func(Post) bool) []Post {
 		}
 	}
 	return filtered
+}
+
+func (p *pageService) getUserFromSession(req fastrex.Request, res fastrex.Response) (*User, error) {
+	c, _ := req.Cookie("__session")
+	sessionByte, err := base64.StdEncoding.DecodeString(c.GetValue())
+	if err != nil {
+		log.Printf("getUserFromSession:base64.StdEncoding.DecodeString: %v", err.Error())
+	}
+	userAgent := req.UserAgent()
+	sessionID := string(sessionByte)
+	userID, err := p.db.getUserIDWithSession(req.Context(), string(sessionID), userAgent)
+	if err != nil {
+		log.Printf("getUserFromSession:getUserIDWithSession: %v", err.Error())
+	}
+
+	user, err := p.db.getUserDetailByID(req.Context(), userID)
+	if err != nil {
+		log.Printf("getUserFromSession:getUserDetailByID: %v", err.Error())
+		return nil, err
+	}
+
+	return &user, nil
 }

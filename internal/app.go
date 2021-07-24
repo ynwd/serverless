@@ -37,7 +37,7 @@ func createPageRoute(ctx context.Context, app fastrex.App) fastrex.App {
 	s := createPageService(ctx)
 	app.Get("/", s.idxPage).
 		Post("/", receiveEvent).
-		Get("/:id", s.userPage).
+		Get("/:username", s.userPage).
 		Get("/post/:id", s.detailPage).
 		Get("/topic/:topic", s.topicPage)
 	return app

@@ -115,3 +115,29 @@ func (d *database) getPostByTopic(ctx context.Context, topic string) []interface
 	}
 	return data
 }
+
+func (d *database) getPostByUsername(ctx context.Context, username string) []interface{} {
+	user, _ := d.getUserDetailByUsername(ctx, username)
+	userID := "user"
+	if user != nil {
+		userID = user.ID
+	}
+
+	iter := d.client.Collection("post").
+		Where("user", "==", userID).
+		Documents(ctx)
+
+	defer d.client.Close()
+	var data []interface{}
+	for {
+		doc, err := iter.Next()
+		if err == iterator.Done {
+			break
+		}
+		if err != nil {
+			log.Fatalf("Failed to iterate: %v", err)
+		}
+		data = append(data, doc.Data())
+	}
+	return data
+}

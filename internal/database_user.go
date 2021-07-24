@@ -100,6 +100,36 @@ func (d *database) getUserDetailByID(ctx context.Context, id string) (User, erro
 	return user, nil
 }
 
+func (d *database) getUserDetailByUsername(ctx context.Context, username string) (*User, error) {
+	iter := d.client.Collection("user").
+		Where("username", "==", username).
+		Documents(ctx)
+
+	var item map[string]interface{}
+	for {
+		doc, err := iter.Next()
+		if err == iterator.Done {
+			break
+		}
+		if err != nil {
+			return nil, err
+		}
+		item = doc.Data()
+	}
+
+	if item == nil {
+		return nil, errors.New("getUserDetailByID:not found")
+	}
+
+	user := User{}
+	user.ID = item["id"].(string)
+	user.Email = item["email"].(string)
+	user.Name = item["name"].(string)
+	user.Username = item["username"].(string)
+
+	return &user, nil
+}
+
 func (d *database) getUserIDWithSession(ctx context.Context, sessionID, userAgent string) (string, error) {
 	if sessionID == "" {
 		err := errors.New("getUserIDWithSession: sessionID empty")
