@@ -42,7 +42,6 @@ func (p *pageService) userPage(req fastrex.Request, res fastrex.Response) {
 	if user != nil {
 		email = user.Email
 	}
-	// title := strings.Title(params[0])
 	td := createDataByUsername(params[0])
 	now := time.Now()
 	loc, _ := time.LoadLocation("Asia/Jakarta")
