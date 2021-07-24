@@ -81,13 +81,28 @@ func groupByTopic(d []internal.Post) []FlatPost {
 				header = topic
 			}
 
-			if idx == 1 && topic != "rumah" {
+			if (topic != "rumah" &&
+				topic != "lowongan" &&
+				topic != "gadget" &&
+				topic != "elektronik" &&
+				topic != "mobil" &&
+				topic != "motor" &&
+				topic != "indekos" &&
+				topic != "laptop") && idx == 1 {
 				break
 			}
 
-			if idx == 9 && topic != "rumah" {
+			if (topic == "rumah" ||
+				topic == "lowongan" ||
+				topic == "gadget" ||
+				topic == "elektronik" ||
+				topic == "mobil" ||
+				topic == "motor" ||
+				topic == "indekos" ||
+				topic == "laptop") && idx == 2 {
 				break
 			}
+
 			// cut larger content
 			if len(post.Content) > 95 {
 				post.Content = post.Content[0:95]
