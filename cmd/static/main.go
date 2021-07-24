@@ -60,6 +60,7 @@ func Filter(vs []internal.Post, f func(internal.Post) bool) []internal.Post {
 
 type FlatPost struct {
 	Header string
+	Size   int
 	internal.Post
 }
 
@@ -113,6 +114,7 @@ func groupByTopic(d []internal.Post) []FlatPost {
 			}
 			data := FlatPost{
 				Header: header,
+				Size:   len(postMap),
 				Post:   post,
 			}
 			fp = append(fp, data)
