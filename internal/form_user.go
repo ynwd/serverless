@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net/mail"
 	"regexp"
+	"strings"
 
 	"github.com/fastrodev/fastrex"
 	"github.com/google/uuid"
@@ -43,7 +44,7 @@ func (s *apiService) createUser(req fastrex.Request, res fastrex.Response) {
 		createResponsePage(res, respTitle, "Password tidak boleh kosong", "")
 		return
 	}
-
+	username = strings.ToLower(username)
 	user["email"] = email
 	user["password"] = password
 	user["id"] = uuid.New().String()
