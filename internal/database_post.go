@@ -6,6 +6,7 @@ import (
 	"log"
 	"time"
 
+	"cloud.google.com/go/firestore"
 	"google.golang.org/api/iterator"
 )
 
@@ -81,7 +82,9 @@ func (d *database) getPostDetail(ctx context.Context, id string) (Post, error) {
 }
 
 func (d *database) getPost(ctx context.Context) []interface{} {
-	iter := d.client.Collection("post").Documents(ctx)
+	iter := d.client.Collection("post").
+		OrderBy("created", firestore.Desc).
+		Documents(ctx)
 	defer d.client.Close()
 	var data []interface{}
 	for {
@@ -90,7 +93,7 @@ func (d *database) getPost(ctx context.Context) []interface{} {
 			break
 		}
 		if err != nil {
-			log.Fatalf("Failed to iterate: %v", err)
+			log.Fatalf("getPost: %v", err)
 		}
 		data = append(data, doc.Data())
 	}
@@ -99,6 +102,7 @@ func (d *database) getPost(ctx context.Context) []interface{} {
 
 func (d *database) getPostByTopic(ctx context.Context, topic string) []interface{} {
 	iter := d.client.Collection("post").
+		OrderBy("created", firestore.Desc).
 		Where("topic", "==", topic).
 		Documents(ctx)
 	defer d.client.Close()
@@ -109,7 +113,7 @@ func (d *database) getPostByTopic(ctx context.Context, topic string) []interface
 			break
 		}
 		if err != nil {
-			log.Fatalf("Failed to iterate: %v", err)
+			log.Fatalf("getPostByTopic: %v", err)
 		}
 		data = append(data, doc.Data())
 	}
@@ -135,7 +139,7 @@ func (d *database) getPostByUsername(ctx context.Context, username string) []int
 			break
 		}
 		if err != nil {
-			log.Fatalf("Failed to iterate: %v", err)
+			log.Fatalf("getPostByUsername: %v", err)
 		}
 		data = append(data, doc.Data())
 	}
