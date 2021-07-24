@@ -49,7 +49,7 @@ func (p *pageService) userPage(req fastrex.Request, res fastrex.Response) {
 	date := now.In(loc)
 	desc := fmt.Sprintf("Profile of %v", params[0])
 	usr, _ := p.db.getUserDetailByUsername(req.Context(), params[0])
-	name := ""
+	name := "Guest"
 	if usr != nil {
 		name = usr.Name
 	}
