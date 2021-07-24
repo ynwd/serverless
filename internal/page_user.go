@@ -42,12 +42,17 @@ func (p *pageService) userPage(req fastrex.Request, res fastrex.Response) {
 	if user != nil {
 		email = user.Email
 	}
-	title := strings.Title(params[0])
+	// title := strings.Title(params[0])
 	td := createDataByUsername(params[0])
 	now := time.Now()
 	loc, _ := time.LoadLocation("Asia/Jakarta")
 	date := now.In(loc)
 	desc := fmt.Sprintf("Profile of %v", params[0])
+	usr, _ := p.db.getUserDetailByUsername(req.Context(), params[0])
+	name := ""
+	if usr != nil {
+		name = usr.Name
+	}
 
 	data := struct {
 		Email       string
@@ -56,7 +61,7 @@ func (p *pageService) userPage(req fastrex.Request, res fastrex.Response) {
 		Description string
 		Date        string
 		Domain      string
-	}{email, title, td, desc, date.Format("2 January 2006"), DOMAIN}
+	}{email, name, td, desc, date.Format("2 January 2006"), DOMAIN}
 	res.Render("result", data)
 }
 
