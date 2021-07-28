@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/base64"
 	"encoding/json"
+	"errors"
 	"io/ioutil"
 	"log"
 	"os"
@@ -162,18 +163,20 @@ func (p *pageService) getUserFromSession(req fastrex.Request, res fastrex.Respon
 	c, _ := req.Cookie("__session")
 	sessionByte, err := base64.StdEncoding.DecodeString(c.GetValue())
 	if err != nil {
-		log.Printf("getUserFromSession:base64.StdEncoding.DecodeString: %v", err.Error())
+		return nil, err
+	}
+	if len(sessionByte) == 0 {
+		return nil, errors.New("getUserFromSession:sessionByte empty")
 	}
 	userAgent := req.UserAgent()
 	sessionID := string(sessionByte)
 	userID, err := p.db.getUserIDWithSession(req.Context(), string(sessionID), userAgent)
 	if err != nil {
-		log.Printf("getUserFromSession:getUserIDWithSession: %v", err.Error())
+		return nil, err
 	}
 
 	user, err := p.db.getUserDetailByID(req.Context(), userID)
 	if err != nil {
-		log.Printf("getUserFromSession:getUserDetailByID: %v", err.Error())
 		return nil, err
 	}
 

@@ -133,7 +133,6 @@ func (d *database) getUserDetailByUsername(ctx context.Context, username string)
 func (d *database) getUserIDWithSession(ctx context.Context, sessionID, userAgent string) (string, error) {
 	if sessionID == "" {
 		err := errors.New("getUserIDWithSession: sessionID empty")
-		log.Println(err.Error())
 		return "", err
 	}
 	iter := d.client.Collection("session").
