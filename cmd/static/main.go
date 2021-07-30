@@ -12,7 +12,7 @@ import (
 
 func main() {
 	td := createData()
-	t, err := template.ParseFiles("template/default.gohtml", "template/footer.gohtml", "template/header.gohtml")
+	t, err := template.ParseFiles("template/default.gohtml", "template/footer.gohtml", "template/header.gohtml", "template/meta.gohtml", "template/style.gohtml")
 	if err != nil {
 		panic(err)
 	}

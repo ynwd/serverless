@@ -3,78 +3,30 @@
 <html>
 
 <head>
-    <title>{{.Title}} | {{.Domain}}</title>
-    <meta charset=utf-8>
-    <meta name=viewport content="width=device-width,initial-scale=1">
-    <meta name="description" content="{{.Description}}">
-    <meta name="twitter:image:src" content="/public/iklan.png" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="{{.Title}}" />
-    <meta name="twitter:description" content="{{.Description}}" />
-    <meta property="og:image" content="/public/iklan.png" />
-    <meta property="og:image:alt" content="Iklan Baris" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="600" />
-    <meta property="og:site_name" content="Fastro.app" />
-    <meta property="og:type" content="object" />
-    <meta property="og:title" content="{{.Title}}" />
-    <meta property="og:url" content="https://fastro.app" />
-    <meta property="og:description" content="{{.Description}}" />
-    <meta name="author" content="github.com/ynwd">
+    <title>{{.Title}} | {{.Domain}}</title>{{template "_meta_result" .}}{{template "_style"}}
     <style media=screen>
-        body {
-            margin: 0;
-            padding: 0;
-        }
-        
-        .container {
-            width: 100%;
-            background: #FFFFFF;
-        }
-        
-        .content-container {
-            max-width: 97%;
-            margin: 0 auto;
-            padding: 10px 0px 10px 0px;
-        }
-        
-        .header {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-        }
-        
         .ads-header {
-            max-width: 260px;
+            margin-right: 11px;
+        }
+        
+        .wrapper {
+            height: 400px;
         }
         
         .content {
             display: flex;
-            flex-wrap: wrap;
-            align-content: baseline;
             flex-direction: column;
-            max-height: 45rem;
-        }
-        
-        .wrapper {
-            max-width: 97%;
-            overflow-x: scroll;
-            height: 685px;
-            border-top-style: solid;
-            border-width: 1px;
-            border-bottom-style: solid;
-            border-color: rgb(214 214 214);
-        }
-        
-        .topic {
-            max-width: 260px;
-            background-color: #FFFFFF;
+            flex-wrap: wrap;
+            overflow-x: auto;
+            align-content: baseline;
+            justify-content: end;
+            width: 100%;
+            flex-grow: 1;
         }
         
         .card {
-            margin: 5px auto;
-            max-width: 260px;
-            margin-right: 11px;
+            max-width: calc(100%/5 - 11px);
+            margin-bottom: 10px;
         }
         
         .card a span,
@@ -90,104 +42,32 @@
             color: inherit;
         }
         
-        .arial {
-            font-family: Arial, Helvetica, sans-serif;
-        }
-        
-        .left {
-            text-align: left;
-        }
-        
-        .right {
-            text-align: right;
-        }
-        
-        .center {
-            text-align: center;
-        }
-        
-        .main {
-            font-size: xx-large;
-            font-weight: bold;
-            text-transform: capitalize;
-        }
-        
-        .register {
-            text-align: right;
-        }
-        
-        .title-ad {
-            text-transform: uppercase;
-            font-size: small;
-            background-color: black;
-            color: #FFFFFF;
-            padding: 10px 0;
-            width: 100%;
-        }
-        
-        .footer {
-            color: darkgrey;
-            text-align: center;
-            font-size: small;
-            margin: 15px auto;
-        }
-        
-        .footer a {
-            color: darkgrey;
-            text-decoration: none;
-        }
-        
-        .bold {
-            font-weight: bold;
-        }
-        
-        .txt {
-            text-align: justify;
-            display: block;
-        }
-        
-        .cap {
-            text-transform: capitalize;
-        }
-        
-        @media all and (min-device-width: 320px) and (max-device-width: 480px),
-        (max-width: 700px) {
-            .content {
-                max-width: 100%;
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: center;
-                margin: 0 auto;
-                max-height: none;
-            }
-            .topic,
-            .ads-header {
-                max-width: 100%;
-                background-color: #fefefe;
-                margin: 0 auto;
-            }
-            .header {
-                padding: 10px 10px;
-                display: flex;
-                flex-direction: column;
-            }
-            .date,
-            .register,
-            .main {
-                margin: 0 auto;
-            }
-            .wrapper {
-                height: unset;
-                border-style: unset;
-            }
+        @media all and (min-width: 601px) and (max-width: 700px) {
             .card {
-                margin-right: unset;
-                max-width: unset;
+                max-width: calc(100%/4 - 10px);
             }
-            .content-container {
-                max-width: 97%;
-                margin: 0 auto;
-                padding: 10px 10px 10px 10px;
+        }
+        
+        @media all and (min-width: 481px) and (max-width: 600px) {
+            .card {
+                max-width: calc(100%/3 - 5px);
+                margin-right: unset;
+            }
+        }
+        
+        @media (min-width: 320px) and (max-width: 480px) {
+            .card {
+                max-width: calc(100%/2 - 5px);
+            }
+        }
+        
+        @media all and (min-width: 50px) and (max-width: 319px) {
+            .card {
+                max-width: 100%;
+                margin-right: unset;
+            }
+            .ads-header {
+                margin-right: unset;
             }
         }
     </style>
@@ -195,28 +75,12 @@
 
 <body>
     <div class=container>
-        <div class="content-container header">
-            <div class="date arial left">{{.Date}}</div>
-            <div class="title main">
-                {{.Title}}
-            </div>
-            {{if .Email}}
-            <div class="register arial right">
-                <span><a href="/home">{{.Email}}</a></span>
-            </div>
-            {{else}}
-            <div class="register arial right">
-                <a href="/post">Pasang</a>
-                <a href="/signin">Masuk</a>
-            </div>
-            {{end}}
-
-        </div>
+        {{template "_header" .}}
         <div class="content-container wrapper content">
             {{ range $key, $value := .Data }} {{if .Header}}
             <div class="ads-header">
                 <a href="/topic/{{.Topic}}">
-                    <div class="title title-ad card center arial bold">
+                    <div class="title-ad center arial bold">
                         {{.Header}}
                     </div>
                 </a>
@@ -228,10 +92,7 @@
             </div>
             {{end}} {{end}}
         </div>
-    </div>
-    <div class="footer arial">
-        Powered by <a href=https://github.com/fastrodev/fastrex>Fastrex</a>
-    </div>
+        {{template "_footer" .}}
     </div>
 </body>
 

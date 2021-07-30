@@ -2,6 +2,7 @@ package internal
 
 import (
 	"encoding/json"
+	"fmt"
 	"log"
 	"strings"
 	"time"
@@ -18,7 +19,6 @@ func (p *pageService) topicPage(req fastrex.Request, res fastrex.Response) {
 	}
 
 	topic := strings.Title(params[0])
-
 	td := createData(topic)
 	now := time.Now()
 	loc, _ := time.LoadLocation("Asia/Jakarta")
@@ -32,7 +32,11 @@ func (p *pageService) topicPage(req fastrex.Request, res fastrex.Response) {
 		Date        string
 		Domain      string
 	}{email, topic, td, desc, date.Format("2 January 2006"), DOMAIN}
-	res.Render("result", data)
+	fmt.Println(data.Title)
+	err := res.Render("result", data)
+	if err != nil {
+		log.Println(err)
+	}
 }
 
 type FlatPost struct {
