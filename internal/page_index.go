@@ -1,6 +1,8 @@
 package internal
 
 import (
+	"log"
+
 	"github.com/fastrodev/fastrex"
 )
 
@@ -12,9 +14,13 @@ func (p *pageService) idxPage(req fastrex.Request, res fastrex.Response) {
 	}
 
 	data := struct {
-		Email  string
-		Title  string
-		Domain string
-	}{email, TITLE, DOMAIN}
-	res.Render(data)
+		Email       string
+		Title       string
+		Description string
+		Domain      string
+	}{email, TITLE, DESC, DOMAIN}
+	err := res.Render(data)
+	if err != nil {
+		log.Panic(err.Error())
+	}
 }

@@ -12,7 +12,7 @@ import (
 
 func main() {
 	td := createData()
-	t, err := template.ParseFiles("template/default.gohtml")
+	t, err := template.ParseFiles("template/default.gohtml", "template/footer.gohtml", "template/header.gohtml")
 	if err != nil {
 		panic(err)
 	}
@@ -32,8 +32,7 @@ func main() {
 
 	frontData := FrontData{
 		Email:         "oke@gmail.com",
-		Title:         "Iklan Baris",
-		Description:   "Aplikasi iklan baris online. Gratis, simple, nyaman dibaca, dan tak ada iklan.",
+		Description:   internal.DESC,
 		Date:          date.Format("2 January 2006"),
 		PublishedDate: date.Format("2006-01-0215:04:05"),
 		Data:          td,
@@ -82,25 +81,7 @@ func groupByTopic(d []internal.Post) []FlatPost {
 				header = topic
 			}
 
-			if (topic != "rumah" &&
-				topic != "lowongan" &&
-				topic != "gadget" &&
-				topic != "elektronik" &&
-				topic != "mobil" &&
-				topic != "motor" &&
-				topic != "indekos" &&
-				topic != "laptop") && idx == 1 {
-				break
-			}
-
-			if (topic == "rumah" ||
-				topic == "lowongan" ||
-				topic == "gadget" ||
-				topic == "elektronik" ||
-				topic == "mobil" ||
-				topic == "motor" ||
-				topic == "indekos" ||
-				topic == "laptop") && idx == 2 {
+			if idx == 1 {
 				break
 			}
 

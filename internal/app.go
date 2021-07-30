@@ -28,8 +28,9 @@ func createTemplate(app fastrex.App) fastrex.App {
 		Template("template/detail.gohtml").
 		Template("template/create.gohtml").
 		Template("template/response.gohtml").
-		Template("template/result.gohtml")
-
+		Template("template/result.gohtml").
+		Template("template/header.gohtml").
+		Template("template/footer.gohtml")
 	return app
 }
 

@@ -1,0 +1,53 @@
+{{define "_header_idx"}}<div class="content-container header desktop">
+    <div class="title main margin-auto">
+        <div class="title-container">{{`{{.Title}}`}}</div>
+    </div>
+    <div class="search-container">
+        <input class="search border radius" type="text" placeholder="Search..">
+    </div>
+    {{`{{if .Email}}`}}
+    <div class="register arial right">
+        <span><a href="/home">{{`{{.Email}}`}}</a></span>
+    </div>
+    {{`{{else}}`}}
+    <div class="register arial right">
+        <a class="pasang" href="/post">Pasang</a>
+        <a href="/signin"><button class="masuk radius">Masuk</button></a>
+    </div>
+    {{`{{end}}`}}
+</div>
+<div class="content-container header mobile">
+     <div class="title main margin-auto">
+        F
+    </div>
+    <div class="search-container">
+        <input class="search border radius" type="text" placeholder="Search..">
+    </div>
+    {{`{{if .Email}}`}}
+    <div class="register arial right">
+        <span><a href="/home">{{`{{.Email}}`}}</a></span>
+    </div>
+    {{`{{else}}`}}
+    <div class="register arial right">
+        <a class="pasang" href="/post">Pasang</a>
+        <a href="/signin"><button class="masuk radius">Masuk</button></a>
+    </div>
+    {{`{{end}}`}}
+</div>{{end}}
+
+{{define "_header"}}<div class="content-container header">
+    <div class="date arial left">{{.Date}}</div>
+    <div class="title main">
+        {{.Title}}
+    </div>
+    {{if .Email}}
+    <div class="register arial right">
+        <span><a href="/home">{{.Email}}</a></span>
+    </div>
+    {{else}}
+    <div class="register arial right">
+        <a href="/post">Pasang</a>
+        <a href="/signin">Masuk</a>
+    </div>
+    {{end}}
+</div>{{end}}
