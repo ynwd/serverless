@@ -2,7 +2,6 @@ package internal
 
 import (
 	"encoding/json"
-	"fmt"
 	"log"
 	"strings"
 	"time"
@@ -37,7 +36,6 @@ func (p *pageService) topicPage(req fastrex.Request, res fastrex.Response) {
 		Date        string
 		Domain      string
 	}{email, topic, td, desc, date.Format("2 January 2006"), DOMAIN}
-	fmt.Println(data.Title)
 	err := res.Render("result", data)
 	if err != nil {
 		log.Println(err)
