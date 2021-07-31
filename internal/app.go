@@ -38,17 +38,18 @@ func createTemplate(app fastrex.App) fastrex.App {
 
 func createPageRoute(ctx context.Context, app fastrex.App) fastrex.App {
 	s := createPageService(ctx)
-	app.Get("/", s.idxPage).
-		Post("/", receiveEvent).
+	app.Post("/", healthChk).
+		Get("/", s.idxPage).
 		Get("/:username", s.userPage).
 		Get("/post/:id", s.detailPage).
 		Get("/topic/:topic", s.topicPage).
 		Get("/search", s.queryPage).
-		Post("/search", s.searchPage)
+		Post("/search", s.searchPage).
+		Get("/activate/:code", s.activatePage)
 	return app
 }
 
-func receiveEvent(req fastrex.Request, res fastrex.Response) {
+func healthChk(req fastrex.Request, res fastrex.Response) {
 	body, err := ioutil.ReadAll(req.Body)
 	if err != nil {
 		log.Printf("error on receive event from pubsub %v", err.Error())

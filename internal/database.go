@@ -34,12 +34,7 @@ type Query struct {
 	OrderBy    string
 }
 
-func (d *database) get(ctx context.Context, q *Query) (*firestore.DocumentSnapshot, error) {
-	it := d.client.CollectionGroup(q.Collection).
-		Where(q.Field, q.Op, q.Value).
-		OrderBy(q.OrderBy, firestore.Desc).
-		Documents(context.Background())
-
+func getDocumentSnapshot(it *firestore.DocumentIterator) (*firestore.DocumentSnapshot, error) {
 	var item *firestore.DocumentSnapshot
 	for {
 		doc, err := it.Next()
@@ -53,6 +48,15 @@ func (d *database) get(ctx context.Context, q *Query) (*firestore.DocumentSnapsh
 	}
 
 	return item, nil
+}
+
+func (d *database) get(ctx context.Context, q *Query) (*firestore.DocumentSnapshot, error) {
+	it := d.client.CollectionGroup(q.Collection).
+		Where(q.Field, q.Op, q.Value).
+		OrderBy(q.OrderBy, firestore.Desc).
+		Documents(context.Background())
+
+	return getDocumentSnapshot(it)
 }
 
 func (d *database) update(ctx context.Context, q *Query, updates []firestore.Update) (

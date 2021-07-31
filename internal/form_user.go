@@ -6,6 +6,7 @@ import (
 	"net/mail"
 	"regexp"
 	"strings"
+	"time"
 
 	"github.com/fastrodev/fastrex"
 	"github.com/google/uuid"
@@ -50,6 +51,9 @@ func (s *apiService) createUser(req fastrex.Request, res fastrex.Response) {
 	user["id"] = uuid.New().String()
 	user["username"] = username
 	user["name"] = username
+	user["active"] = false
+	user["code"] = String(6)
+	user["created"] = time.Now()
 
 	_, _, err := s.db.createUser(req.Context(), user)
 	if err != nil {
@@ -57,7 +61,7 @@ func (s *apiService) createUser(req fastrex.Request, res fastrex.Response) {
 		return
 	}
 
-	msg = "Akun Anda telah tersimpan."
+	msg = "Pendaftaran berhasil. Cek email dan buka link aktivasi yang telah terkirim."
 	createResponsePage(res, respTitle, msg, "/signin")
 }
 
@@ -103,11 +107,6 @@ func (s *apiService) getUserByEmailAndPassword(req fastrex.Request, res fastrex.
 	sessionID := base64.StdEncoding.EncodeToString([]byte(ses))
 
 	c.Name("__session").Value(sessionID).Path("/")
-
-	// dapetin ID
-	// sid, _ := base64.StdEncoding.DecodeString(sessionID)
-	// userID, err := s.db.getUserIDWithSession(req.Context(), string(sid))
-	// fmt.Println(userID)
 
 	if post != "" {
 		url := "/post/" + post

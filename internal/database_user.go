@@ -40,35 +40,25 @@ func (d *database) createUser(ctx context.Context, data interface{}) (
 	return d.add(ctx, "user", data)
 }
 
-func (d *database) getUserDetail(ctx context.Context, email, password string) (User, error) {
+func (d *database) getUserDetail(ctx context.Context, email, password string) (*User, error) {
 	iter := d.client.Collection("user").
 		Where("email", "==", email).
 		Where("password", "==", password).
+		Where("active", "==", true).
 		Documents(ctx)
 
-	var item map[string]interface{}
-	for {
-		doc, err := iter.Next()
-		if err == iterator.Done {
-			break
-		}
-		if err != nil {
-			return User{}, err
-		}
-		item = doc.Data()
+	doc, err := getDocumentSnapshot(iter)
+	if err != nil || doc == nil {
+		return nil, errors.New("not found")
 	}
 
-	if item == nil {
-		return User{}, errors.New("not found")
-	}
-
+	item := doc.Data()
 	user := User{}
 	user.ID = item["id"].(string)
 	user.Email = item["email"].(string)
 	user.Name = item["name"].(string)
 	user.Password = item["password"].(string)
-
-	return user, nil
+	return &user, nil
 }
 
 func (d *database) getUserDetailByID(ctx context.Context, id string) (User, error) {

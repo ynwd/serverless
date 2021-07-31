@@ -12,34 +12,43 @@ import (
 
 func (p *pageService) userPage(req fastrex.Request, res fastrex.Response) {
 	params := req.Params("username")
+	param := ""
+	if len(params) > 0 {
+		param = params[0]
+	}
 
-	if params[0] == "home" {
+	if param == "home" {
 		p.homePage(req, res)
 		return
 	}
 
-	if params[0] == "signout" {
+	if param == "signout" {
 		p.signOut(req, res)
 		return
 	}
 
-	if params[0] == "signin" {
+	if param == "signin" {
 		p.signinPage(req, res)
 		return
 	}
 
-	if params[0] == "signup" {
+	if param == "signup" {
 		p.signupPage(req, res)
 		return
 	}
 
-	if params[0] == "post" {
+	if param == "post" {
 		p.createPostPage(req, res)
 		return
 	}
 
-	if params[0] == "search" {
+	if param == "search" {
 		p.queryPage(req, res)
+		return
+	}
+
+	if param == "activate" {
+		p.activatePage(req, res)
 		return
 	}
 
@@ -48,12 +57,12 @@ func (p *pageService) userPage(req fastrex.Request, res fastrex.Response) {
 	if user != nil {
 		email = user.Email
 	}
-	td := createDataByUsername(params[0])
+	td := createDataByUsername(param)
 	now := time.Now()
 	loc, _ := time.LoadLocation("Asia/Jakarta")
 	date := now.In(loc)
-	desc := fmt.Sprintf("Profile of %v", params[0])
-	usr, _ := p.db.getUserDetailByUsername(req.Context(), params[0])
+	desc := fmt.Sprintf("Profile of %v", param)
+	usr, _ := p.db.getUserDetailByUsername(req.Context(), param)
 	name := "Guest"
 	if usr != nil {
 		name = usr.Name
