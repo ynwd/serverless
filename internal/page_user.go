@@ -39,7 +39,7 @@ func (p *pageService) userPage(req fastrex.Request, res fastrex.Response) {
 	}
 
 	if params[0] == "search" {
-		p.topicPage(req, res)
+		p.queryPage(req, res)
 		return
 	}
 

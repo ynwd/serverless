@@ -1,9 +1,13 @@
-{{define "_header_idx"}}<div class="content-container header desktop">
+{{define "_header_idx"}}
+<div class="content-container header desktop">
     <div class="title main margin-auto">
-        <div class="title-container">{{`{{.Title}}`}}</div>
+        <div class="title-container">F</div>
     </div>
     <div class="search-container">
-        <input class="search border radius" type="text" placeholder="Search..">
+        <form method="POST" action="/search">
+            <input class="search border radius" name="query" type="text" placeholder="Search..">
+            <input type="hidden" id="searchsubmit" />
+        </form>
     </div>
     {{`{{if .Email}}`}}
     <div class="register arial right">
@@ -11,17 +15,19 @@
     </div>
     {{`{{else}}`}}
     <div class="register arial right">
-        <a class="pasang" href="/post">Pasang</a>
-        <a class="masuk radius" href="/signin">Masuk</a>
+        <a class="masuk small-radius" href="/signin">Masuk</a>
     </div>
     {{`{{end}}`}}
 </div>
 <div class="content-container header mobile">
-     <div class="title main margin-auto">
+    <div class="title main margin-auto">
         F
     </div>
     <div class="search-container">
-        <input class="search border radius" type="text" placeholder="Search..">
+        <form method="POST" action="/search">
+            <input class="search border radius" name="query" type="text" placeholder="Search..">
+            <input type="hidden" id="searchsubmit" />
+        </form>
     </div>
     {{`{{if .Email}}`}}
     <div class="register arial right">
@@ -29,18 +35,23 @@
     </div>
     {{`{{else}}`}}
     <div class="register arial right">
-        <a class="pasang" href="/post">Pasang</a>
-        <a class="masuk radius" href="/signin">Masuk</a>
+        <a class="masuk small-radius" href="/signin">Masuk</a>
     </div>
     {{`{{end}}`}}
 </div>{{end}}
 
-{{define "_header"}}<div class="content-container header desktop">
+<!-- result header  -->
+
+{{define "_header"}}
+<div class="content-container header desktop">
     <div class="title main margin-auto">
-        <div class="title-container">{{.Title}}</div>
+        <a href="/">F</a>
     </div>
     <div class="search-container">
-        <input class="search border radius" type="text" placeholder="Search..">
+        <form method="POST" action="/search">
+            <input class="search border radius" name="query" type="text" placeholder="Search..">
+            <input type="hidden" id="searchsubmit" />
+        </form>
     </div>
     {{if .Email}}
     <div class="register arial right">
@@ -48,17 +59,19 @@
     </div>
     {{else}}
     <div class="register arial right">
-        <a class="pasang" href="/post">Pasang</a>
-        <a class="masuk radius" href="/signin">Masuk</a>
+        <a class="masuk small-radius" href="/signin">Masuk</a>
     </div>
     {{end}}
 </div>
 <div class="content-container header mobile">
-     <div class="title main margin-auto">
-        F
+    <div class="title main margin-auto">
+        <a href="/">F</a>
     </div>
     <div class="search-container">
-        <input class="search border radius" type="text" placeholder="Search..">
+        <form method="POST" action="/search">
+            <input class="search border radius" name="query" type="text" placeholder="Search..">
+            <input type="hidden" id="searchsubmit" />
+        </form>
     </div>
     {{if .Email}}
     <div class="register arial right">
@@ -66,7 +79,6 @@
     </div>
     {{else}}
     <div class="register arial right">
-        <a class="pasang" href="/post">Pasang</a>
         <a class="masuk radius" href="/signin">Masuk</a>
     </div>
     {{end}}

@@ -12,13 +12,18 @@ import (
 
 func (p *pageService) topicPage(req fastrex.Request, res fastrex.Response) {
 	params := req.Params("topic")
+	t := ""
+	if len(params) > 0 {
+		t = params[0]
+	}
+
 	user, _ := p.getUserFromSession(req, res)
 	email := ""
 	if user != nil {
 		email = user.Email
 	}
 
-	topic := strings.Title(params[0])
+	topic := strings.Title(t)
 	td := createData(topic)
 	now := time.Now()
 	loc, _ := time.LoadLocation("Asia/Jakarta")
