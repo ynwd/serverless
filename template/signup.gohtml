@@ -7,7 +7,7 @@
     <meta charset=utf-8>
     <meta name=viewport content="width=device-width,initial-scale=1">
     <style media=screen>
-        * {
+         * {
             box-sizing: border-box;
         }
         
@@ -28,14 +28,16 @@
         }
         
         form {
-            max-width: 600px;
+            width: 100%;
+            max-width: 320px;
             margin-left: auto;
             margin-right: auto;
+            padding: 0.5em;
         }
         
         form input,
         form textarea {
-            margin-bottom: 1em;
+            margin-bottom: 0.5em;
             background: #fff;
             border: 1px solid #9c9c9c;
         }
@@ -45,69 +47,45 @@
         }
         
         label {
-            text-align: right;
             display: block;
-            padding-left: 0.5em;
-            padding-right: 0.5em;
-            padding-top: 0.5em;
             padding-bottom: 0.5em;
         }
         
         input,
-        button {
+        button,
+        .new {
             width: 100%;
             padding: 0.7em;
+            margin-bottom: 0.5rem;
         }
         
-        @media (min-width: 400px) {
-            form {
-                overflow: hidden;
-            }
-            label {
-                float: left;
-                width: 100px;
-            }
-            input,
-            h2 {
-                float: left;
-                width: calc(100% - 100px);
-            }
-            button {
-                float: right;
-                width: calc(100% - 100px);
-            }
-            h2 {
-                text-align: center;
-            }
+        .guest {
+            margin-bottom: 0.5em;
+        }
+        
+        .italic {
+            font-style: italic;
+        }
+        
+        .new {
+            float: right;
+            margin-top: 1em;
+        }
+        
+        .center {
+            text-align: center;
+        }
+        
+        .darkgrey {
+            color: rgba(117, 117, 117, 1);
+        }
+        
+        a {
+            text-decoration: none;
         }
 
-         @media (max-width: 400px) {
-            form input,
-            form textarea,
-            select {
-                margin-bottom: unset;
-            }
-        }
-        
-        @media all and (min-device-width: 50px) and (max-device-width: 480px){
-            label {
-                text-align: left;
-                padding-left: 0;
-            }
-            h2 {
-                text-align: center;
-            }
-            form {
-                padding-left: 0.5em;
-                padding-right: 0.5em;
-            }
-            button {
-                margin-top: 1em;
-            }
-            form input,
-            form textarea {
-                margin-bottom: unset;
-            }
+        button{
+          margin-top: 0.5em;
         }
     </style>
 </head>

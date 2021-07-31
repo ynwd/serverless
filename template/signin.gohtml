@@ -28,14 +28,16 @@
         }
         
         form {
-            max-width: 600px;
+            width: 100%;
+            max-width: 320px;
             margin-left: auto;
             margin-right: auto;
+            padding: 1em;
         }
         
         form input,
         form textarea {
-            margin-bottom: 1em;
+            margin-bottom: 0.5em;
             background: #fff;
             border: 1px solid #9c9c9c;
         }
@@ -45,11 +47,7 @@
         }
         
         label {
-            text-align: right;
             display: block;
-            padding-left: 0.5em;
-            padding-right: 0.5em;
-            padding-top: 0.5em;
             padding-bottom: 0.5em;
         }
         
@@ -86,59 +84,8 @@
             text-decoration: none;
         }
         
-        @media (min-width: 400px) {
-            form {
-                overflow: hidden;
-            }
-            label {
-                float: left;
-                width: 100px;
-            }
-            input,
-            h2 {
-                float: left;
-                width: calc(100% - 100px);
-            }
-            button,
-            .new {
-                float: right;
-                width: calc(100% - 100px);
-            }
-            h2 {
-                text-align: center;
-            }
-        }
-        
-        @media (max-width: 400px) {
-            form input,
-            form textarea,
-            select {
-                margin-bottom: unset;
-            }
-        }
-        
-        @media all and (min-device-width: 320px) and (max-device-width: 480px) {
-            label {
-                text-align: left;
-                padding-left: 0;
-            }
-            h2 {
-                text-align: center;
-            }
-            form {
-                padding-left: 0.5em;
-                padding-right: 0.5em;
-            }
-            button {
-                margin-top: 0.5em;
-            }
-            form input,
-            form textarea {
-                margin-bottom: unset;
-            }
-            button {
-                margin-top: 1em;
-            }
+        button {
+            margin-top: 0.5em;
         }
     </style>
 </head>
@@ -159,7 +106,7 @@
         <input id="password" name="password" type="password" placeholder="guest"> {{if .Post}}
         <input type="hidden" name="post" value="{{.Post}}"> {{end}}
         <button>Masuk</button>
-        <div class="new arial center">Baru di Fastro.app? <a href="/signup">Gabung sekarang</a></div>
+        <div class="new arial center">Baru di Fastro? <a href="/signup">Gabung sekarang</a></div>
     </form>
 
 </body>
