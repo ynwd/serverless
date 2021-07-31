@@ -37,6 +37,12 @@ func (p *pageService) userPage(req fastrex.Request, res fastrex.Response) {
 		p.createPostPage(req, res)
 		return
 	}
+
+	if params[0] == "search" {
+		p.topicPage(req, res)
+		return
+	}
+
 	user, _ := p.getUserFromSession(req, res)
 	email := ""
 	if user != nil {
