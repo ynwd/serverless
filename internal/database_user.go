@@ -120,14 +120,13 @@ func (d *database) getUserDetailByUsername(ctx context.Context, username string)
 	return &user, nil
 }
 
-func (d *database) getUserIDWithSession(ctx context.Context, sessionID, userAgent string) (string, error) {
+func (d *database) getUserIDWithSession(ctx context.Context, sessionID string) (string, error) {
 	if sessionID == "" {
 		err := errors.New("getUserIDWithSession: sessionID empty")
 		return "", err
 	}
 	iter := d.client.Collection("session").
 		Where("sessionID", "==", sessionID).
-		Where("userAgent", "==", userAgent).
 		Documents(ctx)
 
 	var item map[string]interface{}

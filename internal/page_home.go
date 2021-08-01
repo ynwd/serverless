@@ -20,9 +20,8 @@ func (p *pageService) homePage(req fastrex.Request, res fastrex.Response) {
 		createResponsePage(res, "Response", err.Error(), "")
 		return
 	}
-	userAgent := req.UserAgent()
 	sessionID := string(sessionByte)
-	userID, err := p.db.getUserIDWithSession(req.Context(), string(sessionID), userAgent)
+	userID, err := p.db.getUserIDWithSession(req.Context(), string(sessionID))
 	if err != nil {
 		log.Printf("error:homePage:getUserIDWithSession: %v", err.Error())
 		return
@@ -33,13 +32,14 @@ func (p *pageService) homePage(req fastrex.Request, res fastrex.Response) {
 		log.Printf("error:homePage:getUserDetailByID: %v", err.Error())
 		createResponsePage(res, "Response", err.Error(), "")
 	}
-	email := user.Email
+	initial := user.Name[0:1]
+	// email := user.Email
 	data := struct {
 		Title  string
 		Email  string
 		Name   string
 		Date   string
 		Domain string
-	}{"Home", email, user.Name, time.Now().Local().Format("2 January 2006"), DOMAIN}
+	}{"Home", initial, user.Name, time.Now().Local().Format("2 January 2006"), DOMAIN}
 	res.Render("home", data)
 }

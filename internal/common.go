@@ -169,9 +169,10 @@ func (p *pageService) getUserFromSession(req fastrex.Request, res fastrex.Respon
 	if len(sessionByte) == 0 {
 		return nil, errors.New("getUserFromSession:sessionByte empty")
 	}
-	userAgent := req.UserAgent()
 	sessionID := string(sessionByte)
-	userID, err := p.db.getUserIDWithSession(req.Context(), string(sessionID), userAgent)
+	// fmt.Println("sessionID", sessionID)
+	userID, err := p.db.getUserIDWithSession(req.Context(), sessionID)
+	// fmt.Println("userID", userID)
 	if err != nil {
 		return nil, err
 	}
