@@ -1,25 +1,22 @@
 steps:
-  - name: "gcr.io/cloud-builders/gcloud"
-    entrypoint: "bash"
+  - name: gcr.io/cloud-builders/gcloud
+    entrypoint: /bin/bash
     args:
-    - '-c'
+    - -c
     - | 
       gcloud secrets versions access latest  --secret=firestore-ads > firestore.json
       export GOOGLE_APPLICATION_CREDENTIALS=firestore.json
-  - name: "golang"
+  - name: golang
     entrypoint: /bin/bash
     args:
-    - '-c'
+    - -c
     - | 
       mkdir public
       mv template/iklan.png public
       go run cmd/static/main.go
-  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
+  - name: gcr.io/google.com/cloudsdktool/cloud-sdk:alpine
+    entrypoint: /bin/bash
     args:
-      - gcloud
-      - functions
-      - deploy
-      - Main
-      - --source=.
-      - --trigger-http
-      - --allow-unauthenticated
+    - -c
+    - |
+      gcloud functions deploy Main --source=. --trigger-http --allow-unauthenticated
