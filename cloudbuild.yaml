@@ -6,7 +6,7 @@ steps:
     - | 
       gcloud secrets versions access latest  --secret=firestore-ads > firestore.json
       export GOOGLE_APPLICATION_CREDENTIALS=firestore.json
-  - name: golang
+  - name: golang:alpine
     entrypoint: /bin/bash
     args:
     - -c
