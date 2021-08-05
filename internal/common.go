@@ -45,7 +45,7 @@ func ReadJson(file string) []Data {
 func ReadPost() []Post {
 	data := []Post{}
 	ctx := context.Background()
-	db := createDatabase(ctx)
+	db := &database{client: createClient(ctx)}
 
 	for _, v := range db.getPost(ctx) {
 		var p map[string]interface{} = v.(map[string]interface{})
@@ -65,7 +65,7 @@ func ReadPost() []Post {
 func ReadPostByTopic(topic string) []Post {
 	data := []Post{}
 	ctx := context.Background()
-	db := createDatabase(ctx)
+	db := &database{client: createClient(ctx)}
 
 	for _, v := range db.getPostByTopic(ctx, topic) {
 		var p map[string]interface{} = v.(map[string]interface{})
@@ -85,7 +85,7 @@ func ReadPostByTopic(topic string) []Post {
 func ReadPostByUsername(username string) []Post {
 	data := []Post{}
 	ctx := context.Background()
-	db := createDatabase(ctx)
+	db := &database{client: createClient(ctx)}
 
 	for _, v := range db.getPostByUsername(ctx, username) {
 		var p map[string]interface{} = v.(map[string]interface{})
@@ -185,8 +185,7 @@ func (p *pageService) getUserFromSession(req fastrex.Request, res fastrex.Respon
 	return &user, nil
 }
 
-const charset = "abcdefghijklmnopqrstuvwxyz" +
-	"ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+const charset = `abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789`
 
 var seededRand *rand.Rand = rand.New(
 	rand.NewSource(time.Now().UnixNano()))

@@ -3,18 +3,21 @@ package internal
 import (
 	"context"
 	"io/ioutil"
-	"log"
 
 	"github.com/fastrodev/fastrex"
 )
 
 func CreateApp() fastrex.App {
-	app := fastrex.New()
 	ctx := context.Background()
-	app = createPageRoute(ctx, app)
-	app = createFormRoute(ctx, app)
-	app = createTemplate(app)
+	db := &database{client: createClient(ctx)}
+	page := &pageService{db: *db}
+	form := &formService{db: *db}
+
+	app := fastrex.New()
 	app.Ctx(ctx).Static("public", "/public")
+	app = createPageRoute(app, page)
+	app = createFormRoute(app, form)
+	app = createTemplate(app)
 	return app
 }
 
@@ -36,48 +39,32 @@ func createTemplate(app fastrex.App) fastrex.App {
 	return app
 }
 
-func createPageRoute(ctx context.Context, app fastrex.App) fastrex.App {
-	s := createPageService(ctx)
+func createPageRoute(app fastrex.App, page *pageService) fastrex.App {
 	app.Post("/", healthChk).
-		Get("/", s.idxPage).
-		Get("/:username", s.userPage).
-		Get("/post/:id", s.detailPage).
-		Get("/topic/:topic", s.topicPage).
-		Get("/search", s.queryPage).
-		Post("/search", s.searchPage).
-		Get("/activate/:code", s.activatePage)
+		Get("/", page.idxPage).
+		Get("/:username", page.userPage).
+		Get("/post/:id", page.detailPage).
+		Get("/topic/:topic", page.topicPage).
+		Get("/search", page.queryPage).
+		Post("/search", page.searchPage).
+		Get("/activate/:code", page.activatePage)
+	return app
+}
+
+func createFormRoute(app fastrex.App, form *formService) fastrex.App {
+	app.Get("/form/post", form.getPost).
+		Post("/form/post", form.createPost).
+		Post("/form/signup", form.createUser).
+		Post("/form/signin", form.getUserByEmailAndPassword)
 	return app
 }
 
 func healthChk(req fastrex.Request, res fastrex.Response) {
 	body, err := ioutil.ReadAll(req.Body)
 	if err != nil {
-		log.Printf("error on receive event from pubsub %v", err.Error())
+		res.Send(err.Error())
+		return
 	}
 	msg := string(body)
-	log.Printf("receiveEvent:%v", msg)
 	res.Send(msg)
-}
-
-func createFormRoute(ctx context.Context, app fastrex.App) fastrex.App {
-	api := createApiService(ctx)
-	app.Get("/form/post", api.getPost).
-		Post("/form/post", api.createPost).
-		Post("/form/signup", api.createUser).
-		Post("/form/signin", api.getUserByEmailAndPassword)
-	return app
-}
-
-func createDatabase(ctx context.Context) *database {
-	return &database{client: createClient(ctx)}
-}
-
-func createApiService(ctx context.Context) *apiService {
-	db := createDatabase(ctx)
-	return &apiService{db: *db}
-}
-
-func createPageService(ctx context.Context) *pageService {
-	db := createDatabase(ctx)
-	return &pageService{db: *db}
 }

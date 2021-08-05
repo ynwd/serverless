@@ -1,5 +1,5 @@
 package internal
 
-type apiService struct {
+type formService struct {
 	db database
 }

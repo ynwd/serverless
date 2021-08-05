@@ -20,6 +20,13 @@ type database struct {
 	client *firestore.Client
 }
 
+type Database interface {
+	add(ctx context.Context, collection string, data interface{}) (*firestore.DocumentRef, *firestore.WriteResult, error)
+	get(ctx context.Context, q *Query) (*firestore.DocumentSnapshot, error)
+	update(ctx context.Context, q *Query, updates []firestore.Update)
+	delete(ctx context.Context, q *Query) (*firestore.WriteResult, error)
+}
+
 func (d *database) add(ctx context.Context, collection string, data interface{}) (
 	*firestore.DocumentRef, *firestore.WriteResult, error) {
 	ref, res, err := d.client.Collection(collection).Add(ctx, data)
