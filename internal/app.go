@@ -9,8 +9,8 @@ import (
 func CreateApp() fastrex.App {
 	ctx := context.Background()
 	db := createDatabase(ctx)
-	page := &pageService{db}
-	form := &formService{db}
+	page := createPage(db)
+	form := createForm(db)
 
 	app := fastrex.New()
 	app.Ctx(ctx).Static("public", "/public")

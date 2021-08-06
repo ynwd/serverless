@@ -6,6 +6,10 @@ type formService struct {
 	db Database
 }
 
+func createForm(db Database) *formService {
+	return &formService{db}
+}
+
 func createFormRoute(app fastrex.App, form *formService) fastrex.App {
 	app.Get("/form/post", form.getPost).
 		Post("/form/post", form.createPost).
