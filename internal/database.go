@@ -8,7 +8,7 @@ import (
 	"google.golang.org/api/iterator"
 )
 
-func createClient(ctx context.Context) *firestore.Client {
+func createFirestoreClient(ctx context.Context) *firestore.Client {
 	client, err := firestore.NewClient(ctx, PROJECT_ID)
 	if err != nil {
 		log.Fatalf("Failed to create client: %v", err)
@@ -16,21 +16,32 @@ func createClient(ctx context.Context) *firestore.Client {
 	return client
 }
 
-type database struct {
-	client *firestore.Client
+type client struct {
+	firestore *firestore.Client
 }
 
 type Database interface {
 	add(ctx context.Context, collection string, data interface{}) (*firestore.DocumentRef, *firestore.WriteResult, error)
 	get(ctx context.Context, q *Query) (*firestore.DocumentSnapshot, error)
-	update(ctx context.Context, q *Query, updates []firestore.Update)
+	update(ctx context.Context, q *Query, updates []firestore.Update) (*firestore.WriteResult, error)
 	delete(ctx context.Context, q *Query) (*firestore.WriteResult, error)
+	createUser(ctx context.Context, data interface{}) (*firestore.DocumentRef, *firestore.WriteResult, error)
+	getUserByActivationCode(ctx context.Context, code string) (*firestore.DocumentSnapshot, error)
+	getUserDetail(ctx context.Context, email, password string) (*User, error)
+	getUserDetailByID(ctx context.Context, id string) (User, error)
+	getUserDetailByUsername(ctx context.Context, username string) (*User, error)
+	getUserIDWithSession(ctx context.Context, sessionID string) (string, error)
+	activateUserByCode(ctx context.Context, code string)
+	createSession(ctx context.Context, userID string, userAgent string, ip string) string
+	addPost(ctx context.Context, data interface{})
+	getPostDetail(ctx context.Context, id string) (Post, error)
+	getPost(ctx context.Context) []interface{}
+	getPostByTopic(ctx context.Context, topic string) []interface{}
+	getPostByUsername(ctx context.Context, username string) []interface{}
 }
 
-func (d *database) add(ctx context.Context, collection string, data interface{}) (
-	*firestore.DocumentRef, *firestore.WriteResult, error) {
-	ref, res, err := d.client.Collection(collection).Add(ctx, data)
-	return ref, res, err
+func createDatabase(ctx context.Context) Database {
+	return &client{firestore: createFirestoreClient(ctx)}
 }
 
 type Query struct {
@@ -39,6 +50,12 @@ type Query struct {
 	Op         string
 	Value      interface{}
 	OrderBy    string
+}
+
+func (d *client) add(ctx context.Context, collection string, data interface{}) (
+	*firestore.DocumentRef, *firestore.WriteResult, error) {
+	ref, res, err := d.firestore.Collection(collection).Add(ctx, data)
+	return ref, res, err
 }
 
 func getDocumentSnapshot(it *firestore.DocumentIterator) (*firestore.DocumentSnapshot, error) {
@@ -57,8 +74,8 @@ func getDocumentSnapshot(it *firestore.DocumentIterator) (*firestore.DocumentSna
 	return item, nil
 }
 
-func (d *database) get(ctx context.Context, q *Query) (*firestore.DocumentSnapshot, error) {
-	it := d.client.CollectionGroup(q.Collection).
+func (d *client) get(ctx context.Context, q *Query) (*firestore.DocumentSnapshot, error) {
+	it := d.firestore.CollectionGroup(q.Collection).
 		Where(q.Field, q.Op, q.Value).
 		OrderBy(q.OrderBy, firestore.Desc).
 		Documents(context.Background())
@@ -66,21 +83,21 @@ func (d *database) get(ctx context.Context, q *Query) (*firestore.DocumentSnapsh
 	return getDocumentSnapshot(it)
 }
 
-func (d *database) update(ctx context.Context, q *Query, updates []firestore.Update) (
+func (d *client) update(ctx context.Context, q *Query, updates []firestore.Update) (
 	*firestore.WriteResult, error) {
 	item, err := d.get(ctx, q)
 	if err != nil {
 		return nil, err
 	}
 
-	return d.client.Collection(q.Collection).Doc(item.Ref.ID).Update(ctx, updates)
+	return d.firestore.Collection(q.Collection).Doc(item.Ref.ID).Update(ctx, updates)
 }
 
-func (d *database) delete(ctx context.Context, q *Query) (*firestore.WriteResult, error) {
+func (d *client) delete(ctx context.Context, q *Query) (*firestore.WriteResult, error) {
 	item, err := d.get(ctx, q)
 	if err != nil {
 		return nil, err
 	}
 
-	return d.client.Collection(q.Collection).Doc(item.Ref.ID).Delete(ctx)
+	return d.firestore.Collection(q.Collection).Doc(item.Ref.ID).Delete(ctx)
 }

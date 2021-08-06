@@ -4,7 +4,6 @@ import (
 	"context"
 	"log"
 
-	"cloud.google.com/go/firestore"
 	"github.com/fastrodev/fastrex"
 )
 
@@ -14,15 +13,7 @@ func (p *pageService) activatePage(req fastrex.Request, res fastrex.Response) {
 	if len(params) > 0 {
 		code = params[0]
 	}
-
-	iter := p.db.client.CollectionGroup("user").
-		Where("code", "==", code).
-		Where("active", "==", false).
-		OrderBy("created", firestore.Desc).
-		Documents(context.Background())
-
-	it, err := getDocumentSnapshot(iter)
-
+	it, err := p.db.getUserByActivationCode(req.Context(), code)
 	if err != nil {
 		log.Println("activatePage:", err)
 	}
@@ -37,19 +28,5 @@ func (p *pageService) activatePage(req fastrex.Request, res fastrex.Response) {
 }
 
 func (p *pageService) activateUserByCode(ctx context.Context, code string) {
-	iter := p.db.client.CollectionGroup("user").
-		Where("code", "==", code).
-		Where("active", "==", false).
-		Documents(ctx)
-	it, err := getDocumentSnapshot(iter)
-	if err != nil {
-		log.Println(err)
-	}
-
-	p.db.client.Collection("user").Doc(it.Ref.ID).Update(ctx, []firestore.Update{
-		{
-			Path:  "active",
-			Value: true,
-		},
-	})
+	p.db.activateUserByCode(ctx, code)
 }

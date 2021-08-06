@@ -10,14 +10,14 @@ import (
 	"google.golang.org/api/iterator"
 )
 
-func (d *database) createUser(ctx context.Context, data interface{}) (
+func (d *client) createUser(ctx context.Context, data interface{}) (
 	*firestore.DocumentRef, *firestore.WriteResult, error) {
 	msg := ""
 	user := data.(map[string]interface{})
 	username := user["username"]
 	email := user["email"]
 
-	u := d.client.Collection("user").Where("username", "==", username).Documents(ctx)
+	u := d.firestore.Collection("user").Where("username", "==", username).Documents(ctx)
 	resU, err := u.GetAll()
 	if err != nil {
 		fmt.Println(err.Error())
@@ -27,10 +27,10 @@ func (d *database) createUser(ctx context.Context, data interface{}) (
 		return nil, nil, errors.New(msg)
 	}
 
-	e := d.client.Collection("user").Where("email", "==", email).Documents(ctx)
+	e := d.firestore.Collection("user").Where("email", "==", email).Documents(ctx)
 	resE, err := e.GetAll()
 	if err != nil {
-		fmt.Println(err.Error())
+		log.Println(err.Error())
 	}
 	if len(resE) > 0 {
 		msg = fmt.Sprintf("Email '%v' telah terdaftar. Gunakan yang lain", email)
@@ -40,8 +40,8 @@ func (d *database) createUser(ctx context.Context, data interface{}) (
 	return d.add(ctx, "user", data)
 }
 
-func (d *database) getUserDetail(ctx context.Context, email, password string) (*User, error) {
-	iter := d.client.Collection("user").
+func (d *client) getUserDetail(ctx context.Context, email, password string) (*User, error) {
+	iter := d.firestore.Collection("user").
 		Where("email", "==", email).
 		Where("password", "==", password).
 		Where("active", "==", true).
@@ -61,8 +61,8 @@ func (d *database) getUserDetail(ctx context.Context, email, password string) (*
 	return &user, nil
 }
 
-func (d *database) getUserDetailByID(ctx context.Context, id string) (User, error) {
-	iter := d.client.Collection("user").
+func (d *client) getUserDetailByID(ctx context.Context, id string) (User, error) {
+	iter := d.firestore.Collection("user").
 		Where("id", "==", id).Documents(ctx)
 
 	var item map[string]interface{}
@@ -90,8 +90,8 @@ func (d *database) getUserDetailByID(ctx context.Context, id string) (User, erro
 	return user, nil
 }
 
-func (d *database) getUserDetailByUsername(ctx context.Context, username string) (*User, error) {
-	iter := d.client.Collection("user").
+func (d *client) getUserDetailByUsername(ctx context.Context, username string) (*User, error) {
+	iter := d.firestore.Collection("user").
 		Where("username", "==", username).
 		Documents(ctx)
 
@@ -120,12 +120,12 @@ func (d *database) getUserDetailByUsername(ctx context.Context, username string)
 	return &user, nil
 }
 
-func (d *database) getUserIDWithSession(ctx context.Context, sessionID string) (string, error) {
+func (d *client) getUserIDWithSession(ctx context.Context, sessionID string) (string, error) {
 	if sessionID == "" {
 		err := errors.New("getUserIDWithSession: sessionID empty")
 		return "", err
 	}
-	iter := d.client.Collection("session").
+	iter := d.firestore.Collection("session").
 		Where("sessionID", "==", sessionID).
 		Documents(ctx)
 
@@ -147,4 +147,32 @@ func (d *database) getUserIDWithSession(ctx context.Context, sessionID string) (
 	}
 
 	return "", nil
+}
+
+func (d *client) activateUserByCode(ctx context.Context, code string) {
+	iter := d.firestore.CollectionGroup("user").
+		Where("code", "==", code).
+		Where("active", "==", false).
+		Documents(ctx)
+	it, err := getDocumentSnapshot(iter)
+	if err != nil {
+		log.Println(err)
+	}
+
+	d.firestore.Collection("user").Doc(it.Ref.ID).Update(ctx, []firestore.Update{
+		{
+			Path:  "active",
+			Value: true,
+		},
+	})
+}
+
+func (d *client) getUserByActivationCode(ctx context.Context, code string) (*firestore.DocumentSnapshot, error) {
+	iter := d.firestore.CollectionGroup("user").
+		Where("code", "==", code).
+		Where("active", "==", false).
+		OrderBy("created", firestore.Desc).
+		Documents(context.Background())
+
+	return getDocumentSnapshot(iter)
 }

@@ -5,23 +5,17 @@ import (
 )
 
 type pageService struct {
-	db database
+	db Database
 }
 
-func (p *pageService) signinPage(req fastrex.Request, res fastrex.Response) {
-	post := req.URL.Query().Get("post")
-	data := struct {
-		Post   string
-		Title  string
-		Domain string
-	}{post, "Masuk", DOMAIN}
-	res.Render("signin", data)
-}
-
-func (p *pageService) signupPage(req fastrex.Request, res fastrex.Response) {
-	data := struct {
-		Title  string
-		Domain string
-	}{"Daftar", DOMAIN}
-	res.Render("signup", data)
+func createPageRoute(app fastrex.App, page *pageService) fastrex.App {
+	app.Post("/", healthChk).
+		Get("/", page.idxPage).
+		Get("/:username", page.userPage).
+		Get("/post/:id", page.detailPage).
+		Get("/topic/:topic", page.topicPage).
+		Get("/search", page.queryPage).
+		Post("/search", page.searchPage).
+		Get("/activate/:code", page.activatePage)
+	return app
 }

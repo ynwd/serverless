@@ -10,12 +10,12 @@ import (
 	"google.golang.org/api/iterator"
 )
 
-func (d *database) addPost(ctx context.Context, data interface{}) {
+func (d *client) addPost(ctx context.Context, data interface{}) {
 	d.add(ctx, "post", data)
 }
 
-func (d *database) getPostDetail(ctx context.Context, id string) (Post, error) {
-	iter := d.client.Collection("post").Where("id", "==", id).Documents(ctx)
+func (d *client) getPostDetail(ctx context.Context, id string) (Post, error) {
+	iter := d.firestore.Collection("post").Where("id", "==", id).Documents(ctx)
 	var item map[string]interface{}
 	for {
 		doc, err := iter.Next()
@@ -81,11 +81,11 @@ func (d *database) getPostDetail(ctx context.Context, id string) (Post, error) {
 	return post, nil
 }
 
-func (d *database) getPost(ctx context.Context) []interface{} {
-	iter := d.client.Collection("post").
+func (d *client) getPost(ctx context.Context) []interface{} {
+	iter := d.firestore.Collection("post").
 		OrderBy("created", firestore.Desc).
 		Documents(ctx)
-	defer d.client.Close()
+	defer d.firestore.Close()
 	var data []interface{}
 	for {
 		doc, err := iter.Next()
@@ -100,12 +100,12 @@ func (d *database) getPost(ctx context.Context) []interface{} {
 	return data
 }
 
-func (d *database) getPostByTopic(ctx context.Context, topic string) []interface{} {
-	iter := d.client.Collection("post").
+func (d *client) getPostByTopic(ctx context.Context, topic string) []interface{} {
+	iter := d.firestore.Collection("post").
 		OrderBy("created", firestore.Desc).
 		Where("topic", "==", topic).
 		Documents(ctx)
-	defer d.client.Close()
+	defer d.firestore.Close()
 	var data []interface{}
 	for {
 		doc, err := iter.Next()
@@ -120,18 +120,18 @@ func (d *database) getPostByTopic(ctx context.Context, topic string) []interface
 	return data
 }
 
-func (d *database) getPostByUsername(ctx context.Context, username string) []interface{} {
+func (d *client) getPostByUsername(ctx context.Context, username string) []interface{} {
 	user, _ := d.getUserDetailByUsername(ctx, username)
 	userID := "user"
 	if user != nil {
 		userID = user.ID
 	}
 
-	iter := d.client.Collection("post").
+	iter := d.firestore.Collection("post").
 		Where("user", "==", userID).
 		Documents(ctx)
 
-	defer d.client.Close()
+	defer d.firestore.Close()
 	var data []interface{}
 	for {
 		doc, err := iter.Next()

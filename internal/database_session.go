@@ -9,7 +9,7 @@ import (
 	"github.com/google/uuid"
 )
 
-func (d *database) createSession(ctx context.Context, userID string, userAgent string, ip string) string {
+func (d *client) createSession(ctx context.Context, userID string, userAgent string, ip string) string {
 	sessionID := uuid.New().String()
 	if userID == "" {
 		log.Printf("createSession error: %v", errors.New("createSession error: userID empty"))
