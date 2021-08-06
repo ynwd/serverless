@@ -7,7 +7,7 @@ import (
 	"github.com/leekchan/accounting"
 )
 
-func (p *pageService) detailPage(req fastrex.Request, res fastrex.Response) {
+func (p *page) detailPage(req fastrex.Request, res fastrex.Response) {
 	id := ""
 	params := req.Params("id")
 	if len(params) > 0 {

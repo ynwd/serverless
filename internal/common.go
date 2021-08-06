@@ -160,7 +160,7 @@ func Filter(vs []Post, f func(Post) bool) []Post {
 	return filtered
 }
 
-func (p *pageService) getUserFromSession(req fastrex.Request, res fastrex.Response) (*User, error) {
+func (p *page) getUserFromSession(req fastrex.Request, res fastrex.Response) (*User, error) {
 	c, _ := req.Cookie("__session")
 	sessionByte, err := base64.StdEncoding.DecodeString(c.GetValue())
 	if err != nil {

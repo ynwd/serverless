@@ -4,7 +4,7 @@ import (
 	"github.com/fastrodev/fastrex"
 )
 
-func (p *pageService) createPostPage(req fastrex.Request, res fastrex.Response) {
+func (p *page) createPostPage(req fastrex.Request, res fastrex.Response) {
 	user, _ := p.getUserFromSession(req, res)
 	if user != nil {
 		data := struct {

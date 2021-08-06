@@ -10,7 +10,7 @@ import (
 	"github.com/fastrodev/fastrex"
 )
 
-func (p *pageService) userPage(req fastrex.Request, res fastrex.Response) {
+func (p *page) userPage(req fastrex.Request, res fastrex.Response) {
 	params := req.Params("username")
 	param := ""
 	if len(params) > 0 {

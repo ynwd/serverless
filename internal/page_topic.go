@@ -9,7 +9,7 @@ import (
 	"github.com/fastrodev/fastrex"
 )
 
-func (p *pageService) topicPage(req fastrex.Request, res fastrex.Response) {
+func (p *page) topicPage(req fastrex.Request, res fastrex.Response) {
 	params := req.Params("topic")
 	t := ""
 	if len(params) > 0 {

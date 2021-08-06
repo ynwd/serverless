@@ -12,7 +12,7 @@ import (
 	"github.com/google/uuid"
 )
 
-func (s *formService) createUser(req fastrex.Request, res fastrex.Response) {
+func (s *form) createUser(req fastrex.Request, res fastrex.Response) {
 	user := make(map[string]interface{})
 	var msg string
 	respTitle := "Daftar"
@@ -79,7 +79,7 @@ func readUserIP(req fastrex.Request) string {
 	return IPAddress
 }
 
-func (s *formService) getUserByEmailAndPassword(req fastrex.Request, res fastrex.Response) {
+func (s *form) getUserByEmailAndPassword(req fastrex.Request, res fastrex.Response) {
 	email := req.FormValue("email")
 	password := req.FormValue("password")
 	post := req.FormValue("post")

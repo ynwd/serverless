@@ -8,7 +8,7 @@ import (
 	"github.com/fastrodev/fastrex"
 )
 
-func (p *pageService) homePage(req fastrex.Request, res fastrex.Response) {
+func (p *page) homePage(req fastrex.Request, res fastrex.Response) {
 	c, err := req.Cookie("__session")
 	if err != nil {
 		res.Redirect("/", 302)

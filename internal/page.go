@@ -4,21 +4,21 @@ import (
 	"github.com/fastrodev/fastrex"
 )
 
-type pageService struct {
+type page struct {
 	db Database
 }
 
-func createPage(db Database) *pageService {
-	return &pageService{db}
+func createPage(db Database) *page {
+	return &page{db}
 }
 
-func createPageRoute(app fastrex.App, page *pageService) fastrex.App {
-	app.Get("/", page.idxPage).
-		Get("/:username", page.userPage).
-		Get("/post/:id", page.detailPage).
-		Get("/topic/:topic", page.topicPage).
-		Get("/search", page.queryPage).
-		Post("/search", page.searchPage).
-		Get("/activate/:code", page.activatePage)
+func createPageRoute(app fastrex.App, p *page) fastrex.App {
+	app.Get("/", p.idxPage).
+		Get("/:username", p.userPage).
+		Get("/post/:id", p.detailPage).
+		Get("/topic/:topic", p.topicPage).
+		Get("/search", p.queryPage).
+		Post("/search", p.searchPage).
+		Get("/activate/:code", p.activatePage)
 	return app
 }

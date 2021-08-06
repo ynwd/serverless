@@ -8,12 +8,12 @@ import (
 	"github.com/fastrodev/fastrex"
 )
 
-func (p *pageService) searchPage(req fastrex.Request, res fastrex.Response) {
+func (p *page) searchPage(req fastrex.Request, res fastrex.Response) {
 	query := req.FormValue("query")
 	res.Redirect("/search?q="+query, REDIRECT_CODE)
 }
 
-func (p *pageService) queryPage(req fastrex.Request, res fastrex.Response) {
+func (p *page) queryPage(req fastrex.Request, res fastrex.Response) {
 	q := req.URL.Query()
 	query := q.Get("q")
 	t := query

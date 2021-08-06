@@ -2,7 +2,7 @@ package internal
 
 import "github.com/fastrodev/fastrex"
 
-func (p *pageService) signupPage(req fastrex.Request, res fastrex.Response) {
+func (p *page) signupPage(req fastrex.Request, res fastrex.Response) {
 	data := struct {
 		Title  string
 		Domain string

@@ -7,7 +7,7 @@ import (
 	"github.com/fastrodev/fastrex"
 )
 
-func (p *pageService) signOut(req fastrex.Request, res fastrex.Response) {
+func (p *page) signOut(req fastrex.Request, res fastrex.Response) {
 	cookie, err := req.Cookie("__session")
 	if err != nil {
 		log.Printf("signOut:req.Cookie: %v", err.Error())

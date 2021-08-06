@@ -43,7 +43,7 @@ func saveToGCS(ctx context.Context, r io.Reader, bucketName, name string) (*stor
 	return obj, attrs, err
 }
 
-func (s *formService) createPost(req fastrex.Request, res fastrex.Response) {
+func (s *form) createPost(req fastrex.Request, res fastrex.Response) {
 	post := make(map[string]interface{})
 	var msg string
 	respTitle := "Pasang Iklan"
@@ -158,7 +158,7 @@ func (s *formService) createPost(req fastrex.Request, res fastrex.Response) {
 	createResponsePage(res, respTitle, msg, url)
 }
 
-func (s *formService) getPost(req fastrex.Request, res fastrex.Response) {
+func (s *form) getPost(req fastrex.Request, res fastrex.Response) {
 	d := s.db.getPost(req.Context())
 	res.Json(d)
 }

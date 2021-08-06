@@ -6,7 +6,7 @@ import (
 	"github.com/fastrodev/fastrex"
 )
 
-func (p *pageService) idxPage(req fastrex.Request, res fastrex.Response) {
+func (p *page) idxPage(req fastrex.Request, res fastrex.Response) {
 	user, _ := p.getUserFromSession(req, res)
 	email := ""
 	initial := ""

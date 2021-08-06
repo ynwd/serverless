@@ -7,7 +7,7 @@ import (
 	"github.com/fastrodev/fastrex"
 )
 
-func (p *pageService) activatePage(req fastrex.Request, res fastrex.Response) {
+func (p *page) activatePage(req fastrex.Request, res fastrex.Response) {
 	params := req.Params("code")
 	code := ""
 	if len(params) > 0 {
@@ -27,6 +27,6 @@ func (p *pageService) activatePage(req fastrex.Request, res fastrex.Response) {
 	createResponsePage(res, "Aktivasi", "Aktivasi gagal. Pastikan kode yang anda masukkan benar.", "")
 }
 
-func (p *pageService) activateUserByCode(ctx context.Context, code string) {
+func (p *page) activateUserByCode(ctx context.Context, code string) {
 	p.db.activateUserByCode(ctx, code)
 }
