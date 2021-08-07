@@ -1,7 +1,6 @@
 package internal
 
 import (
-	"context"
 	"log"
 
 	"github.com/fastrodev/fastrex"
@@ -19,14 +18,10 @@ func (p *page) activatePage(req fastrex.Request, res fastrex.Response) {
 	}
 
 	if it != nil {
-		go p.activateUserByCode(req.Context(), code)
+		go p.db.activateUserByCode(req.Context(), code)
 		createResponsePage(res, "Aktivasi", "User telah diaktifkan. silahkan masuk.", "/signin")
 		return
 	}
 
 	createResponsePage(res, "Aktivasi", "Aktivasi gagal. Pastikan kode yang anda masukkan benar.", "")
-}
-
-func (p *page) activateUserByCode(ctx context.Context, code string) {
-	p.db.activateUserByCode(ctx, code)
 }
