@@ -1,4 +1,5 @@
 {{define "_style"}}<style media=screen>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@700;800&display=swap');
         body {
             margin: 0;
             padding: 0;
@@ -34,9 +35,7 @@
         }
         
         .register {
-            width: 75px;
-            text-align: right;
-            margin: auto;
+            margin: 0 0 0 10%;
         }
         
         .title {
@@ -51,8 +50,9 @@
             width: 37px;
             color: white;
             text-align: center;
-            background-color: #000;
+            background: #373b3f;
             border-radius: 5px;
+            margin-right: 10%;
         }
         
         .footer {
@@ -83,6 +83,24 @@
         .title a {
             color: #fff;
             text-decoration: none;
+        }
+        
+        .headline-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            margin-top: unset;
+            background-color: black;
+            background: #373b3f;
+            min-height: 150px;
+        }
+        
+        .headline {
+            color: #fff;
+            text-align: center;
+            font-family: 'Roboto Slab', serif;
+            font-weight: 700;
         }
         
         .ads-header {
@@ -138,7 +156,7 @@
         .title-ad {
             text-transform: uppercase;
             font-size: small;
-            background-color: black;
+            background: #373b3f;
             color: #FFFFFF;
             padding: 10px 0;
             width: 100%;
@@ -160,7 +178,6 @@
         
         .search-container {
             flex-grow: 1;
-            padding: 0 10px;
         }
         
         .border {
@@ -178,18 +195,19 @@
             outline: unset;
         }
         
-        .masuk {
-            border-width: 1px;
-            border-style: solid;
+        .masuk,
+        .pasang,
+        .how {
+            border-style: unset;
             border-color: #0073b1;
             background-color: #fff;
             color: #0073b1;
             display: inline-block;
-            width: 60px;
             text-align: center;
             height: 100%;
             text-decoration: none;
             line-height: 36px;
+            font-size: small;
         }
         
         .pasang,
@@ -257,13 +275,15 @@
                 width: 37px;
                 color: white;
                 text-align: center;
-                background-color: #000;
             }
             .desktop {
                 display: none;
             }
             .pasang {
                 display: none;
+            }
+            .title {
+                margin-right: 10%;
             }
         }
         
@@ -287,7 +307,6 @@
                 width: 37px;
                 color: white;
                 text-align: center;
-                background-color: #000;
                 border-radius: 5px;
             }
             .search-container {
