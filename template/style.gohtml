@@ -225,6 +225,14 @@
         .profile {
             margin-left: 15px;
         }
+
+        .avatar {
+          display: inline-block;
+          background: #000;
+          color: #fff;
+          min-width: 38px;
+          text-transform: capitalize;
+        }
         
         @media all and (min-width: 601px) and (max-width: 700px) {
             .ads-header {
@@ -275,14 +283,18 @@
                 color: white;
                 text-align: center;
             }
-            .desktop {
-                display: none;
-            }
             .pasang {
                 display: none;
             }
             .title {
-                margin-right: 10%;
+                margin-right: 5%;
+            }
+            .avatar {
+              display: inline-block;
+              background: #000;
+              color: #fff;
+              min-width: 38px;
+              text-transform: capitalize;
             }
         }
         
@@ -290,9 +302,6 @@
             .ads-header {
                 max-width: 100%;
                 background-color: #fefefe;
-            }
-            .desktop {
-                display: none;
             }
             .search,
             .search:focus {
@@ -316,6 +325,9 @@
             }
             .header {
                 flex-wrap: unset;
+            }
+            .title {
+                margin-right: unset;
             }
         }
     </style>{{end}}

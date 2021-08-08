@@ -9,38 +9,18 @@
             <input type="hidden" id="searchsubmit" />
         </form>
     </div>
-    {{`{{if .Email}}`}}
-     <div class="register title radius profile  margin-auto">
-        <a href="/home">{{`{{.Initial}}`}}</a>
-    </div>
-    {{`{{else}}`}}
-    <div class="register arial">
-        <a class="how small-radius" href="/#">Cara Kerja</a>
+    
+     <div class="register arial">
+        <a class="pasang how small-radius" href="/#">Cara Kerja</a>
         <a class="pasang small-radius" href="/post">Pasang</a>
+        {{`{{if .Email}}`}}
+        <a class="pasang radius avatar" href="/home">{{`{{.Initial}}`}}</a>
+        {{`{{else}}`}}
         <a class="masuk small-radius" href="/signin">Masuk</a>
+        {{`{{end}}`}}
     </div>
-    {{`{{end}}`}}
 </div>
-<div class="content-container header mobile">
-    <div class="title main margin-auto">
-        F
-    </div>
-    <div class="search-container">
-        <form method="POST" action="/search">
-            <input class="search border radius" name="query" type="text" placeholder="Search..">
-            <input type="hidden" id="searchsubmit" />
-        </form>
-    </div>
-    {{`{{if .Email}}`}}
-    <div class="register title radius profile  margin-auto">
-        <a href="/home">{{`{{.Initial}}`}}</a>
-    </div>
-    {{`{{else}}`}}
-    <div class="register arial right">
-        <a class="masuk small-radius" href="/signin">Masuk</a>
-    </div>
-    {{`{{end}}`}}
-</div>{{end}}
+{{end}}
 
 <!-- result header  -->
 
@@ -55,35 +35,15 @@
             <input type="hidden" id="searchsubmit" />
         </form>
     </div>
-    {{if .Email}}
-    <div class="register title radius profile  margin-auto">
-        <a href="/home">{{.Initial}}</a>
-    </div>
-    {{else}}
+    
     <div class="register arial">
-         <a class="how small-radius" href="/#">Cara Kerja</a>
+        <a class="pasang how small-radius" href="/#">Cara Kerja</a>
         <a class="pasang small-radius" href="/post">Pasang</a>
+        {{if .Email}}
+        <a class="pasang radius avatar" href="/home">{{.Initial}}</a>
+        {{else}}
         <a class="masuk small-radius" href="/signin">Masuk</a>
+        {{end}}
     </div>
-    {{end}}
-</div>
-<div class="content-container header mobile">
-    <div class="title main margin-auto">
-        <a href="/">F</a>
-    </div>
-    <div class="search-container">
-        <form method="POST" action="/search">
-            <input class="search border radius" name="query" type="text" placeholder="Search..">
-            <input type="hidden" id="searchsubmit" />
-        </form>
-    </div>
-    {{if .Email}}
-    <div class="register title radius profile  margin-auto">
-        <a href="/home">{{.Initial}}</a>
-    </div>
-    {{else}}
-    <div class="register arial right">
-        <a class="masuk radius" href="/signin">Masuk</a>
-    </div>
-    {{end}}
+   
 </div>{{end}}
