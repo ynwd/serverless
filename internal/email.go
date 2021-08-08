@@ -42,7 +42,7 @@ func SendEmail(email string, code string) error {
 		SharedConfigState: session.SharedConfigEnable,
 	}))
 
-	client := lambda.New(sess)
+	client := lambda.New(sess, &aws.Config{Region: aws.String("us-east-2")})
 	payload, err := json.Marshal(Request{email, code})
 	if err != nil {
 		log.Println("Error marshalling MyGetItemsFunction request", err)
