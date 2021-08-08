@@ -26,6 +26,8 @@ import (
 	"log"
 
 	"github.com/aws/aws-sdk-go/aws"
+	"github.com/aws/aws-sdk-go/aws/credentials/stscreds"
+	"github.com/aws/aws-sdk-go/aws/endpoints"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/lambda"
 
@@ -42,7 +44,9 @@ func SendEmail(email string, code string) error {
 		SharedConfigState: session.SharedConfigEnable,
 	}))
 
-	client := lambda.New(sess, &aws.Config{Region: aws.String("us-east-2")})
+	creds := stscreds.NewCredentials(sess, "ses-role-ojpfcuia")
+
+	client := lambda.New(sess, &aws.Config{Region: aws.String(endpoints.UsEast2RegionID), Credentials: creds})
 	payload, err := json.Marshal(Request{email, code})
 	if err != nil {
 		log.Println("Error marshalling MyGetItemsFunction request", err)
