@@ -2,8 +2,8 @@ package internal
 
 import (
 	"context"
-	"fmt"
 	"io"
+	"log"
 	"strconv"
 	"time"
 	"unicode/utf8"
@@ -39,15 +39,16 @@ func saveToGCS(ctx context.Context, r io.Reader, bucketName, name string) (*stor
 	}
 
 	attrs, err := obj.Attrs(ctx)
-	fmt.Printf("Post is saved to GCS: %s\n", attrs.MediaLink)
 	return obj, attrs, err
 }
 
 func (s *form) createPost(req fastrex.Request, res fastrex.Response) {
+	var (
+		msg  string
+		file string
+	)
 	post := make(map[string]interface{})
-	var msg string
 	respTitle := "Pasang Iklan"
-
 	topic := req.FormValue("topic")
 	title := req.FormValue("title")
 	content := req.FormValue("content")
@@ -57,21 +58,17 @@ func (s *form) createPost(req fastrex.Request, res fastrex.Response) {
 	phone := req.FormValue("phone")
 	user := req.FormValue("user")
 	video := req.FormValue("video")
-
-	file := ""
-	id := uuid.New().String()
 	req.ParseMultipartForm(32 << 20)
 	uploadedFile, _, _ := req.FormFile("file")
 	if uploadedFile != nil {
+		id := uuid.New().String()
 		defer uploadedFile.Close()
-
-		_, _, err := saveToGCS(req.Context(), uploadedFile, BUCKET_NAME, id)
-		if err != nil {
-			createResponsePage(res, respTitle, err.Error(), "")
-			fmt.Printf("GCS is not setup %v\n", err)
-			return
-		}
-
+		go func() {
+			_, _, err := saveToGCS(req.Context(), uploadedFile, BUCKET_NAME, id)
+			if err != nil {
+				log.Printf("GCS is not setup %v\n", err)
+			}
+		}()
 		file = GCS_URL + id
 	}
 
