@@ -6,6 +6,7 @@ require (
 	cloud.google.com/go v0.90.0 // indirect
 	cloud.google.com/go/firestore v1.5.0
 	cloud.google.com/go/storage v1.16.0
+	github.com/aws/aws-sdk-go v1.40.17
 	github.com/fastrodev/fastrex v0.0.0-20210728130023-9fc554be4a63
 	github.com/golang/groupcache v0.0.0-20210331224755-41bb18bfe9da // indirect
 	github.com/google/uuid v1.3.0

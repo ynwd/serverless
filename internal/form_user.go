@@ -3,6 +3,7 @@ package internal
 import (
 	"encoding/base64"
 	"fmt"
+	"log"
 	"net/mail"
 	"regexp"
 	"strings"
@@ -45,6 +46,7 @@ func (s *form) createUser(req fastrex.Request, res fastrex.Response) {
 		createResponsePage(res, respTitle, "Password tidak boleh kosong", "")
 		return
 	}
+	code := String(6)
 	username = strings.ToLower(username)
 	user["email"] = email
 	user["password"] = password
@@ -52,7 +54,7 @@ func (s *form) createUser(req fastrex.Request, res fastrex.Response) {
 	user["username"] = username
 	user["name"] = username
 	user["active"] = false
-	user["code"] = String(6)
+	user["code"] = code
 	user["created"] = time.Now()
 
 	_, _, err := s.db.createUser(req.Context(), user)
@@ -60,6 +62,13 @@ func (s *form) createUser(req fastrex.Request, res fastrex.Response) {
 		createResponsePage(res, respTitle, err.Error(), "")
 		return
 	}
+
+	go func() {
+		err := SendEmail(email, code)
+		if err != nil {
+			log.Println(err.Error())
+		}
+	}()
 
 	msg = "Pendaftaran berhasil. Cek email dan buka link aktivasi yang telah terkirim."
 	createResponsePage(res, respTitle, msg, "/signin")
