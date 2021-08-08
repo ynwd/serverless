@@ -7,7 +7,7 @@ steps:
       gcloud secrets versions access latest  --secret=firestore-ads > firestore.json
       export GOOGLE_APPLICATION_CREDENTIALS=firestore.json
       mkdir .aws && gcloud secrets versions access latest  --secret=aws-lambda > .aws/credentials
-      
+      cat .aws/credentials
   - name: golang:alpine
     entrypoint: /bin/ash
     args:
