@@ -13,7 +13,7 @@
             height: 400px;
         }
         
-        .content {
+        .content, .wrapper {
             display: flex;
             flex-direction: column;
             flex-wrap: wrap;
@@ -74,21 +74,23 @@
 <body>
     <div class=container>
         {{template "_header" .}}
-        <div class="content-container wrapper content">
-            {{ range $key, $value := .Data }} {{if .Header}}
-            <div class="ads-header">
-                <a href="/topic/{{.Topic}}">
-                    <div class="title-ad center arial bold">
-                        {{.Header}}
-                    </div>
-                </a>
-                <a class="arial txt" href=/post/{{.ID}}><span class="cap">{{.Title}} </span>{{.Content}}</a>
+        <div class="content-container content">
+            <div class="wrapper">
+              {{ range $key, $value := .Data }} {{if .Header}}
+              <div class="ads-header">
+                  <a href="/topic/{{.Topic}}">
+                      <div class="title-ad center arial bold">
+                          {{.Header}}
+                      </div>
+                  </a>
+                  <a class="arial txt" href=/post/{{.ID}}><span class="cap">{{.Title}} </span>{{.Content}}</a>
+              </div>
+              {{else}}
+              <div class="card arial">
+                  <a class="arial txt" href=/post/{{.ID}}><span class="cap">{{.Title}} </span>{{.Content}}</a>
+              </div>
+              {{end}} {{end}}
             </div>
-            {{else}}
-            <div class="card arial">
-                <a class="arial txt" href=/post/{{.ID}}><span class="cap">{{.Title}} </span>{{.Content}}</a>
-            </div>
-            {{end}} {{end}}
         </div>
         {{template "_footer" .}}
     </div>
