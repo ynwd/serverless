@@ -13,6 +13,8 @@ steps:
     - | 
       mkdir public
       mv template/iklan.png public
+      mv template/fstr.svg public
+      mv template/favicon.ico public
       go run cmd/static/main.go
   - name: gcr.io/google.com/cloudsdktool/cloud-sdk:alpine
     entrypoint: /bin/bash
