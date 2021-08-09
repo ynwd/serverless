@@ -7,6 +7,7 @@
 <body>
     <div class=container>
         {{template "_header_idx"}}
+        {{template "_headline"}}
         <div class="content-container wrapper content">
             {{ range $key, $value := .Data }} {{if .Header}}
             <div class="ads-header">
