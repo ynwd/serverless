@@ -64,14 +64,10 @@ func (p *page) userPage(req fastrex.Request, res fastrex.Response) {
 	desc := fmt.Sprintf("Profile of %v", param)
 	usr, _ := p.db.getUserDetailByUsername(req.Context(), param)
 	name := "Guest"
+	initial := ""
 	if usr != nil {
 		name = usr.Name
-	}
-
-	initial := ""
-	if user != nil {
-		email = user.Email
-		initial = user.Username[0:1]
+		initial = usr.Username[0:1]
 	}
 
 	data := struct {
@@ -83,10 +79,7 @@ func (p *page) userPage(req fastrex.Request, res fastrex.Response) {
 		Date        string
 		Domain      string
 	}{initial, email, name, td, desc, date.Format("2 January 2006"), DOMAIN}
-	err := res.Render("result", data)
-	if err != nil {
-		log.Println(err)
-	}
+	res.Render("result", data)
 }
 
 func createDataByUsername(username string) []FlatPost {
