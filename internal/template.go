@@ -17,6 +17,7 @@ func createTemplate(app fastrex.App) fastrex.App {
 		Template("template/headline.gohtml").
 		Template("template/footer.gohtml").
 		Template("template/meta.gohtml").
-		Template("template/style.gohtml")
+		Template("template/style.gohtml").
+		Template("template/script.gohtml")
 	return app
 }
