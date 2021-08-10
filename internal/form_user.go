@@ -123,5 +123,5 @@ func (s *form) getUserByEmailAndPassword(req fastrex.Request, res fastrex.Respon
 		return
 	}
 
-	res.Cookie(c).Redirect("/home", 302)
+	res.Cookie(c).Redirect("/", 302)
 }
