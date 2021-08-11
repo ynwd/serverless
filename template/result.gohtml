@@ -9,15 +9,10 @@
             margin-right: 11px;
         }
         
+        .content,
         .wrapper {
-            height: 400px;
-        }
-        
-        .content, .wrapper {
             display: flex;
-            flex-direction: column;
             flex-wrap: wrap;
-            overflow-x: auto;
             align-content: baseline;
             justify-content: start;
             width: 100%;
@@ -25,9 +20,9 @@
         }
         
         .card {
-            max-width: calc(100%/5 - 11px);
+            max-width: calc(100%/5 - 5px);
             margin-bottom: 10px;
-            margin-right: 11px;
+            margin-right: 5px;
         }
         
         .card a span,
@@ -41,6 +36,16 @@
         .ads-header a:hover {
             text-decoration: none;
             color: inherit;
+        }
+        
+        .top-title {
+            margin: 0px auto;
+            width: 100%;
+            text-align: center;
+            font-family: 'Roboto Slab', serif;
+            border-bottom-style: solid;
+            border-width: thin;
+            padding: 15px 0;
         }
         
         @media all and (min-width: 601px) and (max-width: 700px) {
@@ -75,21 +80,13 @@
     <div class=container>
         {{template "_header" .}}
         <div class="content-container content">
+            <h2 class="top-title">{{.Title}}</h2>
             <div class="wrapper">
-              {{ range $key, $value := .Data }} {{if .Header}}
-              <div class="ads-header">
-                  <a href="/topic/{{.Topic}}">
-                      <div class="title-ad center arial bold">
-                          {{.Header}}
-                      </div>
-                  </a>
-                  <a class="arial txt" href=/post/{{.ID}}><span class="cap">{{.Title}} </span>{{.Content}}</a>
-              </div>
-              {{else}}
-              <div class="card arial">
-                  <a class="arial txt" href=/post/{{.ID}}><span class="cap">{{.Title}} </span>{{.Content}}</a>
-              </div>
-              {{end}} {{end}}
+                {{ range $key, $value := .Data }}
+                <div class="card arial">
+                    <a class="arial txt" href=/post/{{.ID}}><span class="cap">{{.Title}} </span>{{.Content}}</a>
+                </div>
+                {{end}}
             </div>
         </div>
         {{template "_footer" .}}
