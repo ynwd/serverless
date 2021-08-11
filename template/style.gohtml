@@ -14,15 +14,19 @@
     }
     
     .container {
-        background: #FFFFFF;
+        background: #f3f2ee;
+        background-attachment: fixed;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        overflow: auto;
     }
     
     .content-container {
         margin: 0 auto;
         max-width: 1024px;
+        background: #ffffff;
+        background-repeat: repeat-y;
     }
     
     .header {
@@ -67,6 +71,7 @@
         margin: 0 auto;
         padding-top: 5px;
         padding-bottom: 5px;
+        background: #ffffff;
     }
     
     .radius {
@@ -274,7 +279,7 @@
 
     @media all and (min-width: 1024px) {
       .wrapper {
-          margin: 10px 0;
+          margin: 10px 0px 10px 10px;
       }
     }
 
