@@ -22,31 +22,7 @@
     <meta property="og:title" content="{{.Title}}" />
     <meta property="og:url" content="https://fastro.app/post/{{.ID}}" />
     <meta property="og:description" content="{{.Description}}" />
-    <style media=screen>
-        body {
-            margin: 0;
-            padding: 0;
-        }
-        
-        .container {
-            width: 100%;
-            background: #FFFFFF;
-        }
-        
-        .content-container {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 10px 10px;
-        }
-        
-        .header {
-            display: block;
-        }
-        
-        .content {
-            max-width: 600px;
-        }
-        
+    {{template "_style"}}<style media=screen>
         .content-txt {
             white-space: pre-line;
         }
@@ -126,6 +102,7 @@
         .video {
             max-width: 600px;
             margin-bottom: 1em;
+            margin-top: 1em;
             width: 100%;
         }
         
@@ -176,6 +153,7 @@
         }
         
         .media-container {
+            margin: auto;
             max-width: 600px;
             overflow-x: overlay;
             margin-bottom: 0.5em;
@@ -189,27 +167,23 @@
             /* NEW - Chrome */
             display: flex;
         }
+
+         .wrapper-content {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 10px;
+        }
+
+        .top-title{
+          background: #fff;
+          color: #000;
+          border: unset;
+          margin-bottom: unset;
+          padding-bottom: unset;
+        }
         
         @media all and (min-device-width: 320px) and (max-device-width: 480px),
         (max-width: 700px) {
-            .content {
-                max-width: 100%;
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: center;
-                margin: 0 auto;
-                max-height: none;
-            }
-            .header {
-                padding: 10px 10px;
-                display: flex;
-                flex-direction: column;
-            }
-            .date,
-            .register,
-            .main {
-                margin: 0 auto;
-            }
             .img {
                 max-width: 100%;
                 height: auto;
@@ -220,83 +194,97 @@
 </head>
 
 <body>
-    <div class=container>
-        <div class="content-container header">
-            <div class="title-detail">
-                <div class="topic arial darkgrey"><a href="/topic/{{.Topic}}">{{.Topic}}</a></div>
-                {{.Title}}
-                <div class="sub cap date arial darkgrey user"><a href="/{{.Username}}">{{.User}}</a> · {{.Date}}</div>
-            </div>
+  <div class=container>
+    {{template "_header" .}}
+    {{/* end of header */}}
+    <div class="content-container content ">
+      <div class="wrapper-content">
+        <h2 class="top-title">{{.Title}}</h2>
+        <div class="sub cap date arial darkgrey user"><a href="/{{.Username}}">{{.User}}</a> · <a href="/topic/{{.Topic}}">{{.Topic}}</a> · {{.Date}}</div>
+        {{/* ==wrapper= */}}
+        <div class="media-container">
+            <img src="{{.File}}" class="img"> 
+            {{if .Video}}
+            <div class="video"> <iframe height="100%" src="{{.Video}}"></iframe></div>
+            {{end}}
         </div>
-        <div class="content-container content ">
-            <div class="media-container">
-                <img src="{{.File}}" class="img"> {{if .Video}}
-                <div class="video"> <iframe height="100%" src="{{.Video}}"></iframe></div>
-                {{end}}
-            </div>
-            <div class="margin-bottom arial content-txt">{{.Content}}</div>
-            {{if .Cookie}} {{else}}
-            <div class="arial contact">
-                <div class="contact-container">
-                    <div class="key">Harga </div>
-                    <div class="value">{{.Price}}</div>
-                </div>
-                {{if .Address}}
-                <div class="contact-container">
-                    <div class="key">Alamat </div>
-                    <div class="city value"><a href="https://www.google.com/maps/search/?api=1&query={{.Map}}"><button class="cap">{{.Address}}</button></a></div>
-                </div>
-                {{/* */}} {{if .Address}}
-                <div class="contact-container">
-                    <div class="key arial">Kontak</div>
-                    <div class="value arial"><a href="/signin?post={{.ID}} "><button class="arial">Silahkan masuk</button></a> untuk melihat detail{{if .Email}} kontak pembuat iklan{{end}}.</div>
-                </div>
-                {{end}} {{/* / */}} {{end}}
-            </div>
-            {{end}} {{if .Cookie}} {{if .Email}}
-            <div class="arial contact">
-                <div class="contact-container">
-                    <div class="key">Harga </div>
-                    <div class="value">
-                        <span class="price">{{.Price}}</span>
-                    </div>
-                </div>
-                <div class="contact-container">
-                    <div class="key">Alamat </div>
-                    <div class="city value"><a href="https://www.google.com/maps/search/?api=1&query={{.Map}}"><button class="cap">{{.Address}}</button></a></div>
-                </div>
-                <div class="contact-container">
-                    <div class="key">Kontak </div>
-                    <div class="value"><a href="/{{.Username}}"><button>{{.User}}</button></a></div>
-                </div>
-                <div class="contact-container">
-                    <div class="key">Email </div>
-                    <div class="value"><a href="mailto: {{.Email}}"><button>{{.Email}}</button></a> </div>
-                </div>
-                <div class="contact-container">
-                    <div class="key">Whatsapp </div>
-                    <div class="value"><a href="https://wa.me/{{.Phone}}"><button>{{.Phone}}</button></a></div>
-                </div>
-            </div>
-            {{else}}
-            <div class="arial contact">
-                <div class="contact-container">
-                    <div class="key">Harga</div>
-                    <div class="value">{{.Price}}</div>
-                </div>
-                {{if .Address}}
-                <div class="contact-container">
-                    <div class="key">Alamat </div>
-                    <div class="city value"><a href="https://www.google.com/maps/search/?api=1&query={{.Map}}"><button class="cap">{{.Address}}</button></a></div>
-                </div>
-                {{end}}
-            </div>
-            {{end}} {{end}}
+        <div class="margin-bottom arial content-txt">
+          {{.Content}}
         </div>
-        <div class="footer arial darkgrey ">
-            Powered by <a href=https://github.com/fastrodev/fastrex>Fastrex</a>
+        {{if .Cookie}} 
+        {{/* empty cookie */}}
+        {{else}}
+        <div class="arial contact">
+          <div class="contact-container">
+              <div class="key">Harga </div>
+              <div class="value">{{.Price}}</div>
+          </div>
+            {{if .Address}}
+            <div class="contact-container">
+                <div class="key">Alamat </div>
+                <div class="city value"><a href="https://www.google.com/maps/search/?api=1&query={{.Map}}"><button class="cap">{{.Address}}</button></a></div>
+            </div>
+            {{if .Address}}
+            <div class="contact-container">
+                <div class="key arial">Kontak</div>
+                <div class="value arial"><a href="/signin?post={{.ID}} "><button class="arial">Silahkan masuk</button></a> untuk melihat detail{{if .Email}} kontak pembuat iklan{{end}}.</div>
+            </div>
+            {{end}}
+            {{end}}
         </div>
+        {{end}}
+        {{/* end of empty cookie */}}
+        {{if .Cookie}} 
+        {{if .Email}}
+        <div class="arial contact">
+          <div class="contact-container">
+              <div class="key">Harga </div>
+              <div class="value">
+                  <span class="price">{{.Price}}</span>
+              </div>
+          </div>
+          <div class="contact-container">
+              <div class="key">Alamat </div>
+              <div class="city value"><a href="https://www.google.com/maps/search/?api=1&query={{.Map}}"><button class="cap">{{.Address}}</button></a></div>
+          </div>
+          <div class="contact-container">
+              <div class="key">Kontak </div>
+              <div class="value"><a href="/{{.Username}}"><button>{{.User}}</button></a></div>
+          </div>
+          <div class="contact-container">
+              <div class="key">Email </div>
+              <div class="value"><a href="mailto: {{.Email}}"><button>{{.Email}}</button></a> </div>
+          </div>
+          <div class="contact-container">
+              <div class="key">Whatsapp </div>
+              <div class="value"><a href="https://wa.me/{{.Phone}}"><button>{{.Phone}}</button></a></div>
+          </div>
+        </div>
+        {{else}}
+        <div class="arial contact">
+            <div class="contact-container">
+                <div class="key">Harga</div>
+                <div class="value">{{.Price}}</div>
+            </div>
+            {{if .Address}}
+            <div class="contact-container">
+                <div class="key">Alamat </div>
+                <div class="city value"><a href="https://www.google.com/maps/search/?api=1&query={{.Map}}"><button class="cap">{{.Address}}</button></a></div>
+            </div>
+            {{end}}
+        </div>
+        {{end}} 
+        {{/* end of email */}}
+        {{end}}
+        {{/* end of cookie */}}
+        {{/* ==wrapper= */}}
+      </div>
+      {{/* end of wrapper content */}}
     </div>
+    {{/* end of content */}}
+  </div>
+  {{/* end of container */}}
+   {{template "script"}}
 </body>
 
 </html>

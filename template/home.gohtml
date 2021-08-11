@@ -3,91 +3,12 @@
 <html>
 
 <head>
-    <title>{{.Title}} | {{.Domain}}</title>
+    <title>{{.Title}} | Fastro.app</title>
     <meta charset=utf-8>
     <meta name=viewport content="width=device-width,initial-scale=1">
-    <style media=screen>
-        body {
-            margin: 0;
-            padding: 0;
-        }
-        
-        .container {
-            width: 100%;
-            background: #FFFFFF;
-        }
-        
-        .content-container {
-            max-width: 100%;
-            margin: 0 auto;
-            padding: 10px 10px;
-        }
-        
-        .header {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-        }
-        
-        .content {
-            display: flex;
-            flex-wrap: wrap;
-            align-content: baseline;
-            flex-direction: column;
-            max-height: 50rem;
-        }
-        
-        .arial {
-            font-family: Arial, Helvetica, sans-serif;
-        }
-        
-        .left {
-            text-align: left;
-        }
-        
-        .right {
-            text-align: right;
-        }
-        
-        .center {
-            text-align: center;
-        }
-        
-        .main {
-            font-size: xx-large;
-            font-weight: bold;
-            text-transform: capitalize;
-        }
-        
-        .register {
-            text-align: right;
-        }
-        
-        .title-ad {
-            text-transform: uppercase;
-            font-size: small;
-            background-color: black;
-            color: #FFFFFF;
-            padding: 10px 0;
-        }
-        
-        .footer {
-            color: darkgrey;
-            text-align: center;
-            font-size: small;
-            margin: 15px auto;
-        }
-        
-        .footer a {
-            color: darkgrey;
-            text-decoration: none;
-        }
-        
-        .cmd {
-            margin-bottom: 0.5em;
-        }
-        
-        .home-container {
+    {{template "_style"}}<style media=screen>
+
+       .home-container {
             width: 100%;
             display: flex;
         }
@@ -96,69 +17,38 @@
             min-width: 17em;
         }
         
-        .home-content {
+        .home-content, .content {
             width: 100%;
         }
-        
-        @media all and (min-device-width: 320px) and (max-device-width: 480px),
-        (max-width: 700px) {
-            .content {
-                max-width: 100%;
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: center;
-                margin: 0 auto;
-                max-height: none;
-            }
-            .topic {
-                max-width: 100%;
-                background-color: #fefefe;
-                margin: 0 auto;
-            }
-            .header {
-                padding: 10px 10px;
-                display: flex;
-                flex-direction: column;
-            }
-            .date,
-            .register,
-            .main {
-                margin: 0 auto;
-            }
-            .home-container {
-                flex-direction: column;
-            }
+
+        .cmd {
+            margin-bottom: 0.5em;
         }
+
+        .home-nav {
+            margin-top: 15px;
+            min-width: 17em;
+        }
+
     </style>
 </head>
 
 <body>
-    <div class=container>
-        <div class="content-container header">
-            <div class="date arial left">{{.Date}}</div>
-            <div class="title main">
-                {{.Name}}
-            </div>
-            {{if .Email}}
-            <div class="register arial right">
-                <span><a href="home">{{.Email}}</a></span>
-            </div>
-            {{end}}
-        </div>
-        <div class="content-container content arial">
-            <div class="home-container">
+  <div class=container>
+    {{template "_header" .}}
+    {{/* end of header */}}
+    <div class="content-container content">
+              <div class="home-container">
                 <div class="home-nav">
-                    <div class="cmd"><a href="/post"><button>Post</button></a> untuk membuat iklan.</div>
-                    <div class="cmd"><a href="/"><button>Index</button></a> untuk melihat halaman utama.</div>
                     <div class="cmd"><a href="/signout"><button>Signout</button></a></a> untuk keluar.</div>
                 </div>
                 <div class="home-content"></div>
             </div>
-        </div>
-        <div class="footer arial">
-            Powered by <a href=https://github.com/fastrodev/fastrex>Fastrex</a>
-        </div>
     </div>
+    {{/* end of content */}}
+  </div>
+  {{/* end of container */}}
+  {{template "script"}}
 </body>
 
 </html>

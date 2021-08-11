@@ -33,7 +33,7 @@ func (p *page) queryPage(req fastrex.Request, res fastrex.Response) {
 	desc := "Hasil pencarian berdasarkan topic: " + topic
 	data := struct {
 		Initial     string
-		Email       string
+		UserEmail   string
 		Title       string
 		Data        []FlatPost
 		Description string

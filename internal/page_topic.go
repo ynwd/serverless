@@ -31,7 +31,7 @@ func (p *page) topicPage(req fastrex.Request, res fastrex.Response) {
 	date := now.In(loc)
 	desc := "Hasil pencarian berdasarkan topic: " + topic
 	data := struct {
-		Email       string
+		UserEmail   string
 		Initial     string
 		Title       string
 		Data        []FlatPost

@@ -62,17 +62,23 @@ func (p *page) userPage(req fastrex.Request, res fastrex.Response) {
 	loc, _ := time.LoadLocation("Asia/Jakarta")
 	date := now.In(loc)
 	desc := fmt.Sprintf("Profile of %v", param)
-	usr, _ := p.db.getUserDetailByUsername(req.Context(), param)
-	name := "Guest"
+	// name of user
+	usr, _ := p.db.getUserDetailByUsername(req.Context(), user.Username)
 	initial := ""
 	if usr != nil {
-		name = usr.Name
 		initial = usr.Username[0:1]
+	}
+
+	// name of author
+	name := "Guest"
+	usr, _ = p.db.getUserDetailByUsername(req.Context(), param)
+	if usr != nil {
+		name = usr.Name
 	}
 
 	data := struct {
 		Initial     string
-		Email       string
+		UserEmail   string
 		Title       string
 		Data        []FlatPost
 		Description string

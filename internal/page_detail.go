@@ -46,6 +46,14 @@ func (p *page) detailPage(req fastrex.Request, res fastrex.Response) {
 		username = "guest"
 	}
 
+	usr, _ := p.getUserFromSession(req, res)
+	initial := ""
+	userEmail := ""
+	if usr != nil {
+		initial = usr.Username[0:1]
+		userEmail = usr.Email
+	}
+
 	if post.File != "" {
 		file = post.File
 	}
@@ -73,6 +81,7 @@ func (p *page) detailPage(req fastrex.Request, res fastrex.Response) {
 
 	ac := accounting.Accounting{Symbol: "Rp", Precision: 2}
 	data := struct {
+		Initial     string
 		Description string
 		Title       string
 		Topic       string
@@ -80,6 +89,7 @@ func (p *page) detailPage(req fastrex.Request, res fastrex.Response) {
 		Date        string
 		Content     string
 		Email       string
+		UserEmail   string
 		Phone       string
 		Address     string
 		Map         string
@@ -89,6 +99,7 @@ func (p *page) detailPage(req fastrex.Request, res fastrex.Response) {
 		Price       string
 		Video       string
 		Username    string
-	}{d, title, topic, file, date, content, email, phone, address, mapAddr, c.GetValue(), id, user, ac.FormatMoney(post.Price), video, username}
+		Domain      string
+	}{initial, d, title, topic, file, date, content, email, userEmail, phone, address, mapAddr, c.GetValue(), id, user, ac.FormatMoney(post.Price), video, username, DOMAIN}
 	res.Render("detail", data)
 }

@@ -39,8 +39,11 @@
 
     <div class="register arial">
         <a class="how small-radius" href="/#">Cara Kerja</a>
-        <a class="pasang small-radius" href="/post">Pasang</a> {{if .Email}}
-        <a class="pasang radius avatar" href="/home">{{.Initial}}</a> {{else}}
+        <a class="pasang small-radius" href="/post">Pasang</a> 
+        {{if .UserEmail}}
+        {{/* {{if .Email}} */}}
+        <a class="pasang radius avatar" href="/home">{{.Initial}}</a> 
+        {{else}}
         <a class="masuk small-radius" href="/signin">Masuk</a> {{end}}
     </div>
 
