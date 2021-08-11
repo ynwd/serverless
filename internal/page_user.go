@@ -62,8 +62,12 @@ func (p *page) userPage(req fastrex.Request, res fastrex.Response) {
 	loc, _ := time.LoadLocation("Asia/Jakarta")
 	date := now.In(loc)
 	desc := fmt.Sprintf("Profile of %v", param)
+
 	// name of user
-	usr, _ := p.db.getUserDetailByUsername(req.Context(), user.Username)
+	var usr *User
+	if user != nil {
+		usr, _ = p.db.getUserDetailByUsername(req.Context(), user.Username)
+	}
 	initial := ""
 	if usr != nil {
 		initial = usr.Username[0:1]
