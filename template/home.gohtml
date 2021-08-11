@@ -5,51 +5,31 @@
 <head>
     <title>{{.Title}} | Fastro.app</title>
     <meta charset=utf-8>
-    <meta name=viewport content="width=device-width,initial-scale=1">
-    {{template "_style"}}<style media=screen>
-
-       .home-container {
-            width: 100%;
-            display: flex;
+    <meta name=viewport content="width=device-width,initial-scale=1"> {{template "_style"}}{{template "_style_nav"}}
+    <style media=screen>
+        .greeting {
+            font-family: 'Roboto Slab', serif;
+            margin-left: 15px;
+            margin-top: unset;
         }
-        
-        .home-nav {
-            min-width: 17em;
-        }
-        
-        .home-content, .content {
-            width: 100%;
-        }
-
-        .cmd {
-            margin-bottom: 0.5em;
-        }
-
-        .home-nav {
-            margin: 15px;
-            min-width: 17em;
-        }
-
     </style>
+    <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
+
 </head>
 
 <body>
-  <div class=container>
-    {{template "_header" .}}
-    {{/* end of header */}}
-    <div class="content-container content">
-              <div class="home-container">
-                <div class="home-nav">
-                    <div class="cmd"><a href="/post"><button>Pasang Iklan</button></a></div>
-                    <div class="cmd"><a href="/signout"><button>Keluar</button></a></div>
+    <div class=container>
+        {{template "_header" .}}
+        <div class="content-container content">
+            <div class="home-container">
+                {{template "navigation"}}
+                <div class="home-content">
+                    <h1 class="greeting">Hello {{.Name}}</h1>
                 </div>
-                <div class="home-content"></div>
             </div>
+        </div>
     </div>
-    {{/* end of content */}}
-  </div>
-  {{/* end of container */}}
-  {{template "script"}}
+    {{template "script"}}
 </body>
 
 </html>

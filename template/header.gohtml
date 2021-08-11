@@ -23,8 +23,7 @@
 
 <!-- result header  -->
 
-{{define "_header"}}
-<div class="content-container header top">
+{{define "_header"}}<div class="content-container header top">
     <div class="title-container">
         <div class="title">
             <a href="/"><img width="30" src="/public/fstr.svg"></a>
@@ -39,12 +38,8 @@
 
     <div class="register arial">
         <a class="how small-radius" href="/#">Cara Kerja</a>
-        <a class="pasang small-radius" href="/post">Pasang</a> 
-        {{if .UserEmail}}
-        {{/* {{if .Email}} */}}
-        <a class="pasang radius avatar" href="/home">{{.Initial}}</a> 
-        {{else}}
+        <a class="pasang small-radius" href="/post">Pasang</a> {{if .UserEmail}}
+        <a class="masuk radius avatar" href="/home">{{.Initial}}</a> {{else}}
         <a class="masuk small-radius" href="/signin">Masuk</a> {{end}}
     </div>
-
 </div>{{end}}

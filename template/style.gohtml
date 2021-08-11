@@ -87,6 +87,7 @@
     .title a {
         color: #fff;
         text-decoration: none;
+        height: 30px;
     }
     
     .headline-container {
@@ -414,4 +415,45 @@
           margin: 10px 0px 10px 10px;
         }
     }
+</style>{{end}}
+
+
+{{define "_style_nav"}}<style media=screen>
+.home-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.home-nav {
+    min-width: 17em;
+}
+
+.home-content,
+.content {
+    width: 100%;
+}
+
+.cmd {
+    display: flex;
+    margin: 15px 10px;
+    text-decoration: none;
+    color: #fff;
+}
+
+.cmd-name {
+    margin-left: 10px;
+    line-height: 24px;
+}
+
+.home-nav {
+    background: #232f3e;
+    padding: 2px 0;
+    min-width: 10em;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.search-container {
+    display: none;
+}
 </style>{{end}}
