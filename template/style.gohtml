@@ -323,60 +323,15 @@
             max-width: calc(100%/2 - 10px);
             background-color: #fefefe;
         }
-        .content {
-            max-width: 100%;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            margin: 0 auto;
-            max-height: unset;
-        }
-        .card {
-            margin-right: unset;
-            max-width: unset;
-        }
-        .mobile {
-            display: flex;
-        }
-        .title {
-            min-width: 37px;
-            width: 37px;
-            color: white;
-            text-align: center;
-        }
-        .pasang,
-        .how {
-            display: none;
-        }
-        .title {
-            margin-right: 5%;
-        }
-        .avatar {
-            margin-top: 7px;
-            display: inline-block;
-            background: #0073b1;
-            color: #fff;
-            min-width: 20px;
-            max-height: 20px;
-            line-height: 21px;
-            text-transform: capitalize;
-        }
         .register {
             margin: 0 5px 0 5%;
             height: 100%;
             display: flex;
             justify-content: center;
         }
-        .title-container {
-            margin-right: 5%;
-            margin-left: 10px;
-        }
-        .wrapper {
-            margin: 10px 0px 10px 10px;
-        }
     }
     
-    @media all and (min-width: 50px) and (max-width: 319px) {
+    @media (max-width: 40.0rem) {
         .ads-header {
             max-width: 100%;
             background-color: #fefefe;
@@ -384,9 +339,6 @@
         .search,
         .search:focus {
             width: 100%;
-        }
-        .mobile {
-            display: flex;
         }
         .title {
             min-width: 37px;
@@ -409,7 +361,7 @@
         }
         .title-container {
             margin-right: unset;
-            margin-left: 10px;
+            margin-left: 5px;
         }
         .wrapper {
           margin: 10px 0px 10px 10px;
@@ -456,4 +408,25 @@
 .search-container {
     display: none;
 }
+.greeting {
+    font-family: 'Roboto Slab', serif;
+    margin-left: 15px;
+    margin-top: unset;
+}
+
+.content-container {
+    max-width: unset;
+}
+
+/* Larger than mobile screen */
+@media (max-width: 40.0rem) { 
+  .home-nav {
+    min-width: 3em;
+  }
+  .cmd-name {
+    display:none;
+  }
+}
+
+
 </style>{{end}}
