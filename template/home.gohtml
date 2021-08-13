@@ -6,6 +6,11 @@
     <title>{{.Title}} | Fastro.app</title>
     <meta charset=utf-8>
     <meta name=viewport content="width=device-width,initial-scale=1"> {{template "_style"}}{{template "_style_nav"}}
+    <style media=screen>
+        iframe {
+            border: unset;
+        }
+    </style>
 </head>
 
 <body>
@@ -14,8 +19,7 @@
             <div class="home-container">
                 {{template "navigation"}}
                 <div class="home-content">
-                    {{template "_header_home" .}}
-                    <h1 class="greeting">Hello {{.Name}}</h1>
+                    <iframe class="" width="100%" height="100%" src={{.Path}} title="description"></iframe>
                 </div>
             </div>
         </div>

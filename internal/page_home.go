@@ -9,6 +9,7 @@ import (
 )
 
 func (p *page) homePage(req fastrex.Request, res fastrex.Response) {
+
 	c, err := req.Cookie("__session")
 	if err != nil {
 		res.Redirect("/", 302)
@@ -32,9 +33,16 @@ func (p *page) homePage(req fastrex.Request, res fastrex.Response) {
 		log.Printf("error:homePage:getUserDetailByID: %v", err.Error())
 		createResponsePage(res, "Response", err.Error(), "")
 	}
+
+	item := req.URL.Query().Get("menu")
+	if item == "dashboard" {
+		item = user.Username
+	}
+
 	initial := user.Name[0:1]
 	userEmail := user.Email
 	data := struct {
+		Path      string
 		Initial   string
 		UserEmail string
 		Title     string
@@ -42,7 +50,7 @@ func (p *page) homePage(req fastrex.Request, res fastrex.Response) {
 		Name      string
 		Date      string
 		Domain    string
-	}{initial, userEmail, "Home", initial, user.Name, time.Now().Local().Format("2 January 2006"), DOMAIN}
+	}{item, initial, userEmail, "Home", initial, user.Name, time.Now().Local().Format("2 January 2006"), DOMAIN}
 	err = res.Render("home", data)
 	if err != nil {
 		log.Println(err.Error())
