@@ -20,7 +20,7 @@ type client struct {
 	firestore *firestore.Client
 }
 
-type Database interface {
+type Service interface {
 	add(ctx context.Context, collection string, data interface{}) (*firestore.DocumentRef, *firestore.WriteResult, error)
 	get(ctx context.Context, q *Query) (*firestore.DocumentSnapshot, error)
 	update(ctx context.Context, q *Query, updates []firestore.Update) (*firestore.WriteResult, error)
@@ -40,7 +40,7 @@ type Database interface {
 	getPostByUsername(ctx context.Context, username string) []interface{}
 }
 
-func createDatabase(ctx context.Context) Database {
+func createDatabase(ctx context.Context) Service {
 	return &client{firestore: createFirestoreClient(ctx)}
 }
 

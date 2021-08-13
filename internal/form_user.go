@@ -57,7 +57,7 @@ func (s *form) createUser(req fastrex.Request, res fastrex.Response) {
 	user["code"] = code
 	user["created"] = time.Now()
 
-	_, _, err := s.db.createUser(req.Context(), user)
+	_, _, err := s.svc.createUser(req.Context(), user)
 	if err != nil {
 		createResponsePage(res, respTitle, err.Error(), "")
 		return
@@ -104,7 +104,7 @@ func (s *form) getUserByEmailAndPassword(req fastrex.Request, res fastrex.Respon
 		return
 	}
 
-	user, err := s.db.getUserDetail(req.Context(), email, password)
+	user, err := s.svc.getUserDetail(req.Context(), email, password)
 	if err != nil {
 		createResponsePage(res, respTitle, "user tidak ditemukan. periksa email dan password anda", "")
 		return
@@ -112,7 +112,7 @@ func (s *form) getUserByEmailAndPassword(req fastrex.Request, res fastrex.Respon
 	c := fastrex.Cookie{}
 	userAgent := req.UserAgent()
 	ip := readUserIP(req)
-	ses := s.db.createSession(req.Context(), user.ID, userAgent, ip)
+	ses := s.svc.createSession(req.Context(), user.ID, userAgent, ip)
 	sessionID := base64.StdEncoding.EncodeToString([]byte(ses))
 
 	c.Name("__session").Value(sessionID).Path("/")

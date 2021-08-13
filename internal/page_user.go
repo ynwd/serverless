@@ -66,7 +66,7 @@ func (p *page) userPage(req fastrex.Request, res fastrex.Response) {
 	// name of user
 	var usr *User
 	if user != nil {
-		usr, _ = p.db.getUserDetailByUsername(req.Context(), user.Username)
+		usr, _ = p.svc.getUserDetailByUsername(req.Context(), user.Username)
 	}
 	initial := ""
 	if usr != nil {
@@ -75,7 +75,7 @@ func (p *page) userPage(req fastrex.Request, res fastrex.Response) {
 
 	// name of author
 	name := "Guest"
-	usr, _ = p.db.getUserDetailByUsername(req.Context(), param)
+	usr, _ = p.svc.getUserDetailByUsername(req.Context(), param)
 	if usr != nil {
 		name = usr.Name
 	}

@@ -16,6 +16,7 @@ func CreateApp() fastrex.App {
 	app.Ctx(ctx).Static("public", "/public")
 	app = createTemplate(app)
 	app = createPageRoute(app, page)
+	app = createHomePageRoute(app, page)
 	app = createFormRoute(app, form)
 	app = createApiRoute(app)
 	return app

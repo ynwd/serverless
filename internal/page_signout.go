@@ -25,7 +25,7 @@ func (p *page) signOut(req fastrex.Request, res fastrex.Response) {
 	sessionID := string(sessionByte)
 
 	if err == nil {
-		_, err := p.db.delete(req.Context(), &Query{
+		_, err := p.svc.delete(req.Context(), &Query{
 			Collection: "session",
 			Field:      "sessionID",
 			Op:         "==",

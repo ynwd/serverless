@@ -8,7 +8,6 @@ func createTemplate(app fastrex.App) fastrex.App {
 		Template("template/signin.gohtml").
 		Template("template/signup.gohtml").
 		Template("template/membership.gohtml").
-		Template("template/home.gohtml").
 		Template("template/detail.gohtml").
 		Template("template/create.gohtml").
 		Template("template/response.gohtml").
@@ -19,6 +18,13 @@ func createTemplate(app fastrex.App) fastrex.App {
 		Template("template/meta.gohtml").
 		Template("template/style.gohtml").
 		Template("template/script.gohtml").
-		Template("template/navigation.gohtml")
+		Template("template/navigation.gohtml").
+		Template("template/style_navigation.gohtml").
+		Template("template/home.gohtml").
+		Template("template/home_dashboard.gohtml").
+		Template("template/home_post.gohtml").
+		Template("template/home_topic.gohtml").
+		Template("template/home_account.gohtml").
+		Template("template/home_setting.gohtml")
 	return app
 }

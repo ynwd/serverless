@@ -16,14 +16,14 @@ func (p *page) detailPage(req fastrex.Request, res fastrex.Response) {
 	// belum
 	c, _ := req.Cookie("__session")
 
-	post, err := p.db.getPostDetail(req.Context(), id)
+	post, err := p.svc.getPostDetail(req.Context(), id)
 	if err != nil {
 		msg := err.Error()
 		createResponsePage(res, "Response", msg, "")
 		return
 	}
 
-	userDetail, _ := p.db.getUserDetailByID(req.Context(), post.User)
+	userDetail, _ := p.svc.getUserDetailByID(req.Context(), post.User)
 
 	file := ""
 	video := ""

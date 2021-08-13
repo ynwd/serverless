@@ -171,13 +171,13 @@ func (p *page) getUserFromSession(req fastrex.Request, res fastrex.Response) (*U
 	}
 	sessionID := string(sessionByte)
 	// fmt.Println("sessionID", sessionID)
-	userID, err := p.db.getUserIDWithSession(req.Context(), sessionID)
+	userID, err := p.svc.getUserIDWithSession(req.Context(), sessionID)
 	// fmt.Println("userID", userID)
 	if err != nil {
 		return nil, err
 	}
 
-	user, err := p.db.getUserDetailByID(req.Context(), userID)
+	user, err := p.svc.getUserDetailByID(req.Context(), userID)
 	if err != nil {
 		return nil, err
 	}

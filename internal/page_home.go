@@ -22,21 +22,21 @@ func (p *page) homePage(req fastrex.Request, res fastrex.Response) {
 		return
 	}
 	sessionID := string(sessionByte)
-	userID, err := p.db.getUserIDWithSession(req.Context(), string(sessionID))
+	userID, err := p.svc.getUserIDWithSession(req.Context(), string(sessionID))
 	if err != nil {
 		log.Printf("error:homePage:getUserIDWithSession: %v", err.Error())
 		return
 	}
 
-	user, err := p.db.getUserDetailByID(req.Context(), userID)
+	user, err := p.svc.getUserDetailByID(req.Context(), userID)
 	if err != nil {
 		log.Printf("error:homePage:getUserDetailByID: %v", err.Error())
 		createResponsePage(res, "Response", err.Error(), "")
 	}
 
-	item := req.URL.Query().Get("menu")
-	if item == "" || item == "dashboard" {
-		item = user.Username
+	path := req.URL.Query().Get("menu")
+	if path == "" || path == "dashboard" {
+		path = "dashboard"
 	}
 
 	initial := user.Name[0:1]
@@ -50,7 +50,7 @@ func (p *page) homePage(req fastrex.Request, res fastrex.Response) {
 		Name      string
 		Date      string
 		Domain    string
-	}{item, initial, userEmail, "Home", initial, user.Name, time.Now().Local().Format("2 January 2006"), DOMAIN}
+	}{path, initial, userEmail, "Home", initial, user.Name, time.Now().Local().Format("2 January 2006"), DOMAIN}
 	err = res.Render("home", data)
 	if err != nil {
 		log.Println(err.Error())

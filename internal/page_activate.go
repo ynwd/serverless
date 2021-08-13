@@ -12,13 +12,13 @@ func (p *page) activatePage(req fastrex.Request, res fastrex.Response) {
 	if len(params) > 0 {
 		code = params[0]
 	}
-	it, err := p.db.getUserByActivationCode(req.Context(), code)
+	it, err := p.svc.getUserByActivationCode(req.Context(), code)
 	if err != nil {
 		log.Println("activatePage:", err)
 	}
 
 	if it != nil {
-		go p.db.activateUserByCode(req.Context(), code)
+		go p.svc.activateUserByCode(req.Context(), code)
 		createResponsePage(res, "Aktivasi", "User telah diaktifkan. silahkan masuk.", "/signin")
 		return
 	}

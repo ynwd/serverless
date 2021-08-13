@@ -3,10 +3,10 @@ package internal
 import "github.com/fastrodev/fastrex"
 
 type form struct {
-	db Database
+	svc Service
 }
 
-func createForm(db Database) *form {
+func createForm(db Service) *form {
 	return &form{db}
 }
 

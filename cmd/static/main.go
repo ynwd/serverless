@@ -10,9 +10,25 @@ import (
 	"github.com/fastrodev/serverless/internal"
 )
 
+func firebaseRc(projectID string) string {
+	return `{
+	"projects": {
+		"default": "` + projectID + `"
+	}
+}`
+}
+
 func main() {
 	td := createData()
-	t, err := template.ParseFiles("template/default.gohtml", "template/footer.gohtml", "template/header.gohtml", "template/headline.gohtml", "template/meta.gohtml", "template/style.gohtml", "template/script.gohtml")
+	t, err := template.ParseFiles(
+		"template/default.gohtml",
+		"template/footer.gohtml",
+		"template/header.gohtml",
+		"template/headline.gohtml",
+		"template/meta.gohtml",
+		"template/style.gohtml",
+		"template/style_navigation.gohtml",
+		"template/script.gohtml")
 	if err != nil {
 		panic(err)
 	}
@@ -45,6 +61,7 @@ func main() {
 	}
 
 	internal.WriteFile(bfr.String(), "template/index.gohtml")
+	internal.WriteFile(firebaseRc(internal.PROJECT_ID), ".firebaserc")
 }
 
 func Filter(vs []internal.Post, f func(internal.Post) bool) []internal.Post {

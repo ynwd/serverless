@@ -21,6 +21,7 @@
     }
     
     .content-container {
+        max-width: 1920px;
         margin: 0 auto;
         background: #ffffff;
     }
@@ -282,7 +283,7 @@
         background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(35, 47, 62, 1) 48%, rgb(72 72 72) 100%);
     }
     
-    @media all and (min-width: 1366px) {
+    @media all and (min-width: 1920px) {
         .wrapper-container {
             margin: 0 -10px 0 0;
         }
@@ -368,108 +369,6 @@
         }
         .media-container {
           max-width: 250px;
-        }
-    }
-</style>{{end}}
-
-<!-- style_nav -->
-
-{{define "_style_nav"}}
-<link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
-<style media=screen>
-    @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@700&display=swap');
-    .home-container {
-        width: 100%;
-        height: 100%;
-        display: flex;
-    }
-    
-    .home-nav {
-        min-width: 17em;
-    }
-    
-    .brand {
-        font-size: large;
-        font-family: 'Roboto Slab', serif;
-    }
-    
-    .home-title-container {
-        color: #fff;
-        flex-grow: 1;
-        font-family: Arial, Helvetica, sans-serif;
-    }
-    
-    .home-content,
-    .content {
-        width: 100%;
-        margin: 0;
-        padding: 0;
-    }
-    
-    .cmd {
-        display: flex;
-        margin: 15px 20px;
-        text-decoration: none;
-        color: #fff;
-    }
-    
-    .cmd-name {
-        margin-left: 10px;
-        line-height: 24px;
-    }
-    
-    .home-nav {
-        background: #000;
-        padding: 2px 0;
-        min-width: 256px;
-        font-family: Arial, Helvetica, sans-serif;
-    }
-    
-    .greeting {
-        font-family: 'Roboto Slab', serif;
-        margin-left: 15px;
-        margin-top: unset;
-    }
-    
-    .content-container {
-        max-width: unset;
-    }
-    
-    .nav-header-container {
-        display: block;
-        text-decoration: none;
-    }
-    
-    .nav-header {
-        display: flex;
-        margin: 10px 20px;
-        color: #fff;
-        height: 100%;
-    }
-    /* Larger than mobile screen */
-    
-    @media (max-width: 40.0rem) {
-        .home-nav {
-            min-width: 4em;
-        }
-        .cmd-name {
-            display: none;
-        }
-        .register {
-            margin: 0 5px 0 10%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-        }
-        .how {
-            border-color: #0073b1;
-            color: #fff;
-            display: block;
-            text-align: center;
-            text-decoration: none;
-            margin: auto 5px;
-            height: 100%;
-            line-height: 30px;
         }
     }
 </style>{{end}}

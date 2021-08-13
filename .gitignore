@@ -1,4 +1,5 @@
 .firebase/
+.firebaserc
 tmp/
 public/
 fastro*.json

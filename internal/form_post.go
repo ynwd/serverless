@@ -148,7 +148,7 @@ func (s *form) createPost(req fastrex.Request, res fastrex.Response) {
 	post["file"] = file
 	post["video"] = video
 
-	s.db.addPost(req.Context(), post)
+	s.svc.addPost(req.Context(), post)
 
 	msg = "Iklan telah selesai disimpan. Klik tombol berikut untuk melihatnya."
 	url := "/post/" + postID
@@ -156,6 +156,6 @@ func (s *form) createPost(req fastrex.Request, res fastrex.Response) {
 }
 
 func (s *form) getPost(req fastrex.Request, res fastrex.Response) {
-	d := s.db.getPost(req.Context())
+	d := s.svc.getPost(req.Context())
 	res.Json(d)
 }
