@@ -18,6 +18,31 @@ func firebaseRc(projectID string) string {
 }`
 }
 
+func firebaseJson() string {
+	return `{
+	"hosting": {
+		"rewrites": [{
+				"source": "**",
+				"function": "Main"
+		}],
+		"ignore": [
+				"**/cmd/**",
+				"**/internal/**",
+				"**/public/**",
+				"**/template/**",
+				".gitignore",
+				"cloudbuild.yaml",
+				"firebase.json",
+				"go.mod",
+				"go.sum",
+				"README.md",
+				"serverless.go",
+				"**/.*"
+		]
+	}
+}`
+}
+
 func main() {
 	td := createData()
 	t, err := template.ParseFiles(
@@ -62,6 +87,7 @@ func main() {
 
 	internal.WriteFile(bfr.String(), "template/index.gohtml")
 	internal.WriteFile(firebaseRc(internal.PROJECT_ID), ".firebaserc")
+	internal.WriteFile(firebaseJson(), "firebase.json")
 }
 
 func Filter(vs []internal.Post, f func(internal.Post) bool) []internal.Post {
