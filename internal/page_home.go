@@ -35,7 +35,7 @@ func (p *page) homePage(req fastrex.Request, res fastrex.Response) {
 	}
 
 	item := req.URL.Query().Get("menu")
-	if item == "dashboard" {
+	if item == "" || item == "dashboard" {
 		item = user.Username
 	}
 
