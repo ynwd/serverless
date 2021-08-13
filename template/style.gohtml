@@ -44,18 +44,23 @@
     }
     
     .wrapper {
-      margin: 10px 0px 10px 10px;
+        margin: 10px 0px 10px 10px;
     }
     
     .title-container {
         margin-right: 10%;
         margin-left: 10px;
-    }
-    
-    .title {
-        height: 100%;
         display: flex;
         justify-content: center;
+        height: 100%;
+    }
+    
+    .title-container a,
+    .title-container img {
+        color: #fff;
+        text-decoration: none;
+        height: 24px;
+        margin: auto;
     }
     
     .footer {
@@ -82,12 +87,6 @@
     .footer a {
         color: darkgrey;
         text-decoration: none;
-    }
-    
-    .title a {
-        color: #fff;
-        text-decoration: none;
-        height: 30px;
     }
     
     .headline-container {
@@ -133,7 +132,8 @@
         font-weight: bold;
     }
     
-    .content, .wrapper {
+    .content,
+    .wrapper {
         display: flex;
         flex-wrap: wrap;
         align-content: baseline;
@@ -261,38 +261,38 @@
         line-height: 21px;
         text-transform: capitalize;
     }
-
+    
     .sticky {
-      position: fixed;
-      width: 100%;
-      top: 0;
-      left: 0;
-      right: 0;
-      margin: 0 auto;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
     }
-
+    
     .top-title {
-          margin: 0px auto;
-          width: 100%;
-          text-align: center;
-          font-family: 'Roboto Slab', serif;
-          border-bottom-style: solid;
-          border-width: thin;
-          padding: 15px 0;
-          color: #ffffff;
-          background: rgb(2, 0, 36);
-          background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(35, 47, 62, 1) 48%, rgb(72 72 72) 100%);
-      }
-
-    @media all and (min-width: 1024px) {
-      .wrapper-container {
-        margin: 0 -10px 0 0;
-      }
-      .wrapper {
-        margin: 10px 0px 10px 0px;
-      }
+        margin: 0px auto;
+        width: 100%;
+        text-align: center;
+        font-family: 'Roboto Slab', serif;
+        border-bottom-style: solid;
+        border-width: thin;
+        padding: 15px 0;
+        color: #ffffff;
+        background: rgb(2, 0, 36);
+        background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(35, 47, 62, 1) 48%, rgb(72 72 72) 100%);
     }
-
+    
+    @media all and (min-width: 1024px) {
+        .wrapper-container {
+            margin: 0 -10px 0 0;
+        }
+        .wrapper {
+            margin: 10px 0px 10px 0px;
+        }
+    }
+    
     @media all and (min-width: 601px) and (max-width: 700px) {
         .ads-header {
             max-width: calc(100%/4 - 10px);
@@ -331,7 +331,7 @@
         }
     }
     
-    @media (max-width: 40.0rem) {
+    @media (max-width: 320px) {
         .ads-header {
             max-width: 100%;
             background-color: #fefefe;
@@ -364,69 +364,109 @@
             margin-left: 5px;
         }
         .wrapper {
-          margin: 10px 0px 10px 10px;
+            margin: 10px 0px 10px 10px;
         }
     }
 </style>{{end}}
 
+<!-- style_nav -->
 
-{{define "_style_nav"}}<style media=screen>
-.home-container {
-    width: 100%;
-    height: 100%;
-    display: flex;
-}
-
-.home-nav {
-    min-width: 17em;
-}
-
-.home-content,
-.content {
-    width: 100%;
-}
-
-.cmd {
-    display: flex;
-    margin: 15px 10px;
-    text-decoration: none;
-    color: #fff;
-}
-
-.cmd-name {
-    margin-left: 10px;
-    line-height: 24px;
-}
-
-.home-nav {
-    background: #232f3e;
-    padding: 2px 0;
-    min-width: 10em;
-    font-family: Arial, Helvetica, sans-serif;
-}
-
-.search-container {
-    display: none;
-}
-.greeting {
-    font-family: 'Roboto Slab', serif;
-    margin-left: 15px;
-    margin-top: unset;
-}
-
-.content-container {
-    max-width: unset;
-}
-
-/* Larger than mobile screen */
-@media (max-width: 40.0rem) { 
-  .home-nav {
-    min-width: 3em;
-  }
-  .cmd-name {
-    display:none;
-  }
-}
-
-
+{{define "_style_nav"}}
+<link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
+<style media=screen>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@700&display=swap');
+    .home-container {
+        width: 100%;
+        height: 100%;
+        display: flex;
+    }
+    
+    .home-nav {
+        min-width: 17em;
+    }
+    
+    .brand {
+        font-size: large;
+        font-family: 'Roboto Slab', serif;
+    }
+    
+    .home-title-container {
+        color: #fff;
+        flex-grow: 1;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    
+    .home-content,
+    .content {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+    
+    .cmd {
+        display: flex;
+        margin: 15px 20px;
+        text-decoration: none;
+        color: #fff;
+    }
+    
+    .cmd-name {
+        margin-left: 10px;
+        line-height: 24px;
+    }
+    
+    .home-nav {
+        background: #232f3e;
+        padding: 2px 0;
+        min-width: 256px;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    
+    .greeting {
+        font-family: 'Roboto Slab', serif;
+        margin-left: 15px;
+        margin-top: unset;
+    }
+    
+    .content-container {
+        max-width: unset;
+    }
+    
+    .nav-header-container {
+        display: block;
+        text-decoration: none;
+    }
+    
+    .nav-header {
+        display: flex;
+        margin: 10px 20px;
+        color: #fff;
+        height: 100%;
+    }
+    /* Larger than mobile screen */
+    
+    @media (max-width: 40.0rem) {
+        .home-nav {
+            min-width: 4em;
+        }
+        .cmd-name {
+            display: none;
+        }
+        .register {
+            margin: 0 5px 0 10%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+        }
+        .how {
+            border-color: #0073b1;
+            color: #fff;
+            display: block;
+            text-align: center;
+            text-decoration: none;
+            margin: auto 5px;
+            height: 100%;
+            line-height: 30px;
+        }
+    }
 </style>{{end}}

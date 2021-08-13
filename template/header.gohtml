@@ -1,9 +1,7 @@
 {{define "_header_idx"}}
 <div class="content-container header top">
     <div class="title-container">
-        <div class="title">
-            <img width="30" src="/public/fstr.svg">
-        </div>
+        <img width="24" height="24" src="/public/fstr.svg">
     </div>
     <div class="search-container">
         <form method="POST" action="/search">
@@ -25,9 +23,7 @@
 
 {{define "_header"}}<div class="content-container header top">
     <div class="title-container">
-        <div class="title">
-            <a href="/"><img width="30" src="/public/fstr.svg"></a>
-        </div>
+       <a href="/"><img width="24" height="24" src="/public/fstr.svg"></a>
     </div>
     <div class="search-container">
         <form method="POST" action="/search">
@@ -37,9 +33,21 @@
     </div>
 
     <div class="register arial">
-        <a class="how small-radius" href="/#">Cara Kerja</a>
-        <a class="pasang small-radius" href="/post">Pasang</a> {{if .UserEmail}}
-        <a class="masuk radius avatar" href="/home">{{.Initial}}</a> {{else}}
-        <a class="masuk small-radius" href="/signin">Masuk</a> {{end}}
+      <a class="how small-radius" href="/#">Cara Kerja</a>
+      <a class="pasang small-radius" href="/post">Pasang</a> {{if .UserEmail}}
+      <a class="masuk radius avatar" href="/home">{{.Initial}}</a> {{else}}
+      <a class="masuk small-radius" href="/signin">Masuk</a> {{end}}
+    </div>
+</div>{{end}}
+
+{{define "_header_home"}}<div class="content-container header top">
+    <div class="home-title-container">
+      {{.Title}}
+    </div>
+
+    <div class="register arial">
+      {{if .UserEmail}}
+      <a class="masuk radius avatar" href="/home">{{.Initial}}</a>
+      {{end}}
     </div>
 </div>{{end}}

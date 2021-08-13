@@ -6,17 +6,15 @@
     <title>{{.Title}} | Fastro.app</title>
     <meta charset=utf-8>
     <meta name=viewport content="width=device-width,initial-scale=1"> {{template "_style"}}{{template "_style_nav"}}
-    <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
-
 </head>
 
 <body>
     <div class=container>
-        {{template "_header" .}}
         <div class="content-container content">
             <div class="home-container">
                 {{template "navigation"}}
                 <div class="home-content">
+                    {{template "_header_home" .}}
                     <h1 class="greeting">Hello {{.Name}}</h1>
                 </div>
             </div>

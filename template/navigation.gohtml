@@ -1,11 +1,27 @@
 {{define "navigation"}}
 <div class="home-nav">
+    <a class="nav-header-container" href="/">
+      <div class="nav-header">
+        <img width="24" height="24" src="/public/fstr.svg">
+        <span class="cmd-name brand">Fastro</span>
+      </div>
+    </a>
     <a class="cmd" href="/home">
         <span class="material-icons-outlined">dashboard</span>
-        <span class="cmd-name">Dashboard</span></a>
+        <span class="cmd-name">Dashboard</span>
+    </a>
     <a class="cmd" href="/post">
         <span class="material-icons-outlined">add</span>
-        <span class="cmd-name">Pasang Iklan</span></a>
+        <span class="cmd-name">New Post</span>
+    </a>
+    <a class="cmd" href="/home">
+        <span class="material-icons-outlined">topic</span>
+        <span class="cmd-name">Topic</span>
+    </a>
+    <a class="cmd" href="/home">
+        <span class="material-icons-outlined">account_balance_wallet</span>
+        <span class="cmd-name">Quota</span>
+    </a>
     <a class="cmd" href="/home">
         <span class="material-icons-outlined">account_box</span>
         <span class="cmd-name">Account</span>
@@ -15,6 +31,6 @@
         <span class="cmd-name">Settings</span></a>
     <a class="cmd" href="/signout">
         <span class="material-icons-outlined">logout</span>
-        <span class="cmd-name">Keluar</span></a>
+        <span class="cmd-name">Logout</span></a>
 </div>
 {{end}}

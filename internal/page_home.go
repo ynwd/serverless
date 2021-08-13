@@ -43,5 +43,8 @@ func (p *page) homePage(req fastrex.Request, res fastrex.Response) {
 		Date      string
 		Domain    string
 	}{initial, userEmail, "Home", initial, user.Name, time.Now().Local().Format("2 January 2006"), DOMAIN}
-	res.Render("home", data)
+	err = res.Render("home", data)
+	if err != nil {
+		log.Println(err.Error())
+	}
 }
