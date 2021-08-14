@@ -1,7 +1,5 @@
 package internal
 
-import "os"
-
 const (
 	DOMAIN        = "Fastro.app"
 	BUCKET_NAME   = "fastro-images"
@@ -9,6 +7,5 @@ const (
 	TITLE         = "Iklan baris online - Beta "
 	DESC          = "Membantu Anda membuat iklan baris online yang gampang dicari, nyaman dibaca, ringan, dan responsif."
 	REDIRECT_CODE = 302
+	PROJECT_ID    = "fastro-319406"
 )
-
-var PROJECT_ID string = os.Getenv("PROJECT_ID")
