@@ -1,8 +1,10 @@
 package internal
 
 import (
+	"log"
 	"strings"
 
+	"cloud.google.com/go/firestore"
 	"github.com/fastrodev/fastrex"
 	"github.com/leekchan/accounting"
 )
@@ -13,7 +15,6 @@ func (p *page) detailPage(req fastrex.Request, res fastrex.Response) {
 	if len(params) > 0 {
 		id = params[0]
 	}
-	// belum
 	c, _ := req.Cookie("__session")
 
 	post, err := p.svc.getPostDetail(req.Context(), id)
@@ -36,6 +37,7 @@ func (p *page) detailPage(req fastrex.Request, res fastrex.Response) {
 	address := post.Address
 	user := userDetail.Name
 	username := userDetail.Username
+	view := post.View
 	if post.Video != "" {
 		s := strings.Split(post.Video, "=")
 		video = "https://www.youtube.com/embed/" + s[1] + "?autoplay=1&mute=1"
@@ -101,5 +103,31 @@ func (p *page) detailPage(req fastrex.Request, res fastrex.Response) {
 		Username    string
 		Domain      string
 	}{initial, d, title, topic, file, date, content, email, userEmail, phone, address, mapAddr, c.GetValue(), id, user, ac.FormatMoney(post.Price), video, username, DOMAIN}
-	res.Render("detail", data)
+
+	err = res.Render("detail", data)
+
+	if err != nil {
+		log.Println(err.Error())
+	} else {
+		go p.updateView(req, id, view)
+	}
+}
+
+func (p *page) updateView(req fastrex.Request, id string, view int64) {
+	_, err := p.svc.update(req.Context(), &Query{
+		Collection: "post",
+		Field:      "id",
+		Op:         "==",
+		Value:      id,
+		OrderBy:    "created",
+	}, []firestore.Update{
+		{
+			Path:  "view",
+			Value: view + 1,
+		},
+	})
+
+	if err != nil {
+		log.Println(err.Error())
+	}
 }

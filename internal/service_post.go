@@ -34,11 +34,14 @@ func (d *client) getPostDetail(ctx context.Context, id string) (Post, error) {
 
 	post := Post{}
 	var phone, email, address, file, video string
+	var view int64
+
 	pn := item["phone"]
 	em := item["email"]
 	ad := item["address"]
 	fl := item["file"]
 	vd := item["video"]
+	vw := item["view"]
 	if pn == nil {
 		phone = ""
 	} else {
@@ -64,6 +67,11 @@ func (d *client) getPostDetail(ctx context.Context, id string) (Post, error) {
 	} else {
 		video = vd.(string)
 	}
+	if vw == nil {
+		view = 0
+	} else {
+		view = vw.(int64)
+	}
 
 	post.Phone = phone
 	post.Email = email
@@ -78,6 +86,7 @@ func (d *client) getPostDetail(ctx context.Context, id string) (Post, error) {
 	post.User = item["user"].(string)
 	post.Created = item["created"].(time.Time)
 	post.Price = item["price"].(int64)
+	post.View = view
 	return post, nil
 }
 

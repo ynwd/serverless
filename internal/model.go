@@ -15,6 +15,7 @@ type Post struct {
 	Address string    `json:"address"`
 	Price   int64     `json:"price"`
 	Video   string    `json:"video"`
+	View    int64     `json:"view"`
 	Created time.Time `json:"created,omitempty"`
 }
 

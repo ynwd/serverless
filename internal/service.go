@@ -21,6 +21,7 @@ type client struct {
 }
 
 type Service interface {
+	store() *firestore.Client
 	add(ctx context.Context, collection string, data interface{}) (*firestore.DocumentRef, *firestore.WriteResult, error)
 	get(ctx context.Context, q *Query) (*firestore.DocumentSnapshot, error)
 	update(ctx context.Context, q *Query, updates []firestore.Update) (*firestore.WriteResult, error)
@@ -50,6 +51,10 @@ type Query struct {
 	Op         string
 	Value      interface{}
 	OrderBy    string
+}
+
+func (d *client) store() *firestore.Client {
+	return d.firestore
 }
 
 func (d *client) add(ctx context.Context, collection string, data interface{}) (

@@ -89,7 +89,13 @@ func ReadPostByUsername(username string) []Post {
 
 	for _, v := range db.getPostByUsername(ctx, username) {
 		var p map[string]interface{} = v.(map[string]interface{})
+		var view int64
+		if p["view"] != nil {
+			view = p["view"].(int64)
+		}
+
 		post := Post{}
+		post.View = view
 		post.ID = p["id"].(string)
 		post.Title = p["title"].(string)
 		post.Topic = p["topic"].(string)
