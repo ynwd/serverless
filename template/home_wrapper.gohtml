@@ -1,0 +1,187 @@
+{{define "upper"}}
+<!DOCTYPE html>
+
+<head>
+    <style>
+        body,
+        .container {
+            margin: 0;
+        }
+        
+        .header {
+            background: #000;
+        }
+        
+        .header-container {
+            font-family: Arial, Helvetica, sans-serif;
+            display: flex;
+            color: #fff;
+        }
+        
+        .title-container,
+        .avatar-container {
+            margin: 18px 0;
+        }
+        
+        .title-container {
+            flex-grow: 1;
+        }
+        
+        .title {
+            line-height: 24px;
+        }
+        
+        .avatar-container {
+            display: flex;
+        }
+        
+        .avatar {
+            display: inline-block;
+            background: #0073b1;
+            color: #fff;
+            width: 24px;
+            height: 24px;
+            line-height: 24px;
+            text-transform: capitalize;
+            border-radius: 15px;
+            text-align: center;
+            line-height: 24px;
+        }
+        
+        .username {
+            color: #fff;
+            margin-right: 5px;
+            line-height: 24px;
+        }
+        /* dashboard */
+        
+        .table-data {
+            border: 1px solid #C0C0C0;
+            border-collapse: collapse;
+            padding: 5px;
+        }
+        
+        .table-data th {
+            border-top: 1px solid #C0C0C0;
+            border-bottom: 1px solid #C0C0C0;
+            padding: 5px;
+            background-color: rgba(0, 0, 0, 0.04);
+            text-align: left;
+        }
+        
+        .table-data td {
+            border-top: 1px solid #C0C0C0;
+            border-bottom: 1px solid #C0C0C0;
+            padding: 5px;
+        }
+        
+        .table-data {
+            width: 100%;
+            color: rgb(0, 0, 0);
+            font-family: arial;
+            font-size: 13px;
+            font-weight: 400;
+            line-height: 20px;
+        }
+        
+        .tr-table-data {
+            background-color: rgba(0, 0, 0, 0.04);
+        }
+        /* end of dashboard */
+        /* ================ */
+        /* ================ */
+        /* ================ */
+        /* post */
+        
+        .main {
+            font-size: xx-large;
+            font-weight: bold;
+            text-transform: capitalize;
+            text-align: center;
+        }
+        
+        form {
+            max-width: 400px;
+            margin-left: 15px;
+            margin-top: 15px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        form input,
+        form textarea {
+            margin-bottom: 1em;
+            background: #fff;
+            border: 1px solid #9c9c9c;
+        }
+        
+        form button {
+            padding: 0.7em;
+        }
+        
+        textarea,
+        input,
+        select,
+        button {
+            width: 100%;
+            padding: 10px 10px;
+            margin-bottom: 1rem;
+        }
+        
+        textarea,
+        select {
+            margin-bottom: 1em;
+        }
+        
+        textarea {
+            height: 6rem;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        
+        .arial {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        
+         ::placeholder {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        
+        button,
+        select {
+            width: calc(100% + 22px);
+        }
+        
+        @media (max-width: 480px) {
+            form {
+                width: 80%;
+            }
+        }
+        
+        @media (max-width: 280px) {
+            form {
+                width: 75%;
+            }
+        }
+        /* end of post */
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-container">
+                <div class="title-container">
+                    <div class="title">{{.Title}}</div>
+                </div>
+                <div class="avatar-container">
+                    <div class="username">{{.Name}}</div>
+                    <div class="avatar">{{.Initial}}</div>
+                </div>
+            </div>
+        </div>
+        {{end}} {{/* put the content here */}} {{define "lower"}}
+    </div>
+</body>
+
+</html>
+{{end}}

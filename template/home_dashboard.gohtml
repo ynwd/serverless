@@ -1,11 +1,29 @@
 {{define "home_dashboard"}}
-<style>
-    body,
-    .container {
-        margin: 0;
-    }
-</style>
-<div class="container">
-    dashboard
-</div>
+<!--  -->
+{{template "upper" .}}
+<div class="content">
+    <table class="table-data">
+        <thead>
+            <tr class="tr-table-data">
+                <th>ID</th>
+                <th>Title</th>
+                <th>Topic</th>
+                <th>Created</th>
+                <th>Views</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{ range $key, $value := .Data }}
+            <tr>
+                <td>{{.ID}}</td>
+                <td>{{.Title}}</td>
+                <td>{{.Topic}}</td>
+                <td>{{.Created.Format "02 Jan 2006 15:04:05"}}</td>
+                <td>123</td>
+            </tr>
+            {{end}}
+        </tbody>
+    </table>
+</div>{{template "lower"}}
+<!--  -->
 {{end}}
