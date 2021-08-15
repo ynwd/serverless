@@ -13,6 +13,7 @@ func createForm(db Service) *form {
 func createFormRoute(app fastrex.App, f *form) fastrex.App {
 	app.Get("/form/post", f.getPost).
 		Post("/form/post", f.createPost).
+		Post("/form/update", f.updatePost).
 		Post("/form/signup", f.createUser).
 		Post("/form/signin", f.getUserByEmailAndPassword)
 	return app

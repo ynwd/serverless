@@ -12,8 +12,9 @@
 
     <div class="register arial">
         <a class="how small-radius" href="/#">Cara Kerja</a>
-        <a class="pasang small-radius" href="/post">Pasang</a> {{`{{if .Email}}`}}
-        <a class="masuk radius avatar" href="/home">{{`{{.Initial}}`}}</a> {{`{{else}}`}}
+        {{`{{if .Email}}`}}
+        <a class="masuk radius avatar" href="/home">{{`{{.Initial}}`}}</a> 
+        {{`{{else}}`}}
         <a class="masuk small-radius" href="/signin">Masuk</a> {{`{{end}}`}}
     </div>
 </div>
@@ -33,10 +34,13 @@
     </div>
 
     <div class="register arial">
+      {{if .UserEmail}}
+      <a class="pasang" href="/home/post/{{.ID}}">Update Post</a> 
+      <a class="masuk radius avatar" href="/home">{{.Initial}}</a> 
+      {{else}}
       <a class="how small-radius" href="/#">Cara Kerja</a>
-      <a class="pasang small-radius" href="/post">Pasang</a> {{if .UserEmail}}
-      <a class="masuk radius avatar" href="/home">{{.Initial}}</a> {{else}}
-      <a class="masuk small-radius" href="/signin">Masuk</a> {{end}}
+      <a class="masuk" href="/signin">Masuk</a> 
+      {{end}}
     </div>
 </div>{{end}}
 

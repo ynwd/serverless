@@ -39,7 +39,8 @@ func (p *page) queryPage(req fastrex.Request, res fastrex.Response) {
 		Description string
 		Date        string
 		Domain      string
-	}{initial, email, topic, td, desc, date.Format("2 January 2006"), DOMAIN}
+		ID          string
+	}{initial, email, topic, td, desc, date.Format("2 January 2006"), DOMAIN, ""}
 
 	err := res.Render("result", data)
 	if err != nil {

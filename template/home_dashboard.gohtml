@@ -15,7 +15,7 @@
         <tbody>
             {{ range $key, $value := .Data }}
             <tr>
-                <td>{{.ID}}</td>
+                <td><a class="id" href="/post/{{.ID}}">{{.ID}}</a></td>
                 <td>{{.Title}}</td>
                 <td>{{.Topic}}</td>
                 <td>{{.Created.Format "02 Jan 2006 15:04:05"}}</td>

@@ -2,7 +2,6 @@
 .firebaserc
 firebase.json
 tmp/
-public/
 fastro*.json
 setup.md
 .DS_Store
