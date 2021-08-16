@@ -31,6 +31,6 @@ func createHomePageRoute(app fastrex.App, p *page) fastrex.App {
 		Get("/home/topic", p.homeTopicPage).
 		Get("/home/account", p.homeAccountPage).
 		Get("/home/setting", p.homeSettingPage).
-		Get("/home/search", p.idxPage)
+		Get("/home/search", p.homeSearchPage)
 	return app
 }
