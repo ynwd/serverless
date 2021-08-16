@@ -11,8 +11,8 @@ func (p *page) idxPage(req fastrex.Request, res fastrex.Response) {
 	email := ""
 	initial := ""
 	if user != nil {
-		email = user.Email
-		initial = user.Username[0:1]
+		res.Redirect("/home", 302)
+		return
 	}
 
 	data := struct {
