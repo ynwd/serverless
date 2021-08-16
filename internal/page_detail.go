@@ -57,7 +57,7 @@ func (p *page) detailPage(req fastrex.Request, res fastrex.Response) {
 	}
 
 	edit := ""
-	if usr.ID == userDetail.ID {
+	if usr != nil && (usr.ID == userDetail.ID) {
 		edit = "true"
 	}
 
