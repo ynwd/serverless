@@ -12,7 +12,7 @@
 
     <div class="login-container arial">
         {{`{{if .Email}}`}}
-        <a class="masuk radius avatar" href="/home">{{`{{.Initial}}`}}</a> 
+        <a class="masuk radius avatar" href="#">{{`{{.Initial}}`}}</a> 
         {{`{{else}}`}}
         <a class="masuk small-radius" href="/signin"><span class="material-icons-outlined">login</span></a> 
         {{`{{end}}`}}
@@ -51,10 +51,10 @@
 
     <div class="login-container arial">
       {{if .UserEmail}}
-      {{if .Edit}}}}
-      <a class="edit" href="/home/post/{{.ID}}"><span class="material-icons-outlined">edit</span></a>
-      {{end}} 
-      <a class="masuk radius avatar" href="/home">{{.Initial}}</a> 
+        {{if .Edit}}}}
+        <a class="edit" href="/home/post/{{.ID}}"><span class="material-icons-outlined">edit</span></a>
+        {{end}} 
+      <a class="masuk radius avatar" href="#">{{.Initial}}</a> 
       {{else}}
       <a class="masuk small-radius" href="/signin"><span class="material-icons-outlined">login</span></a> 
       {{end}}
