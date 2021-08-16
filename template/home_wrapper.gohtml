@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 
 <head>
+    <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
     <style>
         body,
         .container {
@@ -29,6 +30,9 @@
         }
         
         .title {
+            height: 24px;
+            margin: auto;
+            height: 100%;
             line-height: 24px;
         }
         
@@ -86,6 +90,12 @@
         
         .tr-table-data {
             background-color: rgba(0, 0, 0, 0.04);
+        }
+        .home-add {
+          display: flex;
+          text-decoration: none;
+          color: #fff;
+          margin-right: 10px;
         }
         /* end of dashboard */
         /* ================ */
@@ -158,11 +168,13 @@
         .id:hover {
             color: royalblue;
             text-decoration: underline;
-        }
-        
+        }        
         @media (max-width: 480px) {
             form {
                 width: 80%;
+            }
+            .id-container, id-topic {
+              display: none;
             }
         }
         
@@ -170,13 +182,17 @@
             form {
                 width: 75%;
             }
+            .id-container, id-topic {
+              display: none;
+            }
         }
-        /* end of post */
+        /* end of post */        
     </style>
 </head>
 
 <body>
-    <div class="container">
+    <div class="container">{{end}}
+        {{define "generic_home_header"}}
         <div class="header">
             <div class="header-container">
                 <div class="title-container">
@@ -188,9 +204,10 @@
                 </div>
             </div>
         </div>
-        {{end}} {{/* put the content here */}} {{define "lower"}}
+        {{end}}
+        {{/* put the content here */}} 
+        {{define "lower"}}
     </div>
 </body>
-
 </html>
 {{end}}

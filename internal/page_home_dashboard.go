@@ -22,7 +22,7 @@ func (p *page) homeDashboardPage(req fastrex.Request, res fastrex.Response) {
 		Title   string
 		Data    []FlatPost
 	}{
-		initial, name, "Dashboard", td,
+		initial, name, "Post", td,
 	}
 
 	err := res.Render("home_dashboard", data)

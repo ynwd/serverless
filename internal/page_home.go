@@ -35,8 +35,8 @@ func (p *page) homePage(req fastrex.Request, res fastrex.Response) {
 	}
 
 	path := req.URL.Query().Get("menu")
-	if path == "" || path == "dashboard" {
-		path = "dashboard"
+	if path == "" {
+		path = "search"
 	}
 
 	initial := user.Name[0:1]
