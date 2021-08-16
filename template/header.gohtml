@@ -10,12 +10,12 @@
         </form>
     </div>
 
-    <div class="register arial">
-        <a class="how small-radius" href="/#">Cara Kerja</a>
+    <div class="login-container arial">
         {{`{{if .Email}}`}}
         <a class="masuk radius avatar" href="/home">{{`{{.Initial}}`}}</a> 
         {{`{{else}}`}}
-        <a class="masuk small-radius" href="/signin">Masuk</a> {{`{{end}}`}}
+        <a class="masuk small-radius" href="/signin"><span class="material-icons-outlined">login</span></a> 
+        {{`{{end}}`}}
     </div>
 </div>
 {{end}}
@@ -33,13 +33,28 @@
         </form>
     </div>
 
-    <div class="register arial">
+    <div class="login-container arial">
       {{if .UserEmail}}
-      <a class="pasang" href="/home/post/{{.ID}}">Update Post</a> 
+      <a class="masuk radius avatar" href="/home">{{.Initial}}</a> 
+
+      {{else}}
+      <a class="masuk small-radius" href="/signin"><span class="material-icons-outlined">login</span></a> 
+      {{end}}
+    </div>
+</div>{{end}}
+
+{{define "_header_detail"}}<div class="content-container header top">
+    <div class="title-container">
+       <a href="/"><img width="24" height="24" src="/public/fstr.svg"></a>
+    </div>
+    <div class="search-container"></div>
+
+    <div class="login-container arial">
+      {{if .UserEmail}}
+      <a class="edit" href="/home/post/{{.ID}}"><span class="material-icons-outlined">edit</span></a> 
       <a class="masuk radius avatar" href="/home">{{.Initial}}</a> 
       {{else}}
-      <a class="how small-radius" href="/#">Cara Kerja</a>
-      <a class="masuk" href="/signin">Masuk</a> 
+      <a class="masuk small-radius" href="/signin"><span class="material-icons-outlined">login</span></a> 
       {{end}}
     </div>
 </div>{{end}}

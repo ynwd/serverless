@@ -1,4 +1,5 @@
 {{define "_style"}}
+<link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
 <style media=screen>
     @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@700;800&display=swap');
     body {
@@ -31,28 +32,28 @@
         width: 100%;
         display: flex;
         flex-direction: row;
-        flex-wrap: wrap;
         justify-content: space-between;
         background-color: #232f3e;
     }
     
-    .register {
-        margin: 0 5px 0 10%;
+    .login-container {
+        margin-left: 10px;
+        margin-right: 10px;
         height: 100%;
         display: flex;
         justify-content: center;
     }
     
-    .wrapper {
-        margin: 10px 0px 10px 10px;
-    }
-    
     .title-container {
-        margin-right: 10%;
+        margin-right: 10px;
         margin-left: 10px;
         display: flex;
         justify-content: center;
         height: 100%;
+    }
+
+    .wrapper {
+        margin: 10px 0px 10px 10px;
     }
     
     .title-container a,
@@ -221,17 +222,13 @@
         outline: unset;
     }
     
-    .masuk,
-    .pasang,
-    .how {
-        border-color: #0073b1;
+    .masuk {
         color: #fff;
-        display: block;
+        display: inline-block;
         text-align: center;
         text-decoration: none;
-        margin: auto 5px;
-        height: 100%;
-        line-height: 30px;
+        margin: auto;
+        height: 24px;
     }
     
     .pasang,
@@ -255,9 +252,9 @@
         display: inline-block;
         background: #0073b1;
         color: #fff;
-        min-width: 20px;
-        max-height: 20px;
-        line-height: 21px;
+        min-width: 24px;
+        max-height: 24px;
+        line-height: 24px;
         text-transform: capitalize;
     }
     
@@ -281,6 +278,12 @@
         color: #ffffff;
         background: rgb(2, 0, 36);
         background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(35, 47, 62, 1) 48%, rgb(72 72 72) 100%);
+    }
+
+    .edit {
+      margin: 0 10px 0 0;
+      height: 24px;
+      color: #fff;
     }
     
     @media all and (min-width: 1920px) {
@@ -347,9 +350,6 @@
         .search-container {
             padding: 0 15px;
         }
-        .register {
-            margin: unset;
-        }
         .how,
         .pasang {
             display: none;
@@ -362,7 +362,11 @@
         }
         .title-container {
             margin-right: unset;
-            margin-left: 5px;
+            margin-left: 10px;
+        }
+        .login-container {
+            margin-right: 10px;
+            margin-left: unset;
         }
         .wrapper {
             margin: 10px 0px 10px 10px;

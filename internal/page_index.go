@@ -21,7 +21,8 @@ func (p *page) idxPage(req fastrex.Request, res fastrex.Response) {
 		Title       string
 		Description string
 		Domain      string
-	}{initial, email, TITLE, DESC, DOMAIN}
+		Path        string
+	}{initial, email, TITLE, DESC, DOMAIN, req.URL.Path}
 	err := res.Render(data)
 	if err != nil {
 		log.Panic(err.Error())
