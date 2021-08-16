@@ -56,6 +56,11 @@ func (p *page) detailPage(req fastrex.Request, res fastrex.Response) {
 		userEmail = usr.Email
 	}
 
+	edit := ""
+	if usr.ID == userDetail.ID {
+		edit = "true"
+	}
+
 	if post.File != "" {
 		file = post.File
 	}
@@ -102,7 +107,8 @@ func (p *page) detailPage(req fastrex.Request, res fastrex.Response) {
 		Video       string
 		Username    string
 		Domain      string
-	}{initial, d, title, topic, file, date, content, email, userEmail, phone, address, mapAddr, c.GetValue(), id, user, ac.FormatMoney(post.Price), video, username, DOMAIN}
+		Edit        string
+	}{initial, d, title, topic, file, date, content, email, userEmail, phone, address, mapAddr, c.GetValue(), id, user, ac.FormatMoney(post.Price), video, username, DOMAIN, edit}
 
 	err = res.Render("detail", data)
 
