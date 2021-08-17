@@ -46,7 +46,11 @@
             </div>
             {{end}}
             <input type="file" id="file" name="file">
-
+            {{if .PostVideo}}
+            <div class="post-video-container">
+                <iframe height="100%" width="auto" src="{{.Video}}"></iframe>
+            </div>
+            {{end}}
             <input type="text" id="video" name="video" value="{{.PostVideo}}" placeholder="Video youtube. Contoh: https://www.youtube.com/watch?v=jNQXAC9IVRw">
 
             <textarea id="content" name="content" placeholder="Konten. Contoh: honda beat tahun 2021, mulus, jarang dipakai, kunci original, harga 10jt, bisa dinego.">{{printf "%s" .PostContent}}</textarea> {{if .PostPrice}}

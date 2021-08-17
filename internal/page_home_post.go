@@ -2,6 +2,7 @@ package internal
 
 import (
 	"log"
+	"strings"
 
 	"github.com/fastrodev/fastrex"
 )
@@ -93,6 +94,12 @@ func (p *page) homeUpdatePost(req fastrex.Request, res fastrex.Response) {
 		log.Println(err.Error())
 	}
 
+	video := ""
+	if post.Video != "" {
+		s := strings.Split(post.Video, "=")
+		video = "https://www.youtube.com/embed/" + s[1] + "?autoplay=1&mute=1"
+	}
+
 	initial := user.Name[0:1]
 	data := struct {
 		Initial     string
@@ -109,6 +116,7 @@ func (p *page) homeUpdatePost(req fastrex.Request, res fastrex.Response) {
 		PostContent []byte
 		PostID      string
 		PostFile    string
+		Video       string
 	}{
 		initial,
 		user.Name,
@@ -124,6 +132,7 @@ func (p *page) homeUpdatePost(req fastrex.Request, res fastrex.Response) {
 		[]byte(post.Content),
 		post.ID,
 		post.File,
+		video,
 	}
 
 	err = res.Render("home_post", data)

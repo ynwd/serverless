@@ -100,9 +100,14 @@
         
         .img,
         .video {
+            margin: auto;
             margin-bottom: 1em;
             margin-top: 1em;
-            width: 100%;
+            
+        }
+
+        .img {
+          width: 100%;
         }
         
         .contact {
@@ -164,6 +169,7 @@
             display: -webkit-flex;
             /* NEW - Chrome */
             display: flex;
+            justify-content:space-between;
         }
 
          .wrapper-content {
@@ -204,7 +210,9 @@
         <div class="sub cap date arial darkgrey user"><a href="/{{.Username}}">{{.User}}</a> · <a href="/topic/{{.Topic}}">{{.Topic}}</a> · {{.Date}}</div>
         {{/* ==wrapper= */}}
         <div class="media-container">
+            {{if .File}}
             <img src="{{.File}}" class="img"> 
+            {{end}}
             {{if .Video}}
             <div class="video"> <iframe height="100%" width="auto" src="{{.Video}}"></iframe></div>
             {{end}}
