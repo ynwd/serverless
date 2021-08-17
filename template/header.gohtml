@@ -54,6 +54,7 @@
 
 {{define "_header_detail"}}<div class="content-container header top">
     <div class="title-container">
+      <a class="share" href="/post/{{.ID}}"><span class="material-icons-outlined">share</span></a>
       {{if .UserEmail}}
       {{if .Edit}}
         <a class="edit" href="/home/post/{{.ID}}"><span class="material-icons-outlined">edit</span></a>
