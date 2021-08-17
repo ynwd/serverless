@@ -23,6 +23,13 @@
     <meta property="og:url" content="https://fastro.app/post/{{.ID}}" />
     <meta property="og:description" content="{{.Description}}" />
     {{template "_style"}}<style media=screen>
+
+        .price-container {
+          font-size: x-large;
+          text-align: center;
+          font-family: 'Roboto Slab', serif;
+          margin: 15px auto;
+        }
         .content-txt {
             white-space: pre-line;
         }
@@ -217,6 +224,9 @@
             <div class="video"> <iframe height="100%" width="auto" src="{{.Video}}"></iframe></div>
             {{end}}
         </div>
+        <div class="price-container">
+          <span class="price">{{.Price}}</span>
+        </div>
         <div class="margin-bottom arial content-txt">
           {{.Content}}
         </div>
@@ -224,10 +234,6 @@
         {{/* empty cookie */}}
         {{else}}
         <div class="arial contact">
-          <div class="contact-container">
-              <div class="key">Harga </div>
-              <div class="value">{{.Price}}</div>
-          </div>
             {{if .Address}}
             <div class="contact-container">
                 <div class="key">Alamat </div>
@@ -246,12 +252,6 @@
         {{if .Cookie}} 
         {{if .Email}}
         <div class="arial contact">
-          <div class="contact-container">
-              <div class="key">Harga </div>
-              <div class="value">
-                  <span class="price">{{.Price}}</span>
-              </div>
-          </div>
           <div class="contact-container">
               <div class="key">Alamat </div>
               <div class="city value"><a href="https://www.google.com/maps/search/?api=1&query={{.Map}}"><button class="cap">{{.Address}}</button></a></div>
