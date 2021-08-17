@@ -37,7 +37,7 @@
     }
     
     .login-container {
-        margin-left: 10px;
+        {{/* margin-left: 10px; */}}
         margin-right: 10px;
         height: 100%;
         display: flex;
@@ -45,7 +45,7 @@
     }
     
     .title-container {
-        margin-right: 10px;
+        {{/* margin-right: 10px; */}}
         margin-left: 10px;
         display: flex;
         justify-content: center;
@@ -62,6 +62,18 @@
         text-decoration: none;
         height: 24px;
         margin: auto;
+    }
+
+    .search-container {
+        flex-grow: 1;
+        margin: 0 10px;
+    }
+    
+    .search-container form {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
     }
     
     .footer {
@@ -194,17 +206,6 @@
     
     .cap {
         text-transform: capitalize;
-    }
-    
-    .search-container {
-        flex-grow: 1;
-    }
-    
-    .search-container form {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        justify-content: center;
     }
     
     .border {
@@ -362,10 +363,10 @@
         }
         .title-container {
             margin-right: unset;
-            margin-left: 10px;
+            {{/* margin-left: 10px; */}}
         }
         .login-container {
-            margin-right: 10px;
+            {{/* margin-right: 10px; */}}
             margin-left: unset;
         }
         .wrapper {

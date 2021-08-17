@@ -22,8 +22,8 @@ func createTemplate(app fastrex.App) fastrex.App {
 		Template("template/home.gohtml").
 		Template("template/home_header.gohtml").
 		Template("template/home_wrapper.gohtml").
-		Template("template/home_dashboard.gohtml").
 		Template("template/home_post.gohtml").
+		Template("template/home_post_new.gohtml").
 		Template("template/home_topic.gohtml").
 		Template("template/home_account.gohtml").
 		Template("template/home_setting.gohtml")

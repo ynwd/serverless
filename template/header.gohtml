@@ -1,8 +1,12 @@
 {{define "_header_idx"}}
 <div class="content-container header top">
+    {{`{{if .Email}}`}}
+    {{/* empty */}}
+    {{`{{else}}`}}
     <div class="title-container">
-        <a href="/"><img width="24" height="24" src="/public/fstr.svg"></a>
+      <a href="/"><img width="24" height="24" src="/public/fstr.svg"></a>
     </div>
+    {{`{{end}}`}}
     <div class="search-container">
         <form method="POST" action="/search">
             <input class="search border radius" name="query" type="text" placeholder="Search..">
@@ -23,9 +27,14 @@
 <!-- result header  -->
 
 {{define "_header"}}<div class="content-container header top">
+    {{if .UserEmail}}
+    {{/* empty */}}
+    {{else}}
     <div class="title-container">
        <a href="/"><img width="24" height="24" src="/public/fstr.svg"></a>
     </div>
+    {{end}}
+
     <div class="search-container">
         <form method="POST" action="/search">
             <input class="search border radius" name="query" type="text" placeholder="Search..">
@@ -45,15 +54,19 @@
 
 {{define "_header_detail"}}<div class="content-container header top">
     <div class="title-container">
+      {{if .UserEmail}}
+      {{if .Edit}}
+        <a class="edit" href="/home/post/{{.ID}}"><span class="material-icons-outlined">edit</span></a>
+      {{end}} 
+      {{else}}
        <a href="/"><img width="24" height="24" src="/public/fstr.svg"></a>
+      {{end}}
     </div>
+    
     <div class="search-container"></div>
 
     <div class="login-container arial">
       {{if .UserEmail}}
-        {{if .Edit}}
-        <a class="edit" href="/home/post/{{.ID}}"><span class="material-icons-outlined">edit</span></a>
-        {{end}} 
       <a class="masuk radius avatar" href="#">{{.Initial}}</a> 
       {{else}}
       <a class="masuk small-radius" href="/signin"><span class="material-icons-outlined">login</span></a> 

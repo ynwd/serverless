@@ -54,6 +54,7 @@ func (p *page) homePostPage(req fastrex.Request, res fastrex.Response) {
 		PostVideo   string
 		PostContent []byte
 		PostID      string
+		PostFile    string
 	}{
 		initial, user.Name, "New Post", user.Email, user.ID,
 		"",
@@ -63,6 +64,7 @@ func (p *page) homePostPage(req fastrex.Request, res fastrex.Response) {
 		"",
 		"",
 		[]byte(""),
+		"",
 		"",
 	}
 
@@ -106,6 +108,7 @@ func (p *page) homeUpdatePost(req fastrex.Request, res fastrex.Response) {
 		PostVideo   string
 		PostContent []byte
 		PostID      string
+		PostFile    string
 	}{
 		initial,
 		user.Name,
@@ -120,6 +123,7 @@ func (p *page) homeUpdatePost(req fastrex.Request, res fastrex.Response) {
 		post.Video,
 		[]byte(post.Content),
 		post.ID,
+		post.File,
 	}
 
 	err = res.Render("home_post", data)

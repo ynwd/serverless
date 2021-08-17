@@ -1,75 +1,41 @@
-{{define "home_post"}}
+{{define "home_dashboard"}}
 <!--  -->
 {{template "upper" .}}
-{{template "generic_home_header" .}}
+<div class="header">
+    <div class="header-container">
+        <div class="title-container">
+            <a class="home-add" href="/home/post">
+                <span class="material-icons-outlined">add</span>
+              </a> 
+        </div>
+        <div class="avatar-container">
+            <div class="avatar">{{.Initial}}</div>
+        </div>
+    </div>
+</div>
 <div class="content">
-    
-    {{if .PostID}}
-    <form method="post" action="/form/update" enctype="multipart/form-data">
-    {{else}}
-    <form method="post" action="/form/post" enctype="multipart/form-data">
-    {{end}}
-
-
-      <select id="topic" name="topic">
-        {{if .PostTopic}}
-        <option value="{{.PostTopic}}" selected >{{.PostTopic}}</option>
-        {{end}}
-        <option value="">Pilih topik iklanmu</option>
-        <option value="rumah">Rumah</option>
-        <option value="dapur">Dapur</option>
-        <option value="apartemen">Apartemen</option>
-        <option value="ruko">Ruko</option>
-        <option value="toko">Toko</option>
-        <option value="tanah">Tanah</option>
-        <option value="indekos">Indekos</option>
-        <option value="sembako">Sembako</option>
-        <option value="catering">Catering</option>
-        <option value="makanan">Makanan</option>
-        <option value="minuman">Minuman</option>
-        <option value="elektronik">Elektronik</option>
-        <option value="gadget">Gadget</option>
-        <option value="laptop">Laptop</option>
-        <option value="televisi">Televisi</option>
-        <option value="mesin cuci">Mesin Cuci</option>
-        <option value="kendaraan">Kendaraan</option>
-        <option value="motor">Motor</option>
-        <option value="mobil">Mobil</option>
-        <option value="sepeda">Sepeda</option>
-        <option value="lowongan">Lowongan</option>
-        <option value="tukang">Tukang</option>
-        <option value="jasa">Jasa</option>
-      </select>
-        <input id="title" name="title" type="text" value="{{.PostTitle}}" placeholder="Judul. Contoh: Honda Beat tahun 2021"></input>
-
-        <textarea id="content" name="content" placeholder="Konten. Contoh: honda beat tahun 2021, mulus, jarang dipakai, kunci original, harga 10jt, bisa dinego.">{{printf "%s" .PostContent}}</textarea>
-
-        {{if .PostPrice}}
-        <input type="number" id="price" name="price" value="{{.PostPrice}}" placeholder="Harga. Contoh: 1000000">  
-        {{else}}
-        <input type="number" id="price" name="price" placeholder="Harga. Contoh: 1000000">  
-        {{end}}
-
-        <input type="file" id="file" name="file">
-
-        <input type="text" id="video" name="video" value="{{.PostVideo}}" placeholder="Video youtube. Contoh: https://www.youtube.com/watch?v=jNQXAC9IVRw">
-
-        <input id="address" name="address" type="text" value="{{.PostAddress}}" placeholder="Alamat. Contoh: cirebon">
-
-        <input id="phone" name="phone" type="text" value="{{.PostPhone}}" placeholder="Nomor Whatsapp. Contoh: 081212345678">
-
-        <input type="hidden" id="email" name="email" type="email" value="{{.Email}}"> 
-        
-        <input type="hidden" name="user" value="{{.User}}"> 
-
-        {{if .PostID}}
-        <input type="hidden" name="id" value="{{.PostID}}"> 
-        <button>Update Iklan</button>
-        {{else}}
-        <button>Pasang Iklan</button>
-        {{end}}
-
-    </form>
+    <table class="table-data">
+        <thead>
+            <tr class="tr-table-data">
+                <th class="id-container">ID</th>
+                <th>Title</th>
+                <th class="topic-container">Topic</th>
+                <th>Created</th>
+                <th>Views</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{ range $key, $value := .Data }}
+            <tr>
+                <td class="id-container"> <a class="id" href="/post/{{.ID}}">{{.ID}}</a></td>
+                <td><a class="id" href="/post/{{.ID}}">{{.Title}}</a></td>
+                <td class="topic-container"><a class="id" href="/topic/{{.Topic}}">{{.Topic}}</a></td>
+                <td>{{.Created.Format "02 Jan 2006 15:04:05"}}</td>
+                <td>{{.View}}</td>
+            </tr>
+            {{end}}
+        </tbody>
+    </table>
 </div>{{template "lower"}}
 <!--  -->
 {{end}}
