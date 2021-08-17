@@ -100,7 +100,6 @@
         
         .img,
         .video {
-            max-width: 600px;
             margin-bottom: 1em;
             margin-top: 1em;
             width: 100%;
@@ -154,9 +153,8 @@
         
         .media-container {
             margin: auto;
-            max-width: 600px;
+            width: 100%;
             overflow-x: overlay;
-            margin-bottom: 0.5em;
             display: -webkit-box;
             /* OLD - iOS 6-, Safari 3.1-6 */
             display: -moz-box;
@@ -189,6 +187,9 @@
                 height: auto;
                 width: auto;
             }
+            .key {
+              display: none;
+            }
         }
     </style>
 </head>
@@ -205,7 +206,7 @@
         <div class="media-container">
             <img src="{{.File}}" class="img"> 
             {{if .Video}}
-            <div class="video"> <iframe height="100%" src="{{.Video}}"></iframe></div>
+            <div class="video"> <iframe height="100%" width="auto" src="{{.Video}}"></iframe></div>
             {{end}}
         </div>
         <div class="margin-bottom arial content-txt">
