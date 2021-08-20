@@ -3,14 +3,13 @@
 {{template "upper" .}}
 <div class="header">
     <div class="header-container">
+        <div class="cmd-container">
+            <a class="home-add" href="/home/post"></a>
+        </div>
         <div class="title-container">
-            <a class="home-add" href="/home/post">
-                <span class="material-icons-outlined">add</span>
-              </a> 
+            <div class="title">{{.Title}}</div>
         </div>
-        <div class="avatar-container">
-            <div class="avatar">{{.Initial}}</div>
-        </div>
+        <div class="avatar-container"></div>
     </div>
 </div>
 <div class="content">

@@ -1,10 +1,8 @@
 {{define "_header_idx"}}
 <div class="content-container header top">
-    {{`{{if .Email}}`}}
-    {{/* empty */}}
-    {{`{{else}}`}}
+    {{`{{if .Email}}`}} {{/* empty */}} {{`{{else}}`}}
     <div class="title-container">
-      <a href="/"><img width="24" height="24" src="/public/fstr.svg"></a>
+        <a href="/"><img width="24" height="24" src="/public/fstr.svg"></a>
     </div>
     {{`{{end}}`}}
     <div class="search-container">
@@ -16,22 +14,20 @@
 
     <div class="login-container arial">
         {{`{{if .Email}}`}}
-        <a class="masuk radius avatar" href="#">{{`{{.Initial}}`}}</a> 
+        {{/* empty */}} 
         {{`{{else}}`}}
-        <a class="masuk small-radius" href="/signin"><span class="material-icons-outlined">login</span></a> 
-        {{`{{end}}`}}
+        <a class="masuk small-radius" href="/signin"><span class="material-icons-outlined">login</span></a> {{`{{end}}`}}
     </div>
 </div>
 {{end}}
 
 <!-- result header  -->
 
-{{define "_header"}}<div class="content-container header top">
-    {{if .UserEmail}}
-    {{/* empty */}}
-    {{else}}
+{{define "_header"}}
+<div class="content-container header top">
+    {{if .UserEmail}} {{/* empty */}} {{else}}
     <div class="title-container">
-       <a href="/"><img width="24" height="24" src="/public/fstr.svg"></a>
+        <a href="/"><img width="24" height="24" src="/public/fstr.svg"></a>
     </div>
     {{end}}
 
@@ -43,48 +39,35 @@
     </div>
 
     <div class="login-container arial">
-      {{if .UserEmail}}
-      <a class="masuk radius avatar" href="/home">{{.Initial}}</a> 
-
-      {{else}}
-      <a class="masuk small-radius" href="/signin"><span class="material-icons-outlined">login</span></a> 
-      {{end}}
+        {{if .UserEmail}}
+        <a class="masuk radius avatar" href="/home">{{.Initial}}</a> {{else}}
+        <a class="masuk small-radius" href="/signin"><span class="material-icons-outlined">login</span></a> {{end}}
     </div>
-</div>{{end}}
-
-{{define "_header_detail"}}<div class="content-container header top">
+</div>{{end}} {{define "_header_detail"}}
+<div class="content-container header top">
     <div class="title-container">
-      {{if .UserEmail}}
-      <a class="share" target="_blank" href="/post/{{.ID}}"><span class="material-icons-outlined">share</span></a>
-      {{if .Edit}}
-        <a class="edit" href="/home/post/{{.ID}}"><span class="material-icons-outlined">edit</span></a>
-      {{end}} 
-      {{else}}
-       <a class="logo" href="/"><img width="24" height="24" src="/public/fstr.svg"></a>
-       <a class="share" href="/post/{{.ID}}"><span class="material-icons-outlined">share</span></a>
-      {{end}}
-      
+        {{if .UserEmail}} {{if .Edit}}
+        <a class="edit" href="/home/post/{{.ID}}"><span class="material-icons-outlined">edit</span></a> {{end}} {{else}}
+        <a class="logo" href="/"><img width="24" height="24" src="/public/fstr.svg"></a>
+        {{end}}
+
     </div>
-    
-    <div class="search-container"></div>
+
+    <div class="topic-container">
+        <a class="topic-link" href="/topic/{{.Topic}}">{{.Topic}}</a>
+    </div>
 
     <div class="login-container arial">
-      {{if .UserEmail}}
-      <a class="masuk radius avatar" href="#">{{.Initial}}</a> 
-      {{else}}
-      <a class="masuk small-radius" href="/signin"><span class="material-icons-outlined">login</span></a> 
-      {{end}}
+        <a class="share" target="_blank" href="/post/{{.ID}}"><span class="material-icons-outlined">share</span></a>
     </div>
-</div>{{end}}
-
-{{define "_header_home"}}<div class="content-container header top">
+</div>{{end}} {{define "_header_home"}}
+<div class="content-container header top">
     <div class="home-title-container">
-      {{.Title}}
+        {{.Title}}
     </div>
 
     <div class="register arial">
-      {{if .UserEmail}}
-      <a class="masuk radius avatar" href="/home">{{.Initial}}</a>
-      {{end}}
+        {{if .UserEmail}}
+        <a class="masuk radius avatar" href="/home">{{.Initial}}</a> {{end}}
     </div>
 </div>{{end}}

@@ -1,5 +1,6 @@
 {{define "upper"}}
 <!DOCTYPE html>
+<html>
 
 <head>
     <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
@@ -20,6 +21,7 @@
             margin: 0 10px 0 10px;
         }
         
+        .cmd-container,
         .title-container,
         .avatar-container {
             margin: 15px 0;
@@ -34,6 +36,7 @@
             margin: auto;
             height: 100%;
             line-height: 24px;
+            text-align: center;
         }
         
         .avatar-container {
@@ -91,12 +94,13 @@
         .tr-table-data {
             background-color: rgba(0, 0, 0, 0.04);
         }
+        
         .home-add {
-          display: flex;
-          text-decoration: none;
-          color: #fff;
-          margin-right: 10px;
-          width: 24px;
+            display: flex;
+            text-decoration: none;
+            color: #fff;
+            margin-right: 10px;
+            line-height: 24px;
         }
         /* end of dashboard */
         /* ================ */
@@ -170,27 +174,32 @@
             color: royalblue;
             text-decoration: underline;
         }
-        .post-img-container, .post-video-container{
-          max-width: 400px;
-          margin: 0px 0px 10px 0px;
-          width: 100%;
-          padding: 10px;
-          border: 1px solid #9c9c9c;
+        
+        .post-img-container,
+        .post-video-container {
+            max-width: 400px;
+            margin: 0px 0px 10px 0px;
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #9c9c9c;
         }
-        .post-video-container{
-         
-        }
+        
         .post-video-container iframe {
-          width: 100%;
-          border: unset;
+            width: 100%;
+            border: unset;
         }
-
+        
+        label {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        
         @media (max-width: 480px) {
             form {
                 width: 80%;
             }
-            .id-container, id-topic {
-              display: none;
+            .id-container,
+            id-topic {
+                display: none;
             }
         }
         
@@ -198,32 +207,30 @@
             form {
                 width: 75%;
             }
-            .id-container, id-topic {
-              display: none;
+            .id-container,
+            id-topic {
+                display: none;
             }
         }
-        /* end of post */        
+        /* end of post */
     </style>
 </head>
 
 <body>
-    <div class="container">{{end}}
-        {{define "generic_home_header"}}
+    <div class="container">{{end}}{{define "generic_home_header"}}
         <div class="header">
             <div class="header-container">
+                <div class="avatar-container">
+                </div>
                 <div class="title-container">
                     <div class="title">{{.Title}}</div>
                 </div>
                 <div class="avatar-container">
-                    <div class="username">{{.Name}}</div>
-                    <div class="avatar">{{.Initial}}</div>
                 </div>
             </div>
-        </div>
-        {{end}}
-        {{/* put the content here */}} 
-        {{define "lower"}}
+        </div>{{end}} {{/* put the content here */}}{{define "lower"}}
     </div>
 </body>
+
 </html>
 {{end}}

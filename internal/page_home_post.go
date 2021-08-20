@@ -10,7 +10,7 @@ import (
 func (p *page) homeDashboardPage(req fastrex.Request, res fastrex.Response) {
 	user, _ := p.getUserFromSession(req, res)
 	if user == nil {
-		createResponsePage(res, "user not found", "user not found", "/")
+		res.Redirect("/", 302)
 		return
 	}
 	name := user.Name
@@ -23,7 +23,7 @@ func (p *page) homeDashboardPage(req fastrex.Request, res fastrex.Response) {
 		Title   string
 		Data    []FlatPost
 	}{
-		initial, name, "Post", td,
+		initial, name, "Posts", td,
 	}
 
 	err := res.Render("home_dashboard", data)
@@ -57,7 +57,7 @@ func (p *page) homePostPage(req fastrex.Request, res fastrex.Response) {
 		PostID      string
 		PostFile    string
 	}{
-		initial, user.Name, "New Post", user.Email, user.ID,
+		initial, user.Name, "Create New Post", user.Email, user.ID,
 		"",
 		"",
 		"",
@@ -152,22 +152,6 @@ func (p *page) homeTopicPage(req fastrex.Request, res fastrex.Response) {
 	}
 
 	err := res.Render("home_topic", data)
-	if err != nil {
-		log.Println(err.Error())
-	}
-}
-
-func (p *page) homeAccountPage(req fastrex.Request, res fastrex.Response) {
-	data := struct {
-		Initial string
-		Name    string
-		Title   string
-		Content string
-	}{
-		"T", "Testing User", "Account", "<h1>KOntent</h1>",
-	}
-
-	err := res.Render("home_account", data)
 	if err != nil {
 		log.Println(err.Error())
 	}

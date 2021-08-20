@@ -15,6 +15,7 @@ func createFormRoute(app fastrex.App, f *form) fastrex.App {
 		Post("/form/post", f.createPost).
 		Post("/form/update", f.updatePost).
 		Post("/form/signup", f.createUser).
+		Post("/form/account", f.updateAccount).
 		Post("/form/signin", f.getUserByEmailAndPassword)
 	return app
 }

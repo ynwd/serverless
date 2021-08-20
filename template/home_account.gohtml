@@ -1,8 +1,32 @@
 {{define "home_account"}}
 <!--  -->
 {{template "upper" .}}
+<div class="header">
+    <div class="header-container">
+        <div class="cmd-container">
+        </div>
+        <div class="title-container">
+            <div class="title">{{.Title}}</div>
+        </div>
+        <div class="avatar-container">
+        </div>
+    </div>
+</div>
 <div class="content">
-    Account
+    <form method="post" action="/form/account" enctype="multipart/form-data">
+        <label for="email">Email</label>
+        <input id="email" name="email" type="text" value="{{.AccountEmail}}" disabled>
+        <label for="username">User Name</label>
+        <input id="username" name="username" type="text" value="{{.AccountUsername}}" disabled>
+        <label for="phone">Phone</label>
+        <input id="phone" name="phone" type="text" value="{{.AccountPhone}}">
+        <label for="name">Full Name</label>
+        <input id="name" name="name" type="text" value="{{.AccountName}}">
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" value="{{.AccountPassword}}">
+        <input type="hidden" name="userID" value="{{.AccountID}}">
+        <button>Update account</button>
+    </form>
 </div>{{template "lower"}}
 <!--  -->
 {{end}}

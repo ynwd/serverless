@@ -20,7 +20,7 @@ func (d *client) createUser(ctx context.Context, data interface{}) (
 	u := d.firestore.Collection("user").Where("username", "==", username).Documents(ctx)
 	resU, err := u.GetAll()
 	if err != nil {
-		fmt.Println(err.Error())
+		log.Println(err.Error())
 	}
 	if len(resU) > 0 {
 		msg = fmt.Sprintf("Username '%v' telah terdaftar. Gunakan yang lain", username)
@@ -86,6 +86,7 @@ func (d *client) getUserDetailByID(ctx context.Context, id string) (User, error)
 	user.Email = item["email"].(string)
 	user.Name = item["name"].(string)
 	user.Username = item["username"].(string)
+	user.Phone = item["phone"].(string)
 
 	return user, nil
 }
